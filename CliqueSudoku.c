@@ -3,13 +3,12 @@
 #include <SDL/SDL.h>
 
 #include "InterfaceSudoku.h"
-#include "Grille.h"
 
-int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, SDL_Event event, TAB t){
+SDL_Rect cliqueSouris(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, SDL_Event event, TAB t){
     positionFond.x = 0;
     positionFond.y = 0;
     /*Ligne 1*/
-    if(event.button.x>448 && event.button.x<492 && event.button.y>132 && event.button.y<173)
+    if(event.button.x>445 && event.button.x<=495 && event.button.y>130 && event.button.y<=180)
     {
         //1
         positionFond.x = 488;
@@ -19,7 +18,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>498 && event.button.x<542 && event.button.y>132 && event.button.y<173)
+    else if(event.button.x>495 && event.button.x<=545 && event.button.y>130 && event.button.y<=180)
     {
         //2
         positionFond.x = 538;
@@ -29,7 +28,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>548 && event.button.x<592 && event.button.y>132 && event.button.y<173)
+    else if(event.button.x>545 && event.button.x<=595 && event.button.y>130 && event.button.y<=180)
     {
         //3
         positionFond.x = 588;
@@ -39,7 +38,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>598 && event.button.x<642 && event.button.y>132 && event.button.y<173)
+    else if(event.button.x>595 && event.button.x<=645 && event.button.y>130 && event.button.y<=180)
     {
         //4
         positionFond.x = 638;
@@ -49,7 +48,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>648 && event.button.x<692 && event.button.y>132 && event.button.y<173)
+    else if(event.button.x>645 && event.button.x<=695 && event.button.y>130 && event.button.y<=180)
     {
         //5
         positionFond.x = 688;
@@ -59,7 +58,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>698 && event.button.x<742 && event.button.y>132 && event.button.y<173)
+    else if(event.button.x>695 && event.button.x<=745 && event.button.y>130 && event.button.y<=180)
     {
         //6
         positionFond.x = 738;
@@ -69,7 +68,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>748 && event.button.x<792 && event.button.y>132 && event.button.y<173)
+    else if(event.button.x>745 && event.button.x<=795 && event.button.y>130 && event.button.y<=180)
     {
         //7
         positionFond.x = 788;
@@ -79,7 +78,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>798 && event.button.x<842 && event.button.y>132 && event.button.y<173)
+    else if(event.button.x>795 && event.button.x<=845 && event.button.y>130 && event.button.y<=180)
     {
         //8
         positionFond.x = 838;
@@ -89,7 +88,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>848 && event.button.x<892 && event.button.y>132 && event.button.y<173)
+    else if(event.button.x>845 && event.button.x<=895 && event.button.y>130 && event.button.y<=180)
     {
         //9
         positionFond.x = 888;
@@ -100,7 +99,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_Flip(ecran);
     }
     /*Ligne 2*/
-    else if(event.button.x>448 && event.button.x<492 && event.button.y>182 && event.button.y<223)
+    else if(event.button.x>445 && event.button.x<=495 && event.button.y>180 && event.button.y<=230)
     {
         //1
         positionFond.x = 488;
@@ -110,7 +109,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>498 && event.button.x<542 && event.button.y>182 && event.button.y<223)
+    else if(event.button.x>495 && event.button.x<=545 && event.button.y>180 && event.button.y<=230)
     {
         //2
         positionFond.x = 538;
@@ -120,7 +119,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>548 && event.button.x<592 && event.button.y>182 && event.button.y<223)
+    else if(event.button.x>545 && event.button.x<=595 && event.button.y>180 && event.button.y<=230)
     {
         //3
         positionFond.x = 588;
@@ -130,7 +129,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>598 && event.button.x<642 && event.button.y>182 && event.button.y<223)
+    else if(event.button.x>595 && event.button.x<=645 && event.button.y>180 && event.button.y<=230)
     {
         //4
         positionFond.x = 638;
@@ -140,7 +139,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>648 && event.button.x<692 && event.button.y>182 && event.button.y<223)
+    else if(event.button.x>645 && event.button.x<=695 && event.button.y>180 && event.button.y<=230)
     {
         //5
         positionFond.x = 688;
@@ -150,7 +149,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>698 && event.button.x<742 && event.button.y>182 && event.button.y<223)
+    else if(event.button.x>695 && event.button.x<=745 && event.button.y>180 && event.button.y<=230)
     {
         //6
         positionFond.x = 738;
@@ -160,7 +159,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>748 && event.button.x<792 && event.button.y>182 && event.button.y<223)
+    else if(event.button.x>745 && event.button.x<=795 && event.button.y>180 && event.button.y<=230)
     {
         //7
         positionFond.x = 788;
@@ -170,7 +169,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>798 && event.button.x<842 && event.button.y>182 && event.button.y<223)
+    else if(event.button.x>795 && event.button.x<=845 && event.button.y>180 && event.button.y<=230)
     {
         //8
         positionFond.x = 838;
@@ -180,7 +179,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>848 && event.button.x<892 && event.button.y>182 && event.button.y<223)
+    else if(event.button.x>845 && event.button.x<=895 && event.button.y>180 && event.button.y<230)
     {
         //9
         positionFond.x = 888;
@@ -191,7 +190,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_Flip(ecran);
     }
     /*Ligne 3*/
-    else if(event.button.x>448 && event.button.x<492 && event.button.y>232 && event.button.y<273)
+    else if(event.button.x>445 && event.button.x<=495 && event.button.y>230 && event.button.y<=280)
     {
         //1
         positionFond.x = 488;
@@ -201,7 +200,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>498 && event.button.x<542 && event.button.y>232 && event.button.y<273)
+    else if(event.button.x>495 && event.button.x<=545 && event.button.y>230 && event.button.y<=280)
     {
         //2
         positionFond.x = 538;
@@ -211,7 +210,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>548 && event.button.x<592 && event.button.y>232 && event.button.y<273)
+    else if(event.button.x>545 && event.button.x<=595 && event.button.y>230 && event.button.y<=280)
     {
         //3
         positionFond.x = 588;
@@ -221,7 +220,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>598 && event.button.x<642 && event.button.y>232 && event.button.y<273)
+    else if(event.button.x>595 && event.button.x<=645 && event.button.y>230 && event.button.y<=280)
     {
         //4
         positionFond.x = 638;
@@ -231,7 +230,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>648 && event.button.x<692 && event.button.y>232 && event.button.y<273)
+    else if(event.button.x>645 && event.button.x<=695 && event.button.y>230 && event.button.y<=280)
     {
         //5
         positionFond.x = 688;
@@ -241,7 +240,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>698 && event.button.x<742 && event.button.y>232 && event.button.y<273)
+    else if(event.button.x>695 && event.button.x<=745 && event.button.y>230 && event.button.y<=280)
     {
         //6
         positionFond.x = 738;
@@ -251,7 +250,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>748 && event.button.x<792 && event.button.y>232 && event.button.y<273)
+    else if(event.button.x>745 && event.button.x<=795 && event.button.y>230 && event.button.y<=280)
     {
         //7
         positionFond.x = 788;
@@ -261,7 +260,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>798 && event.button.x<842 && event.button.y>232 && event.button.y<273)
+    else if(event.button.x>795 && event.button.x<=845 && event.button.y>230 && event.button.y<=280)
     {
         //8
         positionFond.x = 838;
@@ -271,7 +270,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>848 && event.button.x<892 && event.button.y>232 && event.button.y<273)
+    else if(event.button.x>845 && event.button.x<=895 && event.button.y>230 && event.button.y<=280)
     {
         //9
         positionFond.x = 888;
@@ -282,7 +281,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_Flip(ecran);
     }
     /*Ligne 4*/
-    else if(event.button.x>448 && event.button.x<492 && event.button.y>282 && event.button.y<323)
+    else if(event.button.x>445 && event.button.x<=495 && event.button.y>280 && event.button.y<=330)
     {
         //1
         positionFond.x = 488;
@@ -292,7 +291,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>498 && event.button.x<542 && event.button.y>282 && event.button.y<323)
+    else if(event.button.x>495 && event.button.x<=545 && event.button.y>280 && event.button.y<=330)
     {
         //2
         positionFond.x = 538;
@@ -302,7 +301,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>548 && event.button.x<592 && event.button.y>282 && event.button.y<323)
+    else if(event.button.x>545 && event.button.x<=595 && event.button.y>280 && event.button.y<=330)
     {
         //3
         positionFond.x = 588;
@@ -312,7 +311,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>598 && event.button.x<642 && event.button.y>282 && event.button.y<323)
+    else if(event.button.x>595 && event.button.x<=645 && event.button.y>280 && event.button.y<=330)
     {
         //4
         positionFond.x = 638;
@@ -322,7 +321,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>648 && event.button.x<692 && event.button.y>282 && event.button.y<323)
+    else if(event.button.x>645 && event.button.x<=695 && event.button.y>280 && event.button.y<=330)
     {
         //5
         positionFond.x = 688;
@@ -332,7 +331,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>698 && event.button.x<742 && event.button.y>282 && event.button.y<323)
+    else if(event.button.x>695 && event.button.x<=745 && event.button.y>280 && event.button.y<=330)
     {
         //6
         positionFond.x = 738;
@@ -342,7 +341,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>748 && event.button.x<792 && event.button.y>282 && event.button.y<323)
+    else if(event.button.x>745 && event.button.x<=795 && event.button.y>280 && event.button.y<=330)
     {
         //7
         positionFond.x = 788;
@@ -352,7 +351,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>798 && event.button.x<842 && event.button.y>282 && event.button.y<323)
+    else if(event.button.x>795 && event.button.x<=845 && event.button.y>280 && event.button.y<=330)
     {
         //8
         positionFond.x = 838;
@@ -362,7 +361,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>848 && event.button.x<892 && event.button.y>282 && event.button.y<323)
+    else if(event.button.x>845 && event.button.x<=895 && event.button.y>280 && event.button.y<=330)
     {
         //9
         positionFond.x = 888;
@@ -373,7 +372,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_Flip(ecran);
     }
     /*Ligne 5*/
-    else if(event.button.x>448 && event.button.x<492 && event.button.y>332 && event.button.y<373)
+    else if(event.button.x>445 && event.button.x<=495 && event.button.y>330 && event.button.y<=380)
     {
         //1
         positionFond.x = 488;
@@ -383,7 +382,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>498 && event.button.x<542 && event.button.y>332 && event.button.y<373)
+    else if(event.button.x>495 && event.button.x<=545 && event.button.y>330 && event.button.y<=380)
     {
         //2
         positionFond.x = 538;
@@ -393,7 +392,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>548 && event.button.x<592 && event.button.y>332 && event.button.y<373)
+    else if(event.button.x>545 && event.button.x<=595 && event.button.y>330 && event.button.y<=380)
     {
         //3
         positionFond.x = 588;
@@ -403,7 +402,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>598 && event.button.x<642 && event.button.y>332 && event.button.y<373)
+    else if(event.button.x>595 && event.button.x<=645 && event.button.y>330 && event.button.y<=380)
     {
         //4
         positionFond.x = 638;
@@ -413,7 +412,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>648 && event.button.x<692 && event.button.y>332 && event.button.y<373)
+    else if(event.button.x>645 && event.button.x<=695 && event.button.y>330 && event.button.y<=380)
     {
         //5
         positionFond.x = 688;
@@ -423,7 +422,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>698 && event.button.x<742 && event.button.y>332 && event.button.y<373)
+    else if(event.button.x>695 && event.button.x<=745 && event.button.y>330 && event.button.y<=380)
     {
         //6
         positionFond.x = 738;
@@ -433,7 +432,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>748 && event.button.x<792 && event.button.y>332 && event.button.y<373)
+    else if(event.button.x>745 && event.button.x<=795 && event.button.y>330 && event.button.y<=380)
     {
         //7
         positionFond.x = 788;
@@ -443,7 +442,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>798 && event.button.x<842 && event.button.y>332 && event.button.y<373)
+    else if(event.button.x>795 && event.button.x<=845 && event.button.y>330 && event.button.y<=380)
     {
         //8
         positionFond.x = 838;
@@ -453,7 +452,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>848 && event.button.x<892 && event.button.y>332 && event.button.y<373)
+    else if(event.button.x>845 && event.button.x<=895 && event.button.y>330 && event.button.y<=380)
     {
         //9
         positionFond.x = 888;
@@ -464,7 +463,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_Flip(ecran);
     }
     /*Ligne 6*/
-    else if(event.button.x>448 && event.button.x<492 && event.button.y>382 && event.button.y<423)
+    else if(event.button.x>445 && event.button.x<=495 && event.button.y>380 && event.button.y<=430)
     {
         //1
         positionFond.x = 488;
@@ -474,7 +473,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>498 && event.button.x<542 && event.button.y>382 && event.button.y<423)
+    else if(event.button.x>495 && event.button.x<=545 && event.button.y>380 && event.button.y<=430)
     {
         //2
         positionFond.x = 538;
@@ -484,7 +483,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>548 && event.button.x<592 && event.button.y>382 && event.button.y<423)
+    else if(event.button.x>545 && event.button.x<=595 && event.button.y>380 && event.button.y<=430)
     {
         //3
         positionFond.x = 588;
@@ -494,7 +493,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>598 && event.button.x<642 && event.button.y>382 && event.button.y<423)
+    else if(event.button.x>595 && event.button.x<=645 && event.button.y>380 && event.button.y<=430)
     {
         //4
         positionFond.x = 638;
@@ -504,7 +503,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>648 && event.button.x<692 && event.button.y>382 && event.button.y<423)
+    else if(event.button.x>645 && event.button.x<=695 && event.button.y>380 && event.button.y<=430)
     {
         //5
         positionFond.x = 688;
@@ -514,7 +513,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>698 && event.button.x<742 && event.button.y>382 && event.button.y<423)
+    else if(event.button.x>695 && event.button.x<=745 && event.button.y>380 && event.button.y<=430)
     {
         //6
         positionFond.x = 738;
@@ -524,7 +523,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>748 && event.button.x<792 && event.button.y>382 && event.button.y<423)
+    else if(event.button.x>745 && event.button.x<=795 && event.button.y>380 && event.button.y<=430)
     {
         //7
         positionFond.x = 788;
@@ -534,7 +533,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>798 && event.button.x<842 && event.button.y>382 && event.button.y<423)
+    else if(event.button.x>795 && event.button.x<=845 && event.button.y>380 && event.button.y<=430)
     {
         //8
         positionFond.x = 838;
@@ -544,7 +543,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>848 && event.button.x<892 && event.button.y>382 && event.button.y<423)
+    else if(event.button.x>845 && event.button.x<=895 && event.button.y>380 && event.button.y<=430)
     {
         //9
         positionFond.x = 888;
@@ -555,7 +554,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_Flip(ecran);
     }
     /*Ligne 7*/
-    else if(event.button.x>448 && event.button.x<492 && event.button.y>432 && event.button.y<473)
+    else if(event.button.x>445 && event.button.x<=495 && event.button.y>430 && event.button.y<=480)
     {
         //1
         positionFond.x = 488;
@@ -565,7 +564,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
         }
-    else if(event.button.x>498 && event.button.x<542 && event.button.y>432 && event.button.y<473)
+    else if(event.button.x>495 && event.button.x<=545 && event.button.y>430 && event.button.y<=480)
     {
         //2
         positionFond.x = 538;
@@ -575,7 +574,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>548 && event.button.x<592 && event.button.y>432 && event.button.y<473)
+    else if(event.button.x>545 && event.button.x<=595 && event.button.y>430 && event.button.y<=480)
     {
         //3
         positionFond.x = 588;
@@ -585,7 +584,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>598 && event.button.x<642 && event.button.y>432 && event.button.y<473)
+    else if(event.button.x>595 && event.button.x<=645 && event.button.y>430 && event.button.y<=480)
     {
         //4
         positionFond.x = 638;
@@ -595,7 +594,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>648 && event.button.x<692 && event.button.y>432 && event.button.y<473)
+    else if(event.button.x>645 && event.button.x<=695 && event.button.y>430 && event.button.y<=480)
     {
         //5
         positionFond.x = 688;
@@ -605,7 +604,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>698 && event.button.x<742 && event.button.y>432 && event.button.y<473)
+    else if(event.button.x>695 && event.button.x<=745 && event.button.y>430 && event.button.y<=480)
     {
         //6
         positionFond.x = 738;
@@ -615,7 +614,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>748 && event.button.x<792 && event.button.y>432 && event.button.y<473)
+    else if(event.button.x>745 && event.button.x<=795 && event.button.y>430 && event.button.y<=480)
     {
         //7
         positionFond.x = 788;
@@ -625,7 +624,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>798 && event.button.x<842 && event.button.y>432 && event.button.y<473)
+    else if(event.button.x>795 && event.button.x<=845 && event.button.y>430 && event.button.y<=480)
     {
         //8
         positionFond.x = 838;
@@ -635,7 +634,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>848 && event.button.x<892 && event.button.y>432 && event.button.y<473)
+    else if(event.button.x>845 && event.button.x<=895 && event.button.y>430 && event.button.y<=480)
     {
         //9
         positionFond.x = 888;
@@ -646,7 +645,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_Flip(ecran);
     }
     /*Ligne 8*/
-    else if(event.button.x>448 && event.button.x<492 && event.button.y>482 && event.button.y<523)
+    else if(event.button.x>445 && event.button.x<=495 && event.button.y>480 && event.button.y<=530)
     {
         //1
         positionFond.x = 488;
@@ -656,7 +655,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>498 && event.button.x<542 && event.button.y>482 && event.button.y<523)
+    else if(event.button.x>495 && event.button.x<=545 && event.button.y>480 && event.button.y<=530)
     {
         //2
         positionFond.x = 538;
@@ -666,7 +665,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>548 && event.button.x<592 && event.button.y>482 && event.button.y<523)
+    else if(event.button.x>545 && event.button.x<=595 && event.button.y>480 && event.button.y<=530)
     {
         //3
         positionFond.x = 588;
@@ -676,7 +675,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>598 && event.button.x<642 && event.button.y>482 && event.button.y<523)
+    else if(event.button.x>595 && event.button.x<=645 && event.button.y>480 && event.button.y<=530)
     {
         //4
         positionFond.x = 638;
@@ -686,7 +685,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>648 && event.button.x<692 && event.button.y>482 && event.button.y<523)
+    else if(event.button.x>645 && event.button.x<=695 && event.button.y>480 && event.button.y<=530)
     {
         //5
         positionFond.x = 688;
@@ -696,7 +695,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>698 && event.button.x<742 && event.button.y>482 && event.button.y<523)
+    else if(event.button.x>698 && event.button.x<742 && event.button.y>480 && event.button.y<=530)
     {
         //6
         positionFond.x = 738;
@@ -706,7 +705,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>748 && event.button.x<792 && event.button.y>482 && event.button.y<523)
+    else if(event.button.x>745 && event.button.x<=795 && event.button.y>480 && event.button.y<=530)
     {
         //7
         positionFond.x = 788;
@@ -716,7 +715,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>798 && event.button.x<842 && event.button.y>482 && event.button.y<523)
+    else if(event.button.x>795 && event.button.x<=845 && event.button.y>480 && event.button.y<=530)
     {
         //8
         positionFond.x = 838;
@@ -726,7 +725,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>848 && event.button.x<892 && event.button.y>482 && event.button.y<523)
+    else if(event.button.x>845 && event.button.x<=895 && event.button.y>480 && event.button.y<=530)
     {
         //9
         positionFond.x = 888;
@@ -737,7 +736,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_Flip(ecran);
     }
     /*Ligne 9*/
-    else if(event.button.x>448 && event.button.x<492 && event.button.y>532 && event.button.y<573)
+    else if(event.button.x>445 && event.button.x<=495 && event.button.y>530 && event.button.y<=580)
     {
         //1
         positionFond.x = 488;
@@ -747,7 +746,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>498 && event.button.x<542 && event.button.y>532 && event.button.y<573)
+    else if(event.button.x>495 && event.button.x<=545 && event.button.y>530 && event.button.y<=580)
     {
         //2
         positionFond.x = 538;
@@ -757,7 +756,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>548 && event.button.x<592 && event.button.y>532 && event.button.y<573)
+    else if(event.button.x>545 && event.button.x<=595 && event.button.y>530 && event.button.y<=580)
     {
         //3
         positionFond.x = 588;
@@ -767,7 +766,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>598 && event.button.x<642 && event.button.y>532 && event.button.y<573)
+    else if(event.button.x>595 && event.button.x<=645 && event.button.y>530 && event.button.y<=580)
     {
         //4
         positionFond.x = 638;
@@ -777,7 +776,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>648 && event.button.x<692 && event.button.y>532 && event.button.y<573)
+    else if(event.button.x>645 && event.button.x<=695 && event.button.y>530 && event.button.y<=580)
     {
         //5
         positionFond.x = 688;
@@ -787,7 +786,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>698 && event.button.x<742 && event.button.y>532 && event.button.y<573)
+    else if(event.button.x>695 && event.button.x<=745 && event.button.y>530 && event.button.y<=580)
     {
         //6
         positionFond.x = 738;
@@ -797,7 +796,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>748 && event.button.x<792 && event.button.y>532 && event.button.y<573)
+    else if(event.button.x>748 && event.button.x<792 && event.button.y>530 && event.button.y<=580)
     {
         //7
         positionFond.x = 788;
@@ -807,7 +806,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>798 && event.button.x<842 && event.button.y>532 && event.button.y<573)
+    else if(event.button.x>795 && event.button.x<=845 && event.button.y>530 && event.button.y<=580)
     {
         //8
         positionFond.x = 838;
@@ -817,7 +816,7 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
     }
-    else if(event.button.x>848 && event.button.x<892 && event.button.y>532 && event.button.y<573)
+    else if(event.button.x>845 && event.button.x<=895 && event.button.y>530 && event.button.y<=580)
     {
         //9
         positionFond.x = 888;
@@ -829,10 +828,11 @@ int cliqueSouris(int continuer, SDL_Surface *ecran, SDL_Surface *imageDeFond, SD
     }
     else if(event.button.x>1152 && event.button.x<1310 && event.button.y>628 && event.button.y<675)
     {
-        continuer = 0;
+        positionFond.x = -1;
+        positionFond.y = -1;
     }
     else{
         ecrire(t,ecran,imageDeFond);
     }
-    return continuer;
+    return positionFond;
 }

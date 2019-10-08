@@ -7,7 +7,7 @@
 #include "Grille.h"
 
 
-
+/*Fonction qui remplit la grille*/
 void remplirTEST(TAB t){
     t[0][0].valeur = 1;
     t[1][0].valeur = 1;
@@ -62,42 +62,42 @@ void remplirTEST(TAB t){
     t[0][5].valeur = 2;
     t[1][5].valeur = 0;
     t[2][5].valeur = 2;
-    TAB[3][5].valeur = 2;
-    TAB[4][5].valeur = 2;
-    TAB[5][5].valeur = 2;
-    TAB[6][5].valeur = 2;
-    TAB[7][5].valeur = 2;
-    TAB[8][5].valeur = 2;
+    t[3][5].valeur = 2;
+    t[4][5].valeur = 2;
+    t[5][5].valeur = 2;
+    t[6][5].valeur = 2;
+    t[7][5].valeur = 2;
+    t[8][5].valeur = 2;
 
-    TAB[0][6].valeur = 0;
-    TAB[1][6].valeur = 0;
-    TAB[2][6].valeur = 0;
-    TAB[3][6].valeur = 0;
-    TAB[4][6].valeur = 0;
-    TAB[5][6].valeur = 0;
-    TAB[6][6].valeur = 0;
-    TAB[7][6].valeur = 0;
-    TAB[8][6].valeur = 0;
+    t[0][6].valeur = 0;
+    t[1][6].valeur = 0;
+    t[2][6].valeur = 0;
+    t[3][6].valeur = 0;
+    t[4][6].valeur = 0;
+    t[5][6].valeur = 0;
+    t[6][6].valeur = 0;
+    t[7][6].valeur = 0;
+    t[8][6].valeur = 0;
 
-    TAB[0][7].valeur = 2;
-    TAB[1][7].valeur = 0;
-    TAB[2][7].valeur = 0;
-    TAB[3][7].valeur = 2;
-    TAB[4][7].valeur = 2;
-    TAB[5][7].valeur = 9;
-    TAB[6][7].valeur = 2;
-    TAB[7][7].valeur = 2;
-    TAB[8][7].valeur = 2;
+    t[0][7].valeur = 2;
+    t[1][7].valeur = 0;
+    t[2][7].valeur = 0;
+    t[3][7].valeur = 2;
+    t[4][7].valeur = 2;
+    t[5][7].valeur = 9;
+    t[6][7].valeur = 2;
+    t[7][7].valeur = 2;
+    t[8][7].valeur = 2;
 
-    TAB[0][8].valeur = 2;
-    TAB[1][8].valeur = 2;
-    TAB[2][8].valeur = 8;
-    TAB[3][8].valeur = 2;
-    TAB[4][8].valeur = 2;
-    TAB[5][8].valeur = 2;
-    TAB[6][8].valeur = 6;
-    TAB[7][8].valeur = 2;
-    TAB[8][8].valeur = 9;
+    t[0][8].valeur = 2;
+    t[1][8].valeur = 2;
+    t[2][8].valeur = 8;
+    t[3][8].valeur = 2;
+    t[4][8].valeur = 2;
+    t[5][8].valeur = 2;
+    t[6][8].valeur = 6;
+    t[7][8].valeur = 2;
+    t[8][8].valeur = 9;
 }
 
 
@@ -173,7 +173,6 @@ positionFond.y = 0;
 
 }
 
-
 void interSudoku(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond){
 
 
@@ -183,44 +182,94 @@ void interSudoku(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect position
 
 
     TAB t;
-
-    int init(int longueur , int largeur , TAB t);
-
-
-
-
+    //init(9,9,t);
 
     remplirTEST(t);
     ecrire(t,ecran,imageDeFond);
 
-    int continuer = 1;
+    Coordonees c;
+
+
+
     SDL_Event event; // La variable contenant l'événement
 
-    while(continuer){
+    while(positionFond.x>=0 && positionFond.y>=0){
         SDL_WaitEvent(&event);
         switch(event.type) // On teste le type d'événement
         {
+
             case SDL_MOUSEBUTTONUP:
             {
-                continuer = cliqueSouris(continuer,ecran,imageDeFond,positionFond,event,t);
+                positionFond = cliqueSouris(ecran,imageDeFond,positionFond,event,t);
                 break;
             }
             case SDL_KEYDOWN:
             {
-                switch(event.key.keysym.sym)
+                if(positionFond.x!=0 && positionFond.y!=0)
                 {
-                    case SDLK_e:
+                    if(event.key.keysym.sym == SDLK_BACKSPACE)
                     {
-                    imageDeFond = SDL_LoadBMP("zozor.bmp");
-                    /* On blitte par-dessus l'écran */
-                    SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
-                    SDL_Flip(ecran);
-                    break;
+                        c = appuiTouche(positionFond);
+                        modifValeur(c.x,c.y,0,t);
+                        ecrire(t,ecran,imageDeFond);
                     }
-                    default :
-                        break;
+                    else if(event.key.keysym.sym == SDLK_KP1)
+                    {
+                        c = appuiTouche(positionFond);
+                        modifValeur(c.x,c.y,1,t);
+                        ecrire(t,ecran,imageDeFond);
+                    }
+                    else if(event.key.keysym.sym == SDLK_KP2)
+                    {
+                        c = appuiTouche(positionFond);
+                        modifValeur(c.x,c.y,2,t);
+                        ecrire(t,ecran,imageDeFond);
+                    }
+                    else if(event.key.keysym.sym == SDLK_KP3)
+                    {
+                        c = appuiTouche(positionFond);
+                        modifValeur(c.x,c.y,3,t);
+                        ecrire(t,ecran,imageDeFond);
+                    }
+                    else if(event.key.keysym.sym == SDLK_KP4)
+                    {
+                        c = appuiTouche(positionFond);
+                        modifValeur(c.x,c.y,4,t);
+                        ecrire(t,ecran,imageDeFond);
+                    }
+                    else if(event.key.keysym.sym == SDLK_KP5)
+                    {
+                        c = appuiTouche(positionFond);
+                        modifValeur(c.x,c.y,5,t);
+                        ecrire(t,ecran,imageDeFond);
+                    }
+                    else if(event.key.keysym.sym == SDLK_KP6)
+                    {
+                        c = appuiTouche(positionFond);
+                        modifValeur(c.x,c.y,6,t);
+                        ecrire(t,ecran,imageDeFond);
+                    }
+                    else if(event.key.keysym.sym == SDLK_KP7)
+                    {
+                        c = appuiTouche(positionFond);
+                        modifValeur(c.x,c.y,7,t);
+                        ecrire(t,ecran,imageDeFond);
+                    }
+                    else if(event.key.keysym.sym == SDLK_KP8)
+                    {
+                        c = appuiTouche(positionFond);
+                        modifValeur(c.x,c.y,8,t);
+                        ecrire(t,ecran,imageDeFond);
+                    }
+                    else if(event.key.keysym.sym == SDLK_KP9)
+                    {
+                        c = appuiTouche(positionFond);
+                        modifValeur(c.x,c.y,9,t);
+                        ecrire(t,ecran,imageDeFond);
+                    }
                 }
-                    break;
+
+                break;
             }
             default :
             break;
