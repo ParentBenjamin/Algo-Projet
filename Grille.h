@@ -16,7 +16,7 @@ typedef Case TAB[9][9] ;
 
 
 int init(int longueur , int largeur , TAB t);
-int modifValeur(int x , int y , int valeur , TAB t);
+void modifValeur(int x , int y , int valeur , TAB t);
 int changementEtat(int x , int y , TAB t,int etat);
 void affiche(TAB t);
 
