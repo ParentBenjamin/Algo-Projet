@@ -1,5 +1,17 @@
 
 #include "Sudoku.h"
+
+int tableauRempli(TAB t){
+    for (int i = 0; i < 10; ++i) {
+        for (int j = 0; j < 10; ++j) {
+            if (t[i][j].valeur == 0){
+                return 0;
+            }
+        }
+
+    }
+    return 1;
+}
 int modifCase(int x,int y,int valeur,TAB t){
     if(x < 10 && y < 10 && valeur < 10) {
         if (t[x - 1][y - 1].etat == 0 ){
@@ -62,22 +74,31 @@ int coordonneeCarre(int x){
 }
 
 void sudoku(){
-    int n = 0;
+    int n;
     int x;
     int y;
     int valeur;
     TAB t;
-    init(9,9,t);
-    while (n < 81){
-        printf("le x\n");
-        scanf("%d",&x);
-        printf("le y\n");
-        scanf("%d",&y);
-        printf("la valeur\n");
-        scanf("%d",&valeur);
-        if(modifCase(x,y,valeur,t) == 1){
-            n++;
+    int fini = 0;
+    while (fini == 0){
+        init(9,9,t);
+        n =0;
+        valeur = 1;
+        while (valeur !=0) { //si on rentre la valeur 0 la grille recommence
+            affiche(t);
+            printf("la ligne :\n");
+            scanf("%d", &x);
+            printf("la colonne :\n");
+            scanf("%d", &y);
+            printf("la valeur :\n");
+            scanf("%d", &valeur);
+            if (modifCase(x, y, valeur, t) == 1) {
+                n++;
+            }
+            if(tableauRempli(t) == 1){
+                fini = 1;
+            }
         }
-        affiche(t);
+
     }
 }
