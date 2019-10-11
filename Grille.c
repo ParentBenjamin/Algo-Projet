@@ -29,9 +29,21 @@ int changementEtat(int x , int y , TAB t,int etat){ //change l'etat de la case s
 }
 
 void affiche(TAB t){
-
+printf("   ");
         for (int i = 0; i < 9; i++) {
+            if (i == 0){
+                for (int k = 0; k < 9; ++k) {
+
+
+                    printf("%d   ", k + 1);
+                }
+                printf("\n");
+            }
+            printf("%d  ",i+1);
+
+
             for (int j = 0; j < 9; j++) {
+
                //printf("%d ",t[i][j].etat);
                printf("%d   ",t[i][j].valeur);
             }
