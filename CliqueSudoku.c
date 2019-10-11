@@ -4,9 +4,11 @@
 
 #include "InterfaceSudoku.h"
 
+/*Fonction s'active dès que l'utilisateur clique sur la souris*/
 SDL_Rect cliqueSouris(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, SDL_Event event, TAB t){
     positionFond.x = 0;
     positionFond.y = 0;
+    Coordonees c;
     /*Ligne 1*/
     if(event.button.x>445 && event.button.x<=495 && event.button.y>130 && event.button.y<=180)
     {
@@ -17,6 +19,7 @@ SDL_Rect cliqueSouris(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect pos
         imageDeFond = SDL_LoadBMP("chiffres/barre.bmp");
         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         SDL_Flip(ecran);
+
     }
     else if(event.button.x>495 && event.button.x<=545 && event.button.y>130 && event.button.y<=180)
     {

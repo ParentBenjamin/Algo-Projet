@@ -5,7 +5,7 @@
 #include "InterfaceSudoku.h"
 #include "Grille.h"
 
-
+/*Fonction qui donne les coordonnes du tableau par rapport au clic precedent*/
 Coordonees appuiTouche(SDL_Rect positionFond){
     int x,y;
     if(positionFond.y>130 && positionFond.y<=180){
