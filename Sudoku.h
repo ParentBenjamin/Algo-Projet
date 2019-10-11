@@ -1,7 +1,7 @@
 #ifndef PROJETALGO_SUDOKU_H
 #define PROJETALGO_SUDOKU_H
 
-#include "tableau.h"
+#include "Grille.h"
 #include <stdlib.h>
 #include <stdio.h>
 int tableauRempli(TAB t);
