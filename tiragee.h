@@ -20,5 +20,7 @@ void affichagetableau(Tirage t);
 
 int numtire(Tirage *t);
 
+void general();//effectue l'initialisation et le tirage des 90 numéros aléatoirement avec un temps de 7s entre deux tirages.
+
 
 #endif // TIRAGE_H_INCLUDED
