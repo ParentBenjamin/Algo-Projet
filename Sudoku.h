@@ -4,6 +4,7 @@
 #include "tableau.h"
 #include <stdlib.h>
 #include <stdio.h>
+int tableauRempli(TAB t);
 int modifCase(int x,int y,int valeur,TAB t);
 int coordonneeCarre(int x);
 int verifCarre(TAB t ,int x,int y, int valeur);
