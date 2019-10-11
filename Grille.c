@@ -28,24 +28,25 @@ int changementEtat(int x , int y , TAB t,int etat){ //change l'etat de la case s
     else return 0;
 }
 
-void affiche(TAB t){
+void affiche(TAB t){ //affiche le tableau avec les coordonneées et indique si une case est modifiable ou non avec "- -"
 printf("   ");
         for (int i = 0; i < 9; i++) {
             if (i == 0){
                 for (int k = 0; k < 9; ++k) {
 
-
-                    printf("%d   ", k + 1);
+                    printf(" %d  ", k + 1);
                 }
                 printf("\n");
             }
-            printf("%d  ",i+1);
+            printf(" %d ",i+1);
 
 
             for (int j = 0; j < 9; j++) {
 
-               //printf("%d ",t[i][j].etat);
-               printf("%d   ",t[i][j].valeur);
+                if (t[i][j].etat == 1) {
+                    printf("-%d- ", t[i][j].valeur);
+                }
+                else{printf(" %d  ", t[i][j].valeur);}
             }
             printf("\n");
         }
