@@ -12,7 +12,7 @@ void genererTmp(TAB t);
 int getRandom(int min, int max);
 int presenceNombreGrille(TAB t, int yStart, int yEnd, int nombre);
 int colonneRemplie(TAB t, int yStart, int yEnd, int nombre);
-void generer(TAB t);
+int generer(TAB t);
 
 void loto();
 #endif
