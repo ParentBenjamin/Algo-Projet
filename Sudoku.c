@@ -26,6 +26,18 @@ int modifCase(int x,int y,int valeur,TAB t){ //modifie la case par la valeur pro
     else printf("probleme de coordonnées\n");return 0;
 }
 
+int modifCase2(int x,int y,int valeur,TAB t){ //modifie la case par la valeur proposer si les coordonnées sont bonnes, l'etat le permert et si cette valeur n'est ni sur la ligne, ni la colonne, ni la case
+        if (t[x - 1][y - 1].etat == 0 ){
+            if (1 == verifCarre(t, x, y, valeur) && 1 == VerifColonne(t, x, y, valeur) && 1 == VerifLigne(t, x, y, valeur)) {
+
+                modifValeur(x,y,valeur,t);
+                return 1;
+            }
+            //ne peut etre place ici
+        }
+    return 0;
+}
+
 int verifCarre(TAB t ,int x,int y, int valeur){ //verifie a quelle carré(3*3) corresponde les coordonnées et si cette valeur est deja present dans le carré
     int i = 0,j = 0;
     i = coordonneeCarre(x);
