@@ -1,8 +1,8 @@
 
 #include "Sudoku.h"
 int tableauRempli(TAB t){ //verifie si le tableau est rempli, le tableau est rempli quand toutes les case sont différentes de 0
-    for (int i = 0; i < 10; ++i) {
-        for (int j = 0; j < 10; ++j) {
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
             if (t[i][j].valeur == 0){
                 return 0;
             }
