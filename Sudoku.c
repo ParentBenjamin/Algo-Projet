@@ -158,7 +158,7 @@ int chargerSudokuSpe(TAB t, int n){
 			return 0;
 		}else {
 			for(int i=0;i<9;i++){
-				for(int j=0;i<9;j++){
+				for(int j=0;j<9;j++){
 					if (t[i][j].valeur == 0){
 						changementEtat(i+1,j+1,t,0);
 					}else {
