@@ -11,5 +11,10 @@ int coordonneeCarre(int x);
 int verifCarre(TAB t ,int x,int y, int valeur);
 int  VerifLigne(TAB t,int x ,int y , int valeur);
 int  VerifColonne(TAB t,int x ,int y , int valeur);
+int chargerSudoku(TAB t,int n);
+int chargerSudokuSpe(TAB t, int n);
+int nbAlea(int n);
+int compterNombreLigneSudoku();
+int compterNombreLigneFichier(char nom[]);
 void sudoku();
 #endif //PROJETALGO_SUDOKU_H
