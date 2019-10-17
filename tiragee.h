@@ -9,14 +9,16 @@
 typedef struct
 {
     int nbtirage;
-    int tab[100];
+    int tab[90];
 }Tirage;
 
-void initialisation(Tirage *t);
+void initialisationTirage(Tirage *t);
 
 void majtirage(int numtire, Tirage *t);
 
 void affichagetableau(Tirage t);
+
+int getRandom(int mini, int maxi);
 
 int numtire(Tirage *t);
 
