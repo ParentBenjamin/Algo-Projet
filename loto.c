@@ -74,8 +74,8 @@ int generer(TAB t, int yStart, int yEnd) { //yStart et yEnd entiers qui delimite
                 do {
                     lig = getRandom(yStart, yEnd);
                 }while (compter(t, lig)>=5 || t[lig][col].valeur != 0);
-                t[lig][col].etat = 1;
-                t[lig][col].valeur = nbr;
+                modifValeur(lig+1,col+1,nbr,t);
+                changementEtat(lig+1,col+1,t,1);
                 cpt++;
             }
         }
@@ -108,9 +108,10 @@ int genererCartons(TAB t, int nbCartons) {
     }
 }
 
+//change l'etat d'un nombre a 2 si il est present dans les cartons t
 int nombreTrouve(TAB t, int nbCartons, int nombre) {
     int found = 0;
-    int yEnd = nbCartons*3-1;
+    int yEnd = nbCartons*3-1; //limite dans le tableau en fonction du nombre de cartons utilises
     int col;
     if (nombre==90) {
         col = 8;
@@ -120,7 +121,7 @@ int nombreTrouve(TAB t, int nbCartons, int nombre) {
 
     for (int i=0; i<=yEnd; i++){
         if (t[i][col].valeur==nombre) {
-            t[i][col].etat = 2;
+            changementEtat(i+1,col+1,t,2);
             found = true;
         }
     }
@@ -155,10 +156,12 @@ void loto() {
         printf("\nLe numero du Tirage est : %d\n\n",numTirage);
         //afficher le tableau
         affiche(tab);
+        //demande du choix du joueur
         printf("\n0 : tirage suivant  |  1 : j'ai ce numero !  |  2 : j'ai gagne !\n");
         do {
             scanf("%d",&choix);
         }while (choix!=0 && choix!=1 && choix!=2);
+        //traitement du choix
         if (choix==2) {
             victoire = verifierVictoire(tab, nbCartons); // A REVOIR
             break;
@@ -168,6 +171,7 @@ void loto() {
             }
         }
     }
+    //Victoire ou defaire
     if (victoire == 1) {
         printf("VOUS AVEZ GAGNE !\n Nombre de tirages : %d", t.nbtirage);
     } else if (victoire == 0){

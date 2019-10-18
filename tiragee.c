@@ -17,6 +17,7 @@ void majtirage(int numtire, Tirage *t)//maj d'un tirage, on ajoute 1 au nb de ti
     t->tab[t->nbtirage-1]=numtire;
 }
 
+<<<<<<< Updated upstream
 void affichagetableau(Tirage t)//affichage du tableau de tirage et du nombre de tirage effectues
 {
     printf("Nombre de tirage = %d\n",t.nbtirage);
@@ -28,6 +29,8 @@ void affichagetableau(Tirage t)//affichage du tableau de tirage et du nombre de 
     printf("\n");
 }
 
+=======
+>>>>>>> Stashed changes
 //Tirage aleatoire d'un nombre entre min et max compris
 int getRandom(int mini, int maxi) {
     int random = (rand() % (maxi - mini + 1)) + mini;
@@ -45,6 +48,7 @@ int numtire(Tirage *t) //numero tiree aleatoirement
     return numero;
 }
 
+<<<<<<< Updated upstream
 void general()
 {
     srand(time(NULL));//eviter la redondance des sequences d'aleatoire;
@@ -61,4 +65,6 @@ void general()
     //affichagetableau(t);
 }
 
+=======
+>>>>>>> Stashed changes
 #endif // TIRAGE_C_INCLUDED
