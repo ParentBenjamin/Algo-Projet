@@ -4,10 +4,10 @@
 
 void initialisationTirage(Tirage *t) //initialistaion des tirages, nombre et tableau de tirage
 {
-    t->nbtirage=0;
+    t->nbtirage=0; //initialisation nb de tirage effectués
     for (int i=0;i<90;i++)
     {
-        t->tab[i]=0;
+        t->tab[i]=0;//initialisation des valeurs du tableau a 0
     }
 }
 
@@ -17,7 +17,7 @@ void majtirage(int numtire, Tirage *t)//maj d'un tirage, on ajoute 1 au nb de ti
     t->tab[t->nbtirage-1]=numtire;
 }
 
-void affichagetableau(Tirage t)//affichage du tableau de tirage et du nombr de tirage effectues
+void affichagetableau(Tirage t)//affichage du tableau de tirage et du nombre de tirage effectues
 {
     printf("Nombre de tirage = %d\n",t.nbtirage);
     printf("le tableau des tirages :");
@@ -48,15 +48,15 @@ int numtire(Tirage *t) //numero tiree aleatoirement
 void general()
 {
     srand(time(NULL));//eviter la redondance des sequences d'aleatoire;
-    Tirage t;
+    Tirage t;//cree un tirage
     initialisationTirage(&t);//initialisation du tirage
     int num;
-    for (int i=0;i<90;i++)
+    for (int i=0;i<90;i++)//boucle pour effectuer les 90 tirages
     {
         num=numtire(&t);
         majtirage(num,&t);
         printf("Le numero est : %d\n",num);//affichage du numero tire
-        Sleep(7000); //attente entre deux tirages de 7s
+        Sleep(5000); //attente entre deux tirages de 5s
     }
     //affichagetableau(t);
 }
