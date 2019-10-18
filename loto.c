@@ -1,79 +1,59 @@
 #include "loto.h"
+#include "tiragee.h"
 
-//recherche si un nombre est contenu dans un tableau   1 si vrai  0 si faux
-int rechercheNombre(int nombresTires[100], int nombre) {
-    int myBoolean = 0;
-    for (int i=0; i<100; i++) {
-        if (nombresTires[i] == 0) {
-            break;
-        } else if (nombresTires[i] == nombre) {
-            myBoolean = 1;
-            break;
-        }
-    }
-    return myBoolean;
-}
 
-//Verifie pour une, deux ou trois grilles  qu'elles contiennent uniquement des nombres contenus dans le tableau nombresTires   1 si vrai    0 si faux
-int verifierVictoire(TAB t, int nombresTires[100], int yStart, int yEnd) {  //nombresTires est le tableau des nombres deja tires, ystart et yend sont les entiers qui delimitent quelle partie du tableau il faut verifier (en fonction du nombre de grilles)
-    for (int x=0; x<9; x++) {
-        for (int y=yStart; y<=yEnd; y++){
-            if (t[y][x].valeur!=0) {
-                if (!t[y][x].etat==2 || rechercheNombre(nombresTires,t[y][x].valeur)==0) {
-                    return 0;
-                }
+//Verifie pour une, deux ou trois grilles qu'elles contiennent uniquement des nombres contenus dans le tableau des tirages effectues   1 si vrai    0 si faux
+int verifierVictoire(TAB t, int nbCartons) {
+    int yEnd = nbCartons*3-1;
+    for (int y=0; y<=yEnd; y++){
+        for (int x=0; x<9; x++) {
+            if (t[y][x].valeur!=0 && t[y][x].etat!=2) { // si la case n est pas une case vide et que l'etat de la case n est pas "decouvert" (2) alors defaite donc faux
+                return 0;
             }
         }
     }
     return 1;
 }
 
-//Genere une grille valide pour pouvoir tester autres fonctions (temporaire)
-void genererTmp(TAB t) {
-    t[1][0].etat = 1;
-    t[1][0].valeur = 3;
-    t[2][0].etat = 1;
-    t[2][0].valeur = 8;
-    t[0][1].etat = 1;
-    t[0][1].valeur = 16;
-    t[1][2].etat = 1;
-    t[1][2].valeur = 22;
-    t[2][2].etat = 1;
-    t[2][2].valeur = 29;
-    t[0][3].etat = 1;
-    t[0][3].valeur = 35;
-    t[0][4].etat = 1;
-    t[0][4].valeur = 44;
-    t[2][4].etat = 1;
-    t[2][4].valeur = 42;
-    t[1][5].etat = 1;
-    t[1][5].valeur = 56;
-    t[2][5].etat = 1;
-    t[2][5].valeur = 54;
-    t[0][6].etat = 1;
-    t[0][6].valeur = 60;
-    t[1][6].etat = 1;
-    t[1][6].valeur = 66;
-    t[2][7].etat = 1;
-    t[2][7].valeur = 70;
-    t[0][8].etat = 1;
-    t[0][8].valeur = 88;
-    t[1][8].etat = 1;
-    t[1][8].valeur = 87;
-}
-
-//Tirage aleatoire d'un nombre entre min et max compris
-int getRandom(int min, int max) {
-    int random = (rand() % (max - min + 1)) + min;
-    return random;
-}
-
 //Verifie si un nombre est present dans une grille    1 si vrai 0 sinon
-int presenceNombreGrille(TAB t, int yStart, int yEnd, int nombre) {
+int estDejaPresent(TAB t, int yStart, int yEnd, int nombre, int col) {
+    for (int i=yStart; i<=yEnd; i++) {
+        if (t[i][col].valeur == nombre) {
+                return 1;
+        }
+    }
+    return 0;
 }
 
-//Verifie si la colonne où doit être place le nombre est deja pleine ou pas
-int colonneRemplie(TAB t, int yStart, int yEnd, int nombre) {
+//Verifie si la colonne où doit être place le nombre est pleine ou pas   1 si vrai 0 sinon
+int colonneRemplie(TAB t, int yStart, int yEnd, int nombre, int col) {
+    for (int i=yStart; i<=yEnd; i++) {
+        if (t[i][col].valeur == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+//compte le nombre de valeurs dans une ligne du tableau
+int compter(TAB t, int ligne) {
+    int cpt = 0;
+    for (int i=0; i<9; i++) {
+        if (t[ligne][i].valeur != 0) {
+            cpt++;
+        }
+    }
+    return cpt;
+}
+
+//retourne 1 si il y a une place disponible dans la colonne citee qui est valide, cad si la ligne ou la place se situe il y a moins de 5 valeurs
+int placeDispoValide(TAB t, int yStart, int yEnd, int col) {
+    for (int i=yStart; i<=yEnd; i++) {
+        if (t[i][col].valeur==0 && compter(t, i)<5) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 //Genere une grille avec toutes les contraintes du loto   (retourne 1 si generation effectuée, 0 sinon)
@@ -82,8 +62,21 @@ int generer(TAB t, int yStart, int yEnd) { //yStart et yEnd entiers qui delimite
         int cpt = 0; //nombre de nombres places dans la grille
         while (cpt<15) {
             int nbr = getRandom(1,90);
-            if (presenceNombreGrille(t,yStart,yEnd,nbr)==0 && colonneRemplie(t,yStart,yEnd,nbr)==0) { //verifie si pas deja present dans la grille et si pas deja 3 nombres dans sa colonne
-                //placer dans une ligne où il y moins de 5 valeurs
+            int col;
+            if (nbr==90) {
+                col = 8;
+            } else {
+                col = nbr/10;
+            }
+
+            if (estDejaPresent(t, yStart, yEnd, nbr, col)==0 && colonneRemplie(t, yStart, yEnd, nbr, col)==0 && placeDispoValide(t, yStart, yEnd, col)==1) {
+                int lig;
+                do {
+                    lig = getRandom(yStart, yEnd);
+                }while (compter(t, lig)>=5 || t[lig][col].valeur != 0);
+                modifValeur(lig+1,col+1,nbr,t);
+                changementEtat(lig+1,col+1,t,1);
+                cpt++;
             }
         }
         return 1;
@@ -92,20 +85,101 @@ int generer(TAB t, int yStart, int yEnd) { //yStart et yEnd entiers qui delimite
     }
 }
 
+//genere le nombre de cartons demandes (par defaut 3)
+int genererCartons(TAB t, int nbCartons) {
+    switch(nbCartons) {
+        case 1 :
+            generer(t, 0, 2);
+            break;
+        case 2 :
+            generer(t, 0, 2);
+            generer(t, 3, 5);
+            break;
+        case 3 :
+            generer(t, 0, 2);
+            generer(t, 3, 5);
+            generer(t, 6, 8);
+            break;
+        default :
+            generer(t, 0, 2);
+            generer(t, 3, 5);
+            generer(t, 6, 8);
+            break;
+    }
+}
+
+//change l'etat d'un nombre a 2 si il est present dans les cartons t
+int nombreTrouve(TAB t, int nbCartons, int nombre) {
+    int found = 0;
+    int yEnd = nbCartons*3-1; //limite dans le tableau en fonction du nombre de cartons utilises
+    int col;
+    if (nombre==90) {
+        col = 8;
+    } else {
+        col = nombre/10;
+    }
+
+    for (int i=0; i<=yEnd; i++){
+        if (t[i][col].valeur==nombre) {
+            changementEtat(i+1,col+1,t,2);
+            found = true;
+        }
+    }
+    return found;
+}
+
 void loto() {
     srand(time(NULL)); // Necessaire pour la generation aleatoire (ligne a executer 1 seule fois)
 
-    TAB t;
-    init(9,9,t);
-    genererTmp(t);
-    affiche(t);
+    TAB tab;
+    init(9,9,tab);
+    Tirage t;
+    initialisationTirage(&t);
+    int numTirage; //numero du tirage actuel
+    int choix; // choix du joueur
+    int victoire = -1; //1 si victoire 0 defaite car pas tous les nums -1 defaite car tous les tirages ont ete effectues
 
-    /*
-    int nombresTiresFaux[100] = {3,8,16,22,29,35,44,41,56,54,66,60,70,88,87}; //pour test verifierVictoire() pour un cas faux
-    int nombresTiresVrai[100] = {3,8,16,22,29,35,44,42,56,54,66,60,70,88,87}; //pour test verifierVictoire() pour un cas vrai
-    printf("pour vrai : %d\n",verifierVictoire(t,nombresTiresVrai,0,2));
-    printf("pour faux : %d\n",verifierVictoire(t,nombresTiresFaux,0,2));
-    */
+    int nbCartons;
+    do {
+        printf("Combien de cartons de loto voulez-vous ? 1, 2 ou 3 ?\n");
+        scanf("%d",&nbCartons);
+    }while (nbCartons!=1 && nbCartons!=2 && nbCartons != 3);
 
+    genererCartons(tab, nbCartons);
+
+    printf("DEBUT DU JEU\n\n");
+
+    while(t.nbtirage<90){
+        //effectuer un tirage
+        numTirage=numtire(&t);
+        majtirage(numTirage,&t);
+        printf("\nLe numero du Tirage est : %d\n\n",numTirage);
+        //afficher le tableau
+        affiche(tab);
+        //demande du choix du joueur
+        printf("\n0 : tirage suivant  |  1 : j'ai ce numero !  |  2 : j'ai gagne !\n");
+        do {
+            scanf("%d",&choix);
+        }while (choix!=0 && choix!=1 && choix!=2);
+        //traitement du choix
+        if (choix==2) {
+            victoire = verifierVictoire(tab, nbCartons); // A REVOIR
+            break;
+        } else if (choix==1) {
+            if (nombreTrouve(tab, nbCartons, numTirage)==0) {
+                printf("Vous n'avez pas le %d dans vos grilles !\n ", numTirage);
+            }
+        }
+    }
+    //Victoire ou defaire
+    if (victoire == 1) {
+        printf("VOUS AVEZ GAGNE !\n Nombre de tirages : %d", t.nbtirage);
+    } else if (victoire == 0){
+        printf("VOUS AVEZ PERDU !\n Vos cartons ne sont pas remplis !\n Nombre de tirages : %d", t.nbtirage);
+    } else {
+        printf("VOUS AVEZ PERDU !\n Tous les nombres ont ete tires !\nNombre de tirages : %d", t.nbtirage);
+    }
+
+    printf("\nFIN DU JEU\n\n");
 }
 
