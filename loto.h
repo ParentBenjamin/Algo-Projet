@@ -21,5 +21,8 @@ int generer(TAB t, int yStart, int yEnd);
 
 int genererCartons(TAB t, int nbCartons);
 
+int nombreTrouve(TAB t, int nbCartons, int nombre);
+
+
 void loto();
 #endif

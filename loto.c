@@ -2,35 +2,17 @@
 #include "tiragee.h"
 
 
-//Verifie pour une, deux ou trois grilles   qu'elles contiennent uniquement des nombres contenus dans le tableau des tirages effectues   1 si vrai    0 si faux
-int verifierVictoire_aux(TAB t, int yStart, int yEnd) {  //ystart et yend sont les entiers qui delimitent quelle partie du tableau il faut verifier (en fonction du nombre de grilles)
-    for (int y=yStart; y<=yEnd; y++){
+//Verifie pour une, deux ou trois grilles qu'elles contiennent uniquement des nombres contenus dans le tableau des tirages effectues   1 si vrai    0 si faux
+int verifierVictoire(TAB t, int nbCartons) {
+    int yEnd = nbCartons*3-1;
+    for (int y=0; y<=yEnd; y++){
         for (int x=0; x<9; x++) {
-            if (t[y][x].valeur!=0) {
-                if (!t[y][x].etat==2) {  //si le nombre n'est pas "découvert", fin de la fonction, retourne 0
-                    return 0;
-                }
+            if (t[y][x].valeur!=0 && t[y][x].etat!=2) { // si la case n est pas une case vide et que l'etat de la case n est pas "decouvert" (2) alors defaite donc faux
+                return 0;
             }
         }
     }
     return 1;
-}
-
-int verifierVictoire(TAB t, int nbCartons) {
-    switch(nbCartons) {
-        case 1 :
-            verifierVictoire_aux(t, 0, 2);
-            break;
-        case 2 :
-            verifierVictoire_aux(t, 0, 5);
-            break;
-        case 3 :
-            verifierVictoire_aux(t, 0, 8);
-            break;
-        default :
-            verifierVictoire_aux(t, 0, 8);
-            break;
-    }
 }
 
 //Verifie si un nombre est present dans une grille    1 si vrai 0 sinon
@@ -126,6 +108,25 @@ int genererCartons(TAB t, int nbCartons) {
     }
 }
 
+int nombreTrouve(TAB t, int nbCartons, int nombre) {
+    int found = 0;
+    int yEnd = nbCartons*3-1;
+    int col;
+    if (nombre==90) {
+        col = 8;
+    } else {
+        col = nombre/10;
+    }
+
+    for (int i=0; i<=yEnd; i++){
+        if (t[i][col].valeur==nombre) {
+            t[i][col].etat = 2;
+            found = true;
+        }
+    }
+    return found;
+}
+
 void loto() {
     srand(time(NULL)); // Necessaire pour la generation aleatoire (ligne a executer 1 seule fois)
 
@@ -151,18 +152,20 @@ void loto() {
         //effectuer un tirage
         numTirage=numtire(&t);
         majtirage(numTirage,&t);
-        printf("\nLe numero du Tirage est : %d\n",numTirage);
+        printf("\nLe numero du Tirage est : %d\n\n",numTirage);
         //afficher le tableau
         affiche(tab);
-        printf("\n0 : tirage suivant");
-        printf("\n1 : j'ai ce numero !");
-        printf("\n2 : j'ai gagne !\n");
-        scanf("%d",&choix);
+        printf("\n0 : tirage suivant  |  1 : j'ai ce numero !  |  2 : j'ai gagne !\n");
+        do {
+            scanf("%d",&choix);
+        }while (choix!=0 && choix!=1 && choix!=2);
         if (choix==2) {
             victoire = verifierVictoire(tab, nbCartons); // A REVOIR
             break;
         } else if (choix==1) {
-            //appeler fonction qui verifie que le numTirage est dans la grille et passe l'etat à 2
+            if (nombreTrouve(tab, nbCartons, numTirage)==0) {
+                printf("Vous n'avez pas le %d dans vos grilles !\n ", numTirage);
+            }
         }
     }
     if (victoire == 1) {
