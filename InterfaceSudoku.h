@@ -16,7 +16,7 @@ typedef struct{
 
 
 void interSudoku(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond);
-SDL_Rect cliqueSouris(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, SDL_Event event,TAB t);
+SDL_Rect cliqueSourisSudoku(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, SDL_Event event,TAB t);
 void ecrire(TAB t, SDL_Surface *ecran, SDL_Surface *imageDeFond);
 void remplirTEST(TAB t);
 Coordonees appuiTouche(SDL_Rect positionFond);

@@ -347,9 +347,11 @@ void interSudoku(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect position
     int r;
     TAB t;
     int chiffre;
-    //init(9,9,t);
 
-    remplirTEST(t);
+    //init(9,9,t);
+    //remplirTEST(t);
+    //chargerSudokuSpe(t,5);
+    chargerSudoku(t,compterNombreLigneSudoku());
     ecrire(t,ecran,imageDeFond);
 
     Coordonees c;
@@ -377,7 +379,7 @@ void interSudoku(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect position
                 positionFond.x = event.button.x;
                 positionFond.y = event.button.y;
                 c = appuiTouche(positionFond);
-                positionFond = cliqueSouris(ecran,imageDeFond,positionFond,event,t);
+                positionFond = cliqueSourisSudoku(ecran,imageDeFond,positionFond,event,t);
                 break;
             }
             case SDL_KEYDOWN:
@@ -392,7 +394,7 @@ void interSudoku(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect position
                         ecrire(t,ecran,imageDeFond);
                         event.button.x = positionFond.x;
                         event.button.y = positionFond.y;
-                        positionFond = cliqueSouris(ecran,imageDeFond,positionFond,event,t);
+                        positionFond = cliqueSourisSudoku(ecran,imageDeFond,positionFond,event,t);
                         break;
                     }
                     else if(event.key.keysym.sym == SDLK_KP1)
@@ -441,7 +443,7 @@ void interSudoku(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect position
                         ecrire(t,ecran,imageDeFond);
                         event.button.x = positionFond.x;
                         event.button.y = positionFond.y;
-                        positionFond = cliqueSouris(ecran,imageDeFond,positionFond,event,t);
+                        positionFond = cliqueSourisSudoku(ecran,imageDeFond,positionFond,event,t);
                     }
                     else{
                         positionFond.x = 152;
@@ -465,7 +467,14 @@ void interSudoku(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect position
             break;
         }
     }
-    positionFond.x = 0;
-    positionFond.y = 0;
-    menuPrincipal(ecran,imageDeFond,positionFond);
+    if(positionFond.x == -2 && positionFond.y == -2){
+        positionFond.x = 0;
+        positionFond.y = 0;
+        interSudoku(ecran,imageDeFond,positionFond);
+    }
+    if(positionFond.x == -1 && positionFond.y == -1){
+        positionFond.x = 0;
+        positionFond.y = 0;
+        menuPrincipal(ecran,imageDeFond,positionFond);
+    }
 }
