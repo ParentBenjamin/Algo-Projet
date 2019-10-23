@@ -1,4 +1,4 @@
-include "plateau.h"
+#include "plateau.h"
 
 // dans la grille etat : 0 si rien, 1 a leau 2 touche
 // dans la grille valeur : numero de la taille du bateau sinon 0
@@ -60,4 +60,21 @@ bool victoire(Joueur j)
 {
     if(j.nbcoule==5)return true;
     else return false;
+}
+
+
+void batailleNavale() {
+    TAB tab;
+    init(9,9,tab);
+    printf("generation...");
+    genererGrilleTMP(tab);
+    printf("affichage :\n\n");
+    affiche(tab);
+
+    /*for (int i=5; i>1; i--) {
+        printf("PLACEMENT Bateau taille %d\n",)
+        scanf("%d", &x);
+        scanf("%d", &y);
+    }*/
+
 }
