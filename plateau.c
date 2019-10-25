@@ -37,6 +37,27 @@ int coule(int x, int y, TAB t)//retourne 1 si bateau coule 0 sinon
     else return 0;
 }
 
+int chgmtetat(int x, int y,TAB t)//met les cases où se trouve le bateau coulé a letat 3 pour indiquer au joueur le bateau coule
+{
+    int valeur=0;
+    valeur=t[x][y].valeur;//garde en memoire la valeur de la case en cours ( nom du bateau )
+    if(t[x+1][y].valeur==valeur || t[x-1][y].valeur==valeur)//si le bateau est en position verticale
+    {
+        for(int i=0;i<9;i++)
+        {
+            if(t[i][y].valeur==valeur)changementEtat(i+1,y+1,t,3);//on change letat des cases où on a trouve le bateau
+        }
+    }
+    if(t[x][y+1].valeur==valeur || t[x][y-1].valeur==valeur)//si le bateau est en position horizontale
+    {
+        for(int j=0;j<9;j++)
+        {
+            if(t[x][j].valeur==valeur)changementEtat(x+1,j+1,t,3);//on change letat des cases où on a trouve le bateau
+        }
+
+    }
+}
+
 int tir(TAB t, int x, int y, Joueur *j)//0 si a l'eau, 1 si touche, 2 si coule
 {
         if(t[x-1][y-1].valeur!=0)//il y a un bateau sur cette case
@@ -44,7 +65,8 @@ int tir(TAB t, int x, int y, Joueur *j)//0 si a l'eau, 1 si touche, 2 si coule
             changementEtat(x,y,t,2);//on met letat a 2 : touche
             if(coule(x-1,y-1,t))
             {
-                j->nbcoule++;
+                chgmtetat(x-1,y-1,t);//pour indiquer au joueur ou se trouve le  bateau coule
+                j->nbcoule++;//augmente le nombre de bateau coule du joueur
                 return 2;//verifie si le bateau a ete coule ou non, retourne 2 si oui            }
             }
             else return 1;//sinon retourne 1 : il a ete touche
@@ -52,13 +74,13 @@ int tir(TAB t, int x, int y, Joueur *j)//0 si a l'eau, 1 si touche, 2 si coule
         else //il n'y a pas de bateau sur la case : elle est libre
         {
             changementEtat(x,y,t,1);//on met letat a 1 : a leau
-            return 0;
+            return 0;//a leau
         }
 }
 
 bool victoire(Joueur j)
 {
-    if(j.nbcoule==5)return true;
+    if(j.nbcoule==4)return true;
     else return false;
 }
 
