@@ -1,0 +1,42 @@
+int point(int i, int t[5]) {
+    int som = 0;
+     // tri(t)
+    switch (i) {
+            if (t[0] == t[2] || t[2] == t[4] || t[1] == t[3])  //brelan
+            else return 0;
+
+        case 8 :
+            if (t[0] == t[3] || t[1] == t[4])   // brelan
+            else return 0;
+        case 10 :                       //full
+            if (t[0] == t[2]) {
+                if (t[3] == t[4])  // return 
+            }
+            if (t[2] == t[4]) {
+                if (t[0] == t[1]) //return
+            } else return 0;
+
+        case 11 :                   // Suite
+
+            som = 0;
+            if (t[0] == t[1] - 1) {
+                som++;
+            }
+            if (t[1] == t[2] - 1) {
+                som++;
+            }
+            if (t[2] == t[3] - 1) {
+                som++;
+            }
+            if (t[3] == t[4] - 1) {
+                som++;
+            }
+            if (som > 3) {
+                return (40);
+            }
+            else return 0;
+        
+
+    }
+
+}
