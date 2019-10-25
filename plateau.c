@@ -37,14 +37,14 @@ int coule(int x, int y, TAB t)//retourne 1 si bateau coule 0 sinon
     else return 0;
 }
 
-int tir(TAB t, int x, int y, Joueur j)//0 si a l'eau, 1 si touche, 2 si coule
+int tir(TAB t, int x, int y, Joueur *j)//0 si a l'eau, 1 si touche, 2 si coule
 {
-        if(t[x][y].valeur!=0)//il y a un bateau sur cette case
+        if(t[x-1][y-1].valeur!=0)//il y a un bateau sur cette case
         {
             changementEtat(x,y,t,2);//on met letat a 2 : touche
-            if(coule(x,y,t))
+            if(coule(x-1,y-1,t))
             {
-                j.nbcoule++;
+                j->nbcoule++;
                 return 2;//verifie si le bateau a ete coule ou non, retourne 2 si oui            }
             }
             else return 1;//sinon retourne 1 : il a ete touche
@@ -65,11 +65,34 @@ bool victoire(Joueur j)
 
 void batailleNavale() {
     TAB tab;
+    Joueur j;
+    j=initialisationjoueur();
+    int result; //pour le resultat du tir
     init(9,9,tab);
     printf("generation...");
     genererGrilleTMP(tab);
     printf("affichage :\n\n");
     affiche(tab);
+    for(int i=0;i<81;i++)
+    {
+        printf("x=\n");
+        scanf("%d",&x);
+        printf("y=\n");
+        scanf("%d",&y);
+        result=tir(t,x,y,&j);
+        if(result==0)printf("A l'eau :( \n");
+        if(result==1)printf("TOUCHE :) \n");
+        if(result==2)
+        {
+            printf("COULE :D\n");
+            printf("%d\n",j.nbcoule);
+        }
+        if(victoire(j)==true)
+        {
+            printf("victoire\n");
+            break;
+        }
+    }
 
     /*for (int i=5; i>1; i--) {
         printf("PLACEMENT Bateau taille %d\n",)
