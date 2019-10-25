@@ -58,10 +58,63 @@ bool appartient(int v, int c ,int n ,Case t[5+2*n]){
     return false;
 }
 
-void distribution(int n, Case t[5+2*n], Parti p){
-    for (int i = 0; i < 5+2*n ; ++i) {
-        if (i < 5){
+void distribution(int n, Case t[5+2*n], Parti p){  // donne toutes les cartes aux joueurs et a la river
+    for (int i = 0; i < 5 ; ++i) {
+        if (i < 5) {
             p.river[i] = t[i];
         }
     }
+    for (int j = 0; j < 2*n; j+2) {
+            p.tableDeJeu[j/2].jeu[1]= t[j];
+            p.tableDeJeu[j/2].jeu[2]= t[j+1];
+    }
 }
+
+int maxMise(Parti p){ // calcul la plus grandes mise actuel
+    int max = 0;
+    for (int i = 0; i < 5; ++i) {
+            if (max < p.tableDeJeu[i].mise){
+                max = p.tableDeJeu[i].mise;
+            }
+        }
+    return max;
+}
+
+
+void Suivre(Parti p,int joueur){   // suit la plus haute mise
+    int max = maxMise(p);
+    int nouvelleMise = max - p.tableDeJeu[joueur].mise;
+    if(nouvelleMise < p.tableDeJeu[joueur].argent){
+        p.tableDeJeu[joueur].argent -= nouvelleMise;
+        p.tableDeJeu[joueur].mise += nouvelleMise;
+    }else {
+        p.tableDeJeu[joueur].mise += p.tableDeJeu[joueur].argent;
+        p.tableDeJeu[joueur].argent = 0;
+    }
+}
+
+void tapis(Parti p , int joueur){               // permet au joueur de faire tapis
+    p.tableDeJeu[joueur].mise = p.tableDeJeu[joueur].argent;
+    p.tableDeJeu[joueur].argent = 0;
+}
+
+void ceCoucher(Parti p, int joueur){    // permet au joueur de se coucher
+    p.pot += p.tableDeJeu[joueur].mise;
+    p.tableDeJeu[joueur].mise = 0;
+    p.tableDeJeu[joueur].coucher = true;
+}
+
+int relancer(Parti p ,int joueur, int somme ){   // permet de relancer du certaine somme mis en paramètre en plus de la mise max
+    int max = maxMise(p);
+    int nouvelleMise = max - p.tableDeJeu[joueur].mise;
+
+    if(nouvelleMise + somme < p.tableDeJeu[joueur].argent){
+        p.tableDeJeu[joueur].argent -= nouvelleMise + somme;
+        p.tableDeJeu[joueur].mise += nouvelleMise + somme;
+    }else {
+        p.tableDeJeu[joueur].mise += p.tableDeJeu[joueur].argent;
+        p.tableDeJeu[joueur].argent = 0;
+    }
+
+}
+
