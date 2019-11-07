@@ -75,7 +75,7 @@ int generer(TAB t, int yStart, int yEnd) { //yStart et yEnd entiers qui delimite
                     lig = getRandom(yStart, yEnd);
                 }while (compter(t, lig)>=5 || t[lig][col].valeur != 0);
                 modifValeur(lig+1,col+1,nbr,t);
-                changementEtat(lig+1,col+1,t,1);
+                //changementEtat(lig+1,col+1,t,1);
                 cpt++;
             }
         }

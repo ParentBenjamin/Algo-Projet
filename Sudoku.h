@@ -1,6 +1,7 @@
 #ifndef PROJETALGO_SUDOKU_H
 #define PROJETALGO_SUDOKU_H
 
+#include <time.h>
 #include "Grille.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -17,4 +18,5 @@ int nbAlea(int n);
 int compterNombreLigneSudoku();
 int compterNombreLigneFichier(char nom[]);
 void sudoku();
+int chargerSudokuSpe2(TAB t, int n);
 #endif //PROJETALGO_SUDOKU_H

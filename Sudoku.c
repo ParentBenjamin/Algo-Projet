@@ -84,8 +84,8 @@ int coordonneeCarre(int x){  // convertie le x ou le y pour le faire correspondr
 chargerSudoku prend comme arguments
 n un entier
 t un TAB
-remplis le sudoku avec un sudoku choisis au hasard enregistré dans le fichier "Sudoku.txt". 
-Le sudoku est choisis entre la ligne 1 et la ligne n du fichier, 
+remplis le sudoku avec un sudoku choisis au hasard enregistré dans le fichier "Sudoku.txt".
+Le sudoku est choisis entre la ligne 1 et la ligne n du fichier,
 donc pour avoir une chance d'avoir tout les sudoku enregistré n doit être égale au nombre de ligne du fichier Sudoku.txt
 Mettre un n plus grand que le nombre de ligne du fichier Sudoku.txt peut causer des erreur de chargement
 renvoie si le remplissage est un succés ou 0 si c'est un echec
@@ -98,7 +98,7 @@ int chargerSudoku(TAB t, int n){
 		for(int i=0;i<lim;i++){
 			fseek(fichier, 165, SEEK_CUR);
 		}
-		if (fscanf(fichier, "[%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d]", 
+		if (fscanf(fichier, "[%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d]",
 				&t[0][0].valeur, &t[0][1].valeur, &t[0][2].valeur, &t[0][3].valeur,&t[0][4].valeur, &t[0][5].valeur, &t[0][6].valeur, &t[0][7].valeur, &t[0][8].valeur,
 				&t[1][0].valeur, &t[1][1].valeur, &t[1][2].valeur, &t[1][3].valeur,&t[1][4].valeur, &t[1][5].valeur, &t[1][6].valeur, &t[1][7].valeur, &t[1][8].valeur,
 				&t[2][0].valeur, &t[2][1].valeur, &t[2][2].valeur, &t[2][3].valeur,&t[2][4].valeur, &t[2][5].valeur, &t[2][6].valeur, &t[2][7].valeur, &t[2][8].valeur,
@@ -108,7 +108,6 @@ int chargerSudoku(TAB t, int n){
 				&t[6][0].valeur, &t[6][1].valeur, &t[6][2].valeur, &t[6][3].valeur,&t[6][4].valeur, &t[6][5].valeur, &t[6][6].valeur, &t[6][7].valeur, &t[6][8].valeur,
 				&t[7][0].valeur, &t[7][1].valeur, &t[7][2].valeur, &t[7][3].valeur,&t[7][4].valeur, &t[7][5].valeur, &t[7][6].valeur, &t[7][7].valeur, &t[7][8].valeur,
 				&t[8][0].valeur, &t[8][1].valeur, &t[8][2].valeur, &t[8][3].valeur,&t[8][4].valeur, &t[8][5].valeur, &t[8][6].valeur, &t[8][7].valeur, &t[8][8].valeur) == -1) {
-			printf("\n\tErreur impossible de charger le sudoku");
 			return 0;
 		}else {
 			for(int i=0;i<9;i++){
@@ -125,9 +124,8 @@ int chargerSudoku(TAB t, int n){
 		}
     }
     else{
-        printf("\n\tImpossible d'ouvrir le fichier test.txt");
 		return 0;
-    }	
+    }
 }
 
 /*
@@ -144,7 +142,7 @@ int chargerSudokuSpe(TAB t, int n){
 		for(int i=0;i<n-1;i++){
 			fseek(fichier, 165, SEEK_CUR);
 		}
-		if (fscanf(fichier, "[%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d]", 
+		if (fscanf(fichier, "[%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d]",
 				&t[0][0].valeur, &t[0][1].valeur, &t[0][2].valeur, &t[0][3].valeur,&t[0][4].valeur, &t[0][5].valeur, &t[0][6].valeur, &t[0][7].valeur, &t[0][8].valeur,
 				&t[1][0].valeur, &t[1][1].valeur, &t[1][2].valeur, &t[1][3].valeur,&t[1][4].valeur, &t[1][5].valeur, &t[1][6].valeur, &t[1][7].valeur, &t[1][8].valeur,
 				&t[2][0].valeur, &t[2][1].valeur, &t[2][2].valeur, &t[2][3].valeur,&t[2][4].valeur, &t[2][5].valeur, &t[2][6].valeur, &t[2][7].valeur, &t[2][8].valeur,
@@ -154,7 +152,6 @@ int chargerSudokuSpe(TAB t, int n){
 				&t[6][0].valeur, &t[6][1].valeur, &t[6][2].valeur, &t[6][3].valeur,&t[6][4].valeur, &t[6][5].valeur, &t[6][6].valeur, &t[6][7].valeur, &t[6][8].valeur,
 				&t[7][0].valeur, &t[7][1].valeur, &t[7][2].valeur, &t[7][3].valeur,&t[7][4].valeur, &t[7][5].valeur, &t[7][6].valeur, &t[7][7].valeur, &t[7][8].valeur,
 				&t[8][0].valeur, &t[8][1].valeur, &t[8][2].valeur, &t[8][3].valeur,&t[8][4].valeur, &t[8][5].valeur, &t[8][6].valeur, &t[8][7].valeur, &t[8][8].valeur) == -1) {
-			printf("\n\tErreur impossible de charger le sudoku");
 			return 0;
 		}else {
 			for(int i=0;i<9;i++){
@@ -171,13 +168,12 @@ int chargerSudokuSpe(TAB t, int n){
 		}
     }
     else{
-        printf("\n\tImpossible d'ouvrir le fichier test.txt");
 		return 0;
-    }	
+    }
 }
 
 /*
-nbAlea prend comme argument 
+nbAlea prend comme argument
 n un entier
 et renvoie une valeur aléatoire entre 0 et n (n non inclus)
 */
@@ -227,10 +223,9 @@ int compterNombreLigneFichier(char nom[]){
 	return nbLignes;
 	}
     else{
-        printf("Impossible d'ouvrir le fichier test.txt");
 		return 0;
-    }	
-	
+    }
+
 }
 
 void sudoku(){ //main du sudoku en ligne de commande
