@@ -8,7 +8,7 @@
 #define GRILLE_H_INCLUDED
 
 typedef struct {
-    int etat;
+    int etat;  // pour le poker (1 = coeur, 2 = pique, 3 = carreau, 4 = trefle) // pour sudoku ( 1 = case bloque, 0 = case libre)
     int valeur;
 }Case;
 

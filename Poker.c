@@ -6,8 +6,7 @@ int nbAlea(int n){  //genere une valeur aleatoire entre 0 et n;
     return (rand() % n);
 }
 
-joueurPoker initJoueur(){  //  initialise un joueur
-    joueurPoker j;
+void initJoueur(joueurPoker j){  //  initialise un joueur
     j.argent = 1500;
     j.jeu[0].valeur=0;
     j.jeu[1].valeur=0;
@@ -15,7 +14,6 @@ joueurPoker initJoueur(){  //  initialise un joueur
     j.jeu[1].etat=0;
     j.mise = 0;
     j.coucher = false;
-    return j;
 }
 
 void initTirage( int n ,Case t[5+2*n]){  // initialise le tableau de tirage de toutes les cartes qui vont constituer une manche
@@ -31,7 +29,7 @@ void initParti(int n,Parti p){    // initialise la parti
         p.river[i].valeur = 0;
     }
     for (int j = 0; j < n; ++j) {
-        p.tableDeJeu[j] = initJoueur();
+         initJoueur(p.tableDeJeu[j]);
     }
     p.pot = 0;
 }
@@ -117,5 +115,66 @@ int relancer(Parti p ,int joueur, int somme ){   // permet de relancer du certai
         p.tableDeJeu[joueur].argent = 0;
     }
 
+}
+
+void repartitionArgent (Parti p, int joueurGagnant){ // reparti l'argent entre chaque joueur en vérifiant ayant le joueur gagnant 
+    if (p.tableDeJeu[joueurGagnant].mise < maxMise(p)){ //si le joueur gagnant a fait tapis et qu'il a miser moins que les autres
+        for (int i = 0; i < 5; ++i) {
+            if(i != joueurGagnant || p.tableDeJeu[i].coucher){
+                p.tableDeJeu[i].mise -= p.tableDeJeu[joueurGagnant].mise;
+                p.tableDeJeu[joueurGagnant].argent += p.tableDeJeu[joueurGagnant].mise;
+                p.tableDeJeu[i].argent += p.tableDeJeu[i].mise;
+                p.tableDeJeu[i].mise = 0;
+            }
+        }
+        p.tableDeJeu[joueurGagnant].argent += p.pot;
+        p.pot = 0;
+        p.tableDeJeu[joueurGagnant].argent +=p.tableDeJeu[joueurGagnant].mise;
+        p.tableDeJeu[joueurGagnant].mise = 0;
+    }else {                                             // si le joueur gagnant a la mise la plus haute
+        for (int i = 0; i < 5; ++i) {
+            if(p.tableDeJeu[i].coucher){
+                p.tableDeJeu[joueurGagnant].argent += p.tableDeJeu[i].mise;
+                p.tableDeJeu[i].mise = 0;
+            }
+        }
+        p.tableDeJeu[joueurGagnant].argent += p.pot;
+        p.pot = 0;
+    }
+}
+
+void miseDepart(Parti p, int n, int tour){ // la mise de chaque joueur au debut du tour avec 1 joueur qui a la grosse blinde et un qui a la petite blinde
+    for (int i = 0; i < n; ++i) {
+        if(i == tour%n){                    // grosse blinde 
+            if(p.tableDeJeu[i].argent >= 100){    //si il n'a pas assez pour miser
+                p.tableDeJeu[i].argent -= 100;
+                p.tableDeJeu[i].mise = 100;
+            }
+            else {                              //si il a assez pour miser
+                p.tableDeJeu[i].mise = p.tableDeJeu[i].argent;
+                p.tableDeJeu[i].argent = 0;
+            }
+        }
+        if(i == tour+1%n){                  // petite blinde
+            if(p.tableDeJeu[i].argent >= 75){ //si il n'a pas assez pour miser
+                p.tableDeJeu[i].argent -= 75;
+                p.tableDeJeu[i].mise = 75;
+            }
+            else {                              //si il a assez pour miser
+                p.tableDeJeu[i].mise = p.tableDeJeu[i].argent;
+                p.tableDeJeu[i].argent = 0;
+            }
+        }
+        else {                              //mise normale
+            if(p.tableDeJeu[i].argent >= 50){  //si il n'a pas assez pour miser
+                p.tableDeJeu[i].argent -= 50;
+                p.tableDeJeu[i].mise = 50;
+            }
+            else {                              //si il a assez pour miser
+                p.tableDeJeu[i].mise = p.tableDeJeu[i].argent;
+                p.tableDeJeu[i].argent = 0;
+            }
+        }
+    }
 }
 
