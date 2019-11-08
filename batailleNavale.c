@@ -23,6 +23,14 @@ void batailleNavale() {
     init(9,9,tabJOUEUR);
     init(9,9,tabIA);
 
+    //CHOIX DIFFICULTE
+    int difficulte;
+    do {
+        printf("Veuillez choisir la difficulte :\n1 : Facile\n2 : Difficile\n");
+        scanf("%d",&difficulte);
+        system("cls");
+    }while (difficulte!=1 && difficulte!=2);
+
     //PLACEMENT DES BATEAUx
     placementsDesBateauxJOUEUR(tabJOUEUR);
     placementsDesBateauxIA(tabIA);
@@ -35,7 +43,7 @@ void batailleNavale() {
         //TOUR JOUEUR 1
         fin = tirJOUEUR(tabIA, tabJOUEUR);
         if (fin==0) {
-            fin = tirIA(tabJOUEUR);
+            fin = tirIA(tabJOUEUR, difficulte);
             if (fin==1) {
                 fin = 2;
             }
