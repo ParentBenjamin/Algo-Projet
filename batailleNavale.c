@@ -1,6 +1,7 @@
 #include "batailleNavale.h"
 #include "grille.h"
 
+//Verifie victoire, renvoie 1 si true 0 false
 int checkVictoire(TAB t) {
     int victoire = 1;
     for (int i=0; i<9 ; i++) {
@@ -13,6 +14,7 @@ int checkVictoire(TAB t) {
     return victoire;
 }
 
+//fonction principale de la Bataille Navale
 void batailleNavale() {
     srand(time(NULL)); // Necessaire pour la generation aleatoire (ligne a executer 1 seule fois, attention elle est executer dans le loto)
 

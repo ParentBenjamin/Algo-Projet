@@ -42,7 +42,6 @@ int tirJOUEUR(TAB t, TAB tjoueur) {
             affiche(tjoueur);
             printf("\n");
             afficheEtat(t);
-            afficheEtat(tjoueur);
             if (error == 1) {
                 printf("\nMauvaises coordonnees !\n");
                 error = 0;
