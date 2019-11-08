@@ -35,6 +35,8 @@ void Suivre(Parti p,int joueur);
 void tapis(Parti p , int joueur);
 void ceCoucher(Parti p, int joueur);
 int relancer(Parti p ,int joueur, int somme );
+int quitterLaTable(Parti p, int numeroJoueur);
 void repartitionArgent (Parti p, int joueurGagnant);
+void repartitionEgaliter(Parti p, int n);
 void miseDepart(Parti p, int n, int tour);
 #endif //PROJETALGO_POKER_H
