@@ -8,8 +8,8 @@
 //placement des bateaux par le joueur
 int placementsDesBateauxJOUEUR(TAB t);
 
-//effectue un tir par le joueur
-int tirJOUEUR(TAB t);
+//effectue un tir par le joueur sur le tableau ennemi t
+int tirJOUEUR(TAB t, TAB tjoueur);
 
 #endif
 

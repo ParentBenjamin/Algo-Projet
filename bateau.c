@@ -89,3 +89,25 @@ int verifEmplacement(TAB t, int longBateau, int orientation, int x, int y) {
             break;
     }
 }
+
+int checkCoule(TAB t, int nBateau) {
+    int coule = 1;
+    for (int i=0; i<9; i++) {
+        for (int j=0; j<9; j++) {
+            if (t[i][j].valeur==nBateau && t[i][j].etat!=2) {
+                coule = 0;
+            }
+        }
+    }
+
+    if (coule==1) {
+        for (int i=0; i<9; i++) {
+            for (int j=0; j<9; j++) {
+                if (t[i][j].valeur==nBateau) {
+                    t[i][j].etat = 3;
+                }
+            }
+        }
+    }
+    return coule;
+}

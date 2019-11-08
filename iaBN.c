@@ -22,14 +22,19 @@ int tirIA(TAB t) {
     int retour = 0;
     int next = 0;
     do {
-        int x = getRandom(0,8);
-        int y = getRandom(0,8);
+        int x, y;
+        do {
+            x = getRandom(0,8);
+            y = getRandom(0,8);
+        }while(t[x][y].etat != 0);
 
         if (t[x][y].valeur == 0) {
             next = 1;
             t[x][y].etat = 1;
         } else {
             t[x][y].etat = 2;
+            checkCoule(t, t[x][y].valeur);
+            printf("\nTOUCHE\n");
         }
 
         if (checkVictoire(t)==1) {

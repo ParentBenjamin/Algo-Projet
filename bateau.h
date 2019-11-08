@@ -13,4 +13,6 @@ int placerBateau(TAB t, int longBateau, int orientation, int x, int y);
 //verifie un emplacement de bateau et renvoi 1 si disponible, 0 si indisponible
 int verifEmplacement(TAB t, int longBateau, int orientation, int x, int y);
 
+//Verifie si le bateau est coule, si oui passe son etat à 3 et retourn 1 sinon 0
+int checkCoule(TAB t, int nBateau);
 #endif
