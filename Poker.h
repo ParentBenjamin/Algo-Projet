@@ -23,7 +23,7 @@ typedef struct {
 
 
 
-joueur initJoueur();
+void initJoueur(joueurPoker j);
 void initTirage(int n, Case t[5+2*n]);
 void initParti(int n,Parti p);
 int nbAlea(int n);
@@ -35,4 +35,6 @@ void Suivre(Parti p,int joueur);
 void tapis(Parti p , int joueur);
 void ceCoucher(Parti p, int joueur);
 int relancer(Parti p ,int joueur, int somme );
+void repartitionArgent (Parti p, int joueurGagnant);
+void miseDepart(Parti p, int n, int tour);
 #endif //PROJETALGO_POKER_H
