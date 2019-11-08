@@ -2,11 +2,46 @@
 
 //renvoi 1 si le bateau a pu etre place, 0 si impossible
 int placerBateau(TAB t, int longBateau, int orientation, int x, int y) {
+    if (verifEmplacement(t, longBateau, orientation, x ,y)==0) {
+        return 0;
+    }
+    switch (orientation) {
+        case 0 : // haut
+            for (int i=x; i>x-longBateau ;i--) {
+                modifValeur(i+1, y+1, longBateau, t);
+            }
+            break;
+        case 1 : // droite
+            for (int i=y; i<y+longBateau ;i++) {
+                modifValeur(x+1, i+1, longBateau, t);
+            }
+            break;
+        case 2 : // bas
+            for (int i=x; i<x+longBateau ;i++) {
+                modifValeur(i+1, y+1, longBateau, t);
+            }
+            break;
+        case 3 : // gauche
+            for (int i=y; i>y-longBateau ;i--) {
+                modifValeur(x+1, i+1, longBateau, t);
+            }
+            break;
+        default :
+            return 0;
+            break;
+    }
+    return 1;
+}
+
+//verifie un emplacement de bateau et renvoi 1 si disponible, 0 si indisponible
+int verifEmplacement(TAB t, int longBateau, int orientation, int x, int y) {
     switch (orientation) {
         case 0 : // haut
             if (x-(longBateau-1)>=0) {
                 for (int i=x; i>x-longBateau ;i--) {
-                    t[i][y].valeur = longBateau;
+                    if (t[i][y].valeur != 0) {
+                        return 0;
+                    }
                 }
                 return 1;
             }else {
@@ -16,7 +51,9 @@ int placerBateau(TAB t, int longBateau, int orientation, int x, int y) {
         case 1 : // droite
             if (y+(longBateau-1)<=8) {
                 for (int i=y; i<y+longBateau ;i++) {
-                    t[x][i].valeur = longBateau;
+                    if (t[x][i].valeur != 0) {
+                        return 0;
+                    }
                 }
                 return 1;
             }else {
@@ -26,7 +63,9 @@ int placerBateau(TAB t, int longBateau, int orientation, int x, int y) {
         case 2 : // bas
             if (x+(longBateau-1)<=8) {
                 for (int i=x; i<x+longBateau ;i++) {
-                    t[i][y].valeur = longBateau;
+                    if (t[i][y].valeur != 0) {
+                        return 0;
+                    }
                 }
                 return 1;
             }else {
@@ -36,7 +75,9 @@ int placerBateau(TAB t, int longBateau, int orientation, int x, int y) {
         case 3 : // gauche
             if (y-(longBateau-1)>=0) {
                 for (int i=y; i>y-longBateau ;i--) {
-                    t[x][i].valeur = longBateau;
+                    if (t[x][i].valeur != 0) {
+                        return 0;
+                    }
                 }
                 return 1;
             }else {
@@ -47,11 +88,4 @@ int placerBateau(TAB t, int longBateau, int orientation, int x, int y) {
             return 0;
             break;
     }
-}
-
-void genererGrilleTMP(TAB t) {
-    placerBateau(t, 5, 1, 1, 4);
-    placerBateau(t, 4, 3, 7, 8);
-    placerBateau(t, 3, 2, 6, 0);
-    placerBateau(t, 2, 0, 4, 1);
 }

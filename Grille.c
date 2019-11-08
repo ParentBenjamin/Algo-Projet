@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <SDL/SDL.h>
+//#include <SDL/SDL.h>
 #include "Grille.h"
 
 int init(int longueur , int largeur , TAB t){ //retourne 1 si l'initiation a ete fait sinon 0
@@ -28,11 +28,36 @@ int changementEtat(int x , int y , TAB t,int etat){ //change l'etat de la case s
     else return 0;
 }
 
-void affiche(TAB t){ //affiche le tableau avec les coordonneées et indique si une case est modifiable ou non avec "- -"
+void affiche(TAB t){ //affiche le tableau version console pour les tests bataille navale
+    printf("  y 1 2 3 4 5 6 7 8 9\n");
+    printf("x  ------------------");
     for (int i=0; i<9; i++) {
-        printf("\n");
+        printf("\n%d | ",i+1);
         for (int j=0; j<9; j++) {
-            printf("%d ",t[i][j].valeur);
+            if (t[i][j].valeur != 0) {
+                printf("%d ",t[i][j].valeur);
+            } else {
+                printf("  ");
+            }
+        }
+    }
+}
+
+void afficheEtat(TAB t){ //affiche le tableau version console pour les tests bataille navale
+    printf("  y 1 2 3 4 5 6 7 8 9\n");
+    printf("x  ------------------");
+    for (int i=0; i<9; i++) {
+        printf("\n%d | ",i+1);
+        for (int j=0; j<9; j++) {
+            if (t[i][j].etat == 0) {
+                printf("  ");
+            } else if (t[i][j].etat == 1) {
+                printf("o ");
+            } else if (t[i][j].etat == 2) {
+                printf("x ");
+            } else {
+                printf("* ");
+            }
         }
     }
 }
