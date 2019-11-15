@@ -144,7 +144,7 @@ Parti repartitionArgent (Parti p, int joueurGagnant, int n){    // reparti l'arg
         p.tableDeJeu[joueurGagnant].mise = 0;
     }else {                                       // si le joueur gagnant a la mise la plus haute
         for (int i = 0; i < 5; ++i) {
-            if(p.tableDeJeu[i].coucher){
+            if(p.tableDeJeu[i].coucher == false){
                 p.tableDeJeu[joueurGagnant].argent += p.tableDeJeu[i].mise;
                 p.tableDeJeu[i].mise = 0;
             }
@@ -185,21 +185,23 @@ Parti miseDepart(Parti p, int n, int tour){ // la mise de chaque joueur au debut
                     p.tableDeJeu[i].argent = 0;
                 }
             }
-            if (i == tour + 1 ) {                  // petite blinde
-                if (p.tableDeJeu[i].argent >= 75) { //si il n'a pas assez pour miser
-                    p.tableDeJeu[i].argent -= 75;
-                    p.tableDeJeu[i].mise = 75;
-                } else {                              //si il a assez pour miser
-                    p.tableDeJeu[i].mise = p.tableDeJeu[i].argent;
-                    p.tableDeJeu[i].argent = 0;
-                }
-            } else {                              //mise normale
-                if (p.tableDeJeu[i].argent >= 50) {  //si il n'a pas assez pour miser
-                    p.tableDeJeu[i].argent -= 50;
-                    p.tableDeJeu[i].mise = 50;
-                } else {                              //si il a assez pour miser
-                    p.tableDeJeu[i].mise = p.tableDeJeu[i].argent;
-                    p.tableDeJeu[i].argent = 0;
+            else {
+                if (i == tour + 1) {                  // petite blinde
+                    if (p.tableDeJeu[i].argent >= 75) { //si il n'a pas assez pour miser
+                        p.tableDeJeu[i].argent -= 75;
+                        p.tableDeJeu[i].mise = 75;
+                    } else {                              //si il a assez pour miser
+                        p.tableDeJeu[i].mise = p.tableDeJeu[i].argent;
+                        p.tableDeJeu[i].argent = 0;
+                    }
+                } else {                              //mise normale
+                    if (p.tableDeJeu[i].argent >= 50) {  //si il n'a pas assez pour miser
+                        p.tableDeJeu[i].argent -= 50;
+                        p.tableDeJeu[i].mise = 50;
+                    } else {                              //si il a assez pour miser
+                        p.tableDeJeu[i].mise = p.tableDeJeu[i].argent;
+                        p.tableDeJeu[i].argent = 0;
+                    }
                 }
             }
         }
@@ -261,20 +263,20 @@ Parti tourJoueur(Parti p,int numerojoueur, int n){
 
 int tour(Parti* p, int n, int premier){
     int n1 = 0;
-    while((n1 >= n && p->tableDeJeu[(n1+premier)%n].mise != p->tableDeJeu[(n1+premier+1)%n].mise) || (n1 < n) || (nombreCoucher(*p,n) < n )) {
+    while(((n1 >= n && p->tableDeJeu[(n1+premier)%n].mise != p->tableDeJeu[(n1+premier+1)%n].mise) || (n1 < n)) && (nombreCoucher(*p,n) < n-1 )) {
         *p = tourJoueur(*p,n1%n,n);
         n1++;
         for (int i = 0; i < n; ++i) {
             printf("%d   ", p->tableDeJeu[i].mise);
         }
-        printf("%d  ",n1);
+        printf("%d  %d",n1,nombreCoucher(*p,n));
     }
 }
 
 Parti tourPartie (Parti p , int n, Case t[5+2*n]){
     int numjoueur = 0;
     int i = 0;
-    int joueurGagnant;
+    int joueurGagnant = 3;
     while(i<4 && nombreCoucher(p,n) < n-1) {
         numjoueur = tour(&p, n , numjoueur);
         //retourne les cartes
