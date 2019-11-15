@@ -7,6 +7,7 @@
 #include "Menu.h"
 #include "InterfaceSudoku.h"
 #include "InterfaceLoto.h"
+#include "InterfaceBN.h"
 
 void menuPrincipal(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond){ /* Le menu principal */
     SDL_Event event; // La variable contenant l'événement
@@ -15,23 +16,6 @@ void menuPrincipal(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positi
 
     SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
     SDL_Flip(ecran);
-
-
-    /*int monentier = 90;
-
-    char machaine[1];
-
-    sprintf(machaine,"%d",monentier);
-
-    positionFond.x = 50;
-    positionFond.y = 100;
-    SDL_Color color = {255, 255, 255};
-
-    TTF_Font *police = TTF_OpenFont("font/arialunicode.ttf",200);
-
-    imageDeFond = TTF_RenderText_Blended(police, machaine, color);
-    SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
-    SDL_Flip(ecran);*/
 
     positionFond.x = 0;
     positionFond.y = 0;
@@ -48,9 +32,7 @@ void menuPrincipal(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positi
                 if(event.button.x>1007 && event.button.x<1335 && event.button.y>27 && event.button.y<72)
                 {
 
-
-                  continuer = 0;
-
+                    interBN(ecran,imageDeFond,positionFond);
 
                 }
                 else if(event.button.x>1185 && event.button.x<1347 && event.button.y>80 && event.button.y<119)

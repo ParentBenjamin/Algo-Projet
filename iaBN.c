@@ -17,19 +17,8 @@ int placementsDesBateauxIA(TAB t) {
     return 0;
 }
 
-//effectue un tir aleatoire par l'IA sur le tableau t en appelant tirIA_facile ou tirIA_difficile selon la difficulte
-int tirIA(TAB t, int difficulte) {
-    int retour;
-    if (difficulte==1) {
-        retour = tirIA_facile(t);
-    } else {
-        retour = tirIA_difficile(t);
-    }
-    return retour;
-}
-
-//tir IA facile
-int tirIA_facile(TAB t) {
+//effectue un tir aleatoire par l'IA sur le tableau t
+int tirIA(TAB t) {
     int retour = 0;
     int next = 0;
     do {
@@ -44,8 +33,8 @@ int tirIA_facile(TAB t) {
             t[x][y].etat = 1;
         } else {
             t[x][y].etat = 2;
-            checkCoule(t, t[x][y].valeur);
-            printf("\nTOUCHE\n");
+            //checkCoule(t, t[x][y].valeur);
+            //printf("\nTOUCHE\n");
         }
 
         if (checkVictoire(t)==1) {
@@ -56,9 +45,4 @@ int tirIA_facile(TAB t) {
     }while (next==0);
 
     return retour;
-}
-
-//tir IA difficile
-int tirIA_difficile(TAB t) {
-
 }
