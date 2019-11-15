@@ -228,6 +228,31 @@ int compterNombreLigneFichier(char nom[]){
 
 }
 
+int aide(TAB t) {       // place la premiere bonne réponse dont on peut etre sûr 
+    int vue = 0;
+    int dejatrouver = 0;
+    int i = 1, j;
+    while (i < 10 && dejatrouver == 0) {
+        j = 1;
+        while (j < 10 && dejatrouver == 0) {
+            if (t[i-1][j-1].valeur == 0) {
+                for (int k = 1; k < 10; ++k) {
+                    if (modifCase(i, j, k, t) == 1) {
+                        vue++;
+                    }
+
+                }
+                if (vue > 1) {
+                    t[i-1][j-1].valeur = 0;
+                } else dejatrouver == 1;
+            }
+            j++;
+        }
+        i++;
+    }
+    return (dejatrouver);
+}
+
 void sudoku(){ //main du sudoku en ligne de commande
     int n;
     int x;
