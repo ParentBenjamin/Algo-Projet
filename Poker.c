@@ -2,7 +2,6 @@
 #include "Poker.h"
 
 int nbAlea(int n){  //genere une valeur aleatoire entre 0 et n;
-    srand (time (NULL));
     return (rand() % n);
 }
 
@@ -39,6 +38,7 @@ Parti initParti(int n,Parti p){    // initialise la parti
 void remplirTirage(int n ,Case t[5+2*n]){    // Fait le tirage de toutes qui vont constituer une manche
     int valeur ,couleur;
     int i = 0;
+    srand(time(NULL));
     while (i < ((n*2)+5)) {
         valeur = nbAlea(13) + 2;
         couleur = nbAlea(4) + 1;
