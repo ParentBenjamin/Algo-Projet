@@ -238,6 +238,23 @@ int nombreCoucher(Parti p, int n){
     return nb;
 }
 
+bool prochaineMiseEgale (int numjoueur, Parti p , int n){
+    int i = 0;
+    int joueurTest = (numjoueur+1)%n;
+    bool misedifferent = true;
+    while (i < n && misedifferent == true)  {
+        if (p.tableDeJeu[joueurTest].coucher || (p.tableDeJeu[joueurTest].argent == 0 && p.tableDeJeu[joueurTest].mise == 0)) {
+            joueurTest = (joueurTest+1)%n;
+            i++;
+        }  else {
+            if (p.tableDeJeu[numjoueur].mise == p.tableDeJeu[joueurTest].mise) {
+                i+=n;
+            }else misedifferent = false;
+        }
+    }
+    return  misedifferent;
+}
+
 Parti tourJoueur(Parti p,int numerojoueur, int n){
     int choix,somme = 0;
     printf("carte une :%d , %d  /",p.tableDeJeu[numerojoueur].jeu[0].valeur,p.tableDeJeu[numerojoueur].jeu[0].etat);
@@ -263,7 +280,7 @@ Parti tourJoueur(Parti p,int numerojoueur, int n){
 
 int tour(Parti* p, int n, int premier){
     int n1 = 0;
-    while(((n1 >= n && p->tableDeJeu[(n1+premier)%n].mise != p->tableDeJeu[(n1+premier+1)%n].mise) || (n1 < n)) && (nombreCoucher(*p,n) < n-1 )) {
+    while(((n1-1 >= n && !prochaineMiseEgale(((n1+premier)%n),*p,n)) || (n1-1 < n)) && (nombreCoucher(*p,n) < n-1 )) {
         *p = tourJoueur(*p,n1%n,n);
         n1++;
         for (int i = 0; i < n; ++i) {
