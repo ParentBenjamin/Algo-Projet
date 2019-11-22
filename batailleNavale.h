@@ -9,6 +9,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+void sauvegarderjeu(TAB joueur, TAB ia, char *nom, Player p);//sauvegarde la partie dans un fichier texte
+void genererpartie(TAB chainejoueur, TAB chaineia, Player p);//genere la partie a partir du fichier texte
+
 //Verifie victoire, renvoie 1 si true 0 false
 int checkVictoire(TAB t);
 
