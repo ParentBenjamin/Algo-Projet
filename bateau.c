@@ -90,7 +90,7 @@ int verifEmplacement(TAB t, int longBateau, int orientation, int x, int y) {
     }
 }
 
-//Verifie si le bateau est coule, si oui passe son etat à 3 et retourn 1 sinon 0
+//Verifie si le bateau est coule, si oui passe son etat à 3 et retourne 1 sinon 0
 int checkCoule(TAB t, int nBateau) {
     int coule = 1;
     for (int i=0; i<9; i++) {

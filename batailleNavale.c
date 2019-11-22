@@ -1,5 +1,6 @@
 #include "batailleNavale.h"
 #include "grille.h"
+#include "iaBN.h"
 
 //Verifie victoire, renvoie 1 si true 0 false
 int checkVictoire(TAB t) {
@@ -19,31 +20,24 @@ void batailleNavale() {
     srand(time(NULL)); // Necessaire pour la generation aleatoire (ligne a executer 1 seule fois, attention elle est executer dans le loto)
 
     //INITIALISATION
+    IA irobot;
     TAB tabJOUEUR, tabIA;
     init(9,9,tabJOUEUR);
     init(9,9,tabIA);
+    initIA(&irobot);
 
-    //CHOIX DIFFICULTE
-    int difficulte;
-    do {
-        printf("Veuillez choisir la difficulte :\n1 : Facile\n2 : Difficile\n");
-        scanf("%d",&difficulte);
-        system("cls");
-    }while (difficulte!=1 && difficulte!=2);
-
-    //PLACEMENT DES BATEAUx
+    //PLACEMENT DES BATEAUX
     placementsDesBateauxJOUEUR(tabJOUEUR);
     placementsDesBateauxIA(tabIA);
 
     system("cls"); // clear console
 
     int fin = 0;
-    int cpt = 0;
     while (fin==0) {
         //TOUR JOUEUR 1
         fin = tirJOUEUR(tabIA, tabJOUEUR);
         if (fin==0) {
-            fin = tirIA(tabJOUEUR, difficulte);
+            fin = tirIA(tabJOUEUR, &irobot);
             if (fin==1) {
                 fin = 2;
             }
@@ -57,5 +51,5 @@ void batailleNavale() {
     }
 
     afficheEtat(tabJOUEUR);
-
 }
+
