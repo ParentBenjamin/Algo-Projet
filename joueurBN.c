@@ -1,5 +1,10 @@
 #include "joueurBN.h"
 
+//initialise le player
+void initPlayer(Player *p) {
+    p->nbtir = 0;
+}
+
 //placement des bateaux par le joueur
 int placementsDesBateauxJOUEUR(TAB t) {
     int x=0,y=0,orien=1;
@@ -31,7 +36,7 @@ int placementsDesBateauxJOUEUR(TAB t) {
 }
 
 //effectue un tir par le joueur sur le tableau ennemi t
-int tirJOUEUR(TAB t, TAB tjoueur) {
+int tirJOUEUR(TAB t, TAB tjoueur, Player *p) {
     int retour = 0;
     int next = 0;
     do {
@@ -73,6 +78,7 @@ int tirJOUEUR(TAB t, TAB tjoueur) {
             checkCoule(t, t[x][y].valeur);
             printf("\nTOUCHE\n");
         }
+        p->nbtir = p->nbtir+1;
 
         if (checkVictoire(t)==1) {
             next = 1;

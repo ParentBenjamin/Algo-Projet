@@ -15,6 +15,9 @@ void genererpartie(TAB chainejoueur, TAB chaineia, Player p);//genere la partie 
 //Verifie victoire, renvoie 1 si true 0 false
 int checkVictoire(TAB t);
 
+//calcule le score si victoire sinon 0
+int calculScoreBN(Player *p, int fin);
+
 //fonction principale de la Bataille Navale
 void batailleNavale();
 
