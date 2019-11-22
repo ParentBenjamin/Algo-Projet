@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-//#include <SDL/SDL.h>
 #include "Grille.h"
 
 int init(int longueur , int largeur , TAB t){ //retourne 1 si l'initiation a ete fait sinon 0

@@ -2,11 +2,33 @@
 #include <stdio.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
+#include <SDL/SDL_mixer.h>
 
 
 #include "Menu.h"
 #include "InterfaceSudoku.h"
 #include "InterfaceLoto.h"
+#include "InterfaceBN.h"
+#include "InterfacePoker.h"
+
+/*
+int init_mini_sound(MiniSound *minisound)
+{
+    Mix_AllocateChannels(2);
+
+    minisound->music = Mix_LoadWAV("explosion.wav");
+
+    if(minisound->music == NULL)
+    {
+        return 1;
+    }
+
+    return 0;
+}
+*/
+
+
+
 
 void menuPrincipal(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond){ /* Le menu principal */
     SDL_Event event; // La variable contenant l'événement
@@ -16,25 +38,20 @@ void menuPrincipal(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positi
     SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
     SDL_Flip(ecran);
 
-
-    /*int monentier = 90;
-
-    char machaine[1];
-
-    sprintf(machaine,"%d",monentier);
-
-    positionFond.x = 50;
-    positionFond.y = 100;
-    SDL_Color color = {255, 255, 255};
-
-    TTF_Font *police = TTF_OpenFont("font/arialunicode.ttf",200);
-
-    imageDeFond = TTF_RenderText_Blended(police, machaine, color);
-    SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
-    SDL_Flip(ecran);*/
-
     positionFond.x = 0;
     positionFond.y = 0;
+
+
+    TTF_Init();
+    //Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2000);
+
+    //Mix_Music *music = NULL;
+
+
+
+    //music = Mix_LoadMUS("The Lion Sleeps Tonight (Wimoweh).mp3");
+
+    //Mix_PlayMusic(music, 55);
 
     while(continuer){
         imageDeFond = SDL_LoadBMP("menu.bmp");
@@ -48,9 +65,7 @@ void menuPrincipal(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positi
                 if(event.button.x>1007 && event.button.x<1335 && event.button.y>27 && event.button.y<72)
                 {
 
-
-                  continuer = 0;
-
+                    interBN(ecran,imageDeFond,positionFond);
 
                 }
                 else if(event.button.x>1185 && event.button.x<1347 && event.button.y>80 && event.button.y<119)
@@ -60,7 +75,7 @@ void menuPrincipal(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positi
                 }
                 else if(event.button.x>1220 && event.button.x<1344 && event.button.y>134 && event.button.y<173)
                 {
-                    continuer = 0;
+                    interPoker(ecran,imageDeFond,positionFond);
                 }
                 else if(event.button.x>1244 && event.button.x<1346 && event.button.y>189 && event.button.y<228)
                 {
@@ -76,4 +91,6 @@ void menuPrincipal(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positi
             break;
         }
     }
+    //Mix_FreeMusic(music); //Libération de la musique
+    //Mix_CloseAudio(); //Fermeture de l'API
 }

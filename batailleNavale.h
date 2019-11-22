@@ -2,6 +2,10 @@
 #define PROJETALGO_BATAILLENAVALE_H
 
 #include "grille.h"
+#include "bateau.h"
+#include "time.h"
+#include "joueurBN.h"
+#include "iaBN.h"
 #include <stdlib.h>
 #include <stdio.h>
 

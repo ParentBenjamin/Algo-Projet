@@ -47,7 +47,7 @@ int tirJOUEUR(TAB t, TAB tjoueur) {
                 error = 0;
             }
             if (error2 == 1) {
-                printf("\nVous avez deja tire ici !\n");
+                printf("\nVous avez deja tiré ici !\n");
                 error2 = 0;
             }
             printf("\n\nTIR du JOUEUR\n");

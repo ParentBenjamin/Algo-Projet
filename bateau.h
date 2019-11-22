@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "grille.h"
+#include "batailleNavale.h"
 
 //orientation : 0 si vers le haut, 1 si vers la droite, 2 si vers le bas, 3 si vers la gauche
 

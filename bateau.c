@@ -100,7 +100,7 @@ int checkCoule(TAB t, int nBateau) {
             }
         }
     }
-
+/*
     if (coule==1) {
         for (int i=0; i<9; i++) {
             for (int j=0; j<9; j++) {
@@ -109,6 +109,6 @@ int checkCoule(TAB t, int nBateau) {
                 }
             }
         }
-    }
+    }*/
     return coule;
 }

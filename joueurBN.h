@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "grille.h"
+#include "batailleNavale.h"
 
 //placement des bateaux par le joueur
 int placementsDesBateauxJOUEUR(TAB t);

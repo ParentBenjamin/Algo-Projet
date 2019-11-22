@@ -2,15 +2,17 @@
 #include <stdio.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
+#include <time.h>
 
 
 #include "InterfaceLoto.h"
 #include "menu.h"
+#include "loto.h"
 
 
 /*Fonction qui remplit la grille*/
 void remplirTEST2(TAB t){
-    t[0][0].valeur = 1;
+    /*t[0][0].valeur = 1;
     t[0][1].valeur = 34;
     t[0][2].valeur = 54;
     t[0][3].valeur = 65;
@@ -98,106 +100,146 @@ void remplirTEST2(TAB t){
     t[8][5].valeur = 61;
     t[8][6].valeur = 12;
     t[8][7].valeur = 45;
-    t[8][8].valeur = 23;
+    t[8][8].valeur = 23;*/
 
 
 
 
-    t[0][0].etat = 0;
-    t[0][1].etat = 0;
-    t[0][2].etat = 0;
-    t[0][3].etat = 0;
-    t[0][4].etat = 0;
-    t[0][5].etat = 0;
-    t[0][6].etat = 0;
-    t[0][7].etat = 0;
-    t[0][8].etat = 0;
+    t[0][0].etat = 2;
+    t[0][1].etat = 2;
+    t[0][2].etat = 2;
+    t[0][3].etat = 2;
+    t[0][4].etat = 2;
+    t[0][5].etat = 2;
+    t[0][6].etat = 2;
+    t[0][7].etat = 2;
+    t[0][8].etat = 2;
 
-    t[1][0].etat = 1;
-    t[1][1].etat = 0;
-    t[1][2].etat = 0;
-    t[1][3].etat = 1;
-    t[1][4].etat = 1;
-    t[1][5].etat = 1;
-    t[1][6].etat = 0;
-    t[1][7].etat = 0;
-    t[1][8].etat = 0;
+    t[1][0].etat = 2;
+    t[1][1].etat = 2;
+    t[1][2].etat = 2;
+    t[1][3].etat = 2;
+    t[1][4].etat = 2;
+    t[1][5].etat = 2;
+    t[1][6].etat = 2;
+    t[1][7].etat = 2;
+    t[1][8].etat = 2;
 
-    t[2][0].etat = 0;
-    t[2][1].etat = 1;
-    t[2][2].etat = 1;
-    t[2][3].etat = 0;
-    t[2][4].etat = 0;
-    t[2][5].etat = 0;
-    t[2][6].etat = 0;
-    t[2][7].etat = 1;
-    t[2][8].etat = 0;
+    t[2][0].etat = 2;
+    t[2][1].etat = 2;
+    t[2][2].etat = 2;
+    t[2][3].etat = 2;
+    t[2][4].etat = 2;
+    t[2][5].etat = 2;
+    t[2][6].etat = 2;
+    t[2][7].etat = 2;
+    t[2][8].etat = 2;
 
-    t[3][0].etat = 1;
-    t[3][1].etat = 0;
-    t[3][2].etat = 0;
-    t[3][3].etat = 0;
-    t[3][4].etat = 1;
-    t[3][5].etat = 0;
-    t[3][6].etat = 0;
-    t[3][7].etat = 0;
-    t[3][8].etat = 1;
+    t[3][0].etat = 2;
+    t[3][1].etat = 2;
+    t[3][2].etat = 2;
+    t[3][3].etat = 2;
+    t[3][4].etat = 2;
+    t[3][5].etat = 2;
+    t[3][6].etat = 2;
+    t[3][7].etat = 2;
+    t[3][8].etat = 2;
 
-    t[4][0].etat = 1;
+    t[4][0].etat = 2;
     t[4][1].etat = 0;
-    t[4][2].etat = 0;
-    t[4][3].etat = 1;
-    t[4][4].etat = 0;
-    t[4][5].etat = 1;
-    t[4][6].etat = 0;
-    t[4][7].etat = 0;
-    t[4][8].etat = 1;
+    t[4][2].etat = 2;
+    t[4][3].etat = 2;
+    t[4][4].etat = 2;
+    t[4][5].etat = 2;
+    t[4][6].etat = 2;
+    t[4][7].etat = 2;
+    t[4][8].etat = 2;
 
-    t[5][0].etat = 1;
-    t[5][1].etat = 0;
-    t[5][2].etat = 0;
-    t[5][3].etat = 0;
-    t[5][4].etat = 1;
-    t[5][5].etat = 0;
-    t[5][6].etat = 0;
-    t[5][7].etat = 0;
-    t[5][8].etat = 1;
+    t[5][0].etat = 2;
+    t[5][1].etat = 2;
+    t[5][2].etat = 2;
+    t[5][3].etat = 2;
+    t[5][4].etat = 2;
+    t[5][5].etat = 2;
+    t[5][6].etat = 2;
+    t[5][7].etat = 2;
+    t[5][8].etat = 2;
 
-    t[6][0].etat = 0;
-    t[6][1].etat = 1;
-    t[6][2].etat = 0;
-    t[6][3].etat = 0;
-    t[6][4].etat = 0;
-    t[6][5].etat = 0;
-    t[6][6].etat = 1;
-    t[6][7].etat = 1;
-    t[6][8].etat = 0;
+    t[6][0].etat = 2;
+    t[6][1].etat = 2;
+    t[6][2].etat = 2;
+    t[6][3].etat = 2;
+    t[6][4].etat = 2;
+    t[6][5].etat = 2;
+    t[6][6].etat = 2;
+    t[6][7].etat = 2;
+    t[6][8].etat = 2;
 
-    t[7][0].etat = 0;
-    t[7][1].etat = 0;
-    t[7][2].etat = 0;
-    t[7][3].etat = 1;
-    t[7][4].etat = 1;
-    t[7][5].etat = 1;
-    t[7][6].etat = 0;
-    t[7][7].etat = 0;
-    t[7][8].etat = 1;
+    t[7][0].etat = 2;
+    t[7][1].etat = 2;
+    t[7][2].etat = 2;
+    t[7][3].etat = 2;
+    t[7][4].etat = 2;
+    t[7][5].etat = 2;
+    t[7][6].etat = 2;
+    t[7][7].etat = 2;
+    t[7][8].etat = 2;
 
-    t[8][0].etat = 0;
-    t[8][1].etat = 0;
-    t[8][2].etat = 0;
-    t[8][3].etat = 0;
-    t[8][4].etat = 1;
-    t[8][5].etat = 0;
-    t[8][6].etat = 0;
-    t[8][7].etat = 1;
-    t[8][8].etat = 1;
+    t[8][0].etat = 2;
+    t[8][1].etat = 2;
+    t[8][2].etat = 2;
+    t[8][3].etat = 2;
+    t[8][4].etat = 2;
+    t[8][5].etat = 2;
+    t[8][6].etat = 2;
+    t[8][7].etat = 2;
+    t[8][8].etat = 2;
 }
 
+Tirage suivant(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, TAB t, int choix, Tirage tab){
+    SDL_Color color = {255, 0, 0};
+    TTF_Font *police = TTF_OpenFont("font/arialunicode.ttf",40);
+    if(tab.nbtirage<90)
+    {
+        int numTirage; //numero du tirage actuel
+        int monentier = tab.nbtirage+1;
+        char machaine[4];
+        sprintf(machaine,"%d",monentier);
+
+        positionFond.x = 1130;
+        positionFond.y = 400;
+        imageDeFond = SDL_LoadBMP("loto/blanc2.bmp");
+        SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
+        SDL_Flip(ecran);
+        imageDeFond = TTF_RenderText_Blended(police, machaine, color);
+        SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
+        SDL_Flip(ecran);
 
 
+        numTirage=numtire(&tab);
+        majtirage(numTirage,&tab);
+        ecrireLoto(t,ecran,imageDeFond,positionFond,choix,tab);
+    }
+    else
+    {
+        positionFond.x = 100;
+        positionFond.y = 250;
+        if(verifierVictoire(t,choix))
+        {
+            imageDeFond = TTF_RenderText_Blended(police, "Gagné", color);
+            SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
+            SDL_Flip(ecran);
+        }
+        else
+        {
+            imageDeFond = TTF_RenderText_Blended(police, "Perdu", color);
+            SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
+            SDL_Flip(ecran);
+        }
 
-
+    }
+    return tab;
+}
 
 
 
@@ -241,15 +283,13 @@ void ecrireLoto(TAB t, SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect po
                 monentier = t[i][0].valeur;
                 sprintf(machaine,"%d",monentier);
                 if(t[i][0].etat == 2){
-                    SDL_Color color = {255, 0, 0};
-                    TTF_Font *police = TTF_OpenFont("font/arialunicode.ttf",40);
+                    color.r = 255;
                     imageDeFond = TTF_RenderText_Blended(police, machaine, color);
                     SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
                     SDL_Flip(ecran);
                 }
                 else{
                     color.r = 0;
-                    TTF_Font *police = TTF_OpenFont("font/arialunicode.ttf",40);
                     imageDeFond = TTF_RenderText_Blended(police, machaine, color);
                     SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
                     SDL_Flip(ecran);
@@ -266,8 +306,7 @@ void ecrireLoto(TAB t, SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect po
                     monentier = t[i][j].valeur;
                     sprintf(machaine,"%d",monentier);
                     if(t[i][j].etat == 2){
-                        SDL_Color color = {255, 0, 0};
-                        TTF_Font *police = TTF_OpenFont("font/arialunicode.ttf",40);
+                        color.r = 255;
                         imageDeFond = TTF_RenderText_Blended(police, machaine, color);
                         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
                         SDL_Flip(ecran);
@@ -317,8 +356,19 @@ int interLoto(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFon
             }
             default : break;
         }
-
     }
+    /*int monentier;
+    char machaine[4];
+    monentier = (float)t1/CLOCKS_PER_SEC;
+    sprintf(machaine,"%d",monentier);
+    positionFond.x = 1130;
+    positionFond.y = 400;
+    SDL_Color color = {255, 0, 0};
+    TTF_Font *police = TTF_OpenFont("font/arialunicode.ttf",40);
+    imageDeFond = TTF_RenderText_Blended(police, machaine, color);
+    SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
+    SDL_Flip(ecran);
+    Sleep(50000);*/
     //positionFond.x = 0;
     //positionFond.y = 0;
    // menuPrincipal(ecran,imageDeFond,positionFond);

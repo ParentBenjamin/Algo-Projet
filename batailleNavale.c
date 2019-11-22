@@ -6,7 +6,7 @@ int checkVictoire(TAB t) {
     int victoire = 1;
     for (int i=0; i<9 ; i++) {
         for (int j=0; j<9; j++) {
-            if (t[i][j].valeur != 0 && t[i][j].etat != 3) {
+            if (t[i][j].valeur >0 && t[i][j].etat == 0 ) {
                 victoire = 0;
             }
         }
@@ -23,14 +23,6 @@ void batailleNavale() {
     init(9,9,tabJOUEUR);
     init(9,9,tabIA);
 
-    //CHOIX DIFFICULTE
-    int difficulte;
-    do {
-        printf("Veuillez choisir la difficulte :\n1 : Facile\n2 : Difficile\n");
-        scanf("%d",&difficulte);
-        system("cls");
-    }while (difficulte!=1 && difficulte!=2);
-
     //PLACEMENT DES BATEAUx
     placementsDesBateauxJOUEUR(tabJOUEUR);
     placementsDesBateauxIA(tabIA);
@@ -43,7 +35,7 @@ void batailleNavale() {
         //TOUR JOUEUR 1
         fin = tirJOUEUR(tabIA, tabJOUEUR);
         if (fin==0) {
-            fin = tirIA(tabJOUEUR, difficulte);
+            fin = tirIA(tabJOUEUR);
             if (fin==1) {
                 fin = 2;
             }

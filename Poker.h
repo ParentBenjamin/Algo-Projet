@@ -45,4 +45,7 @@ int nombreCoucher(Parti p, int n);
 Parti tourJoueur(Parti p,int numerojoueur, int n);
 int tour(Parti* p, int n, int premier);
 Parti tourPartie (Parti p , int n,  Case t[5+2*n]);
+bool prochaineMiseEgale (int numjoueur, Parti p , int n);
 void partie();
+
+#endif // PROJETALGO_POKER_H

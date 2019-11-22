@@ -17,7 +17,6 @@ int chargerSudokuSpe(TAB t, int n);
 int nbAlea(int n);
 int compterNombreLigneSudoku();
 int compterNombreLigneFichier(char nom[]);
-int aide(Tab t);
 void sudoku();
 int chargerSudokuSpe2(TAB t, int n);
 #endif //PROJETALGO_SUDOKU_H
