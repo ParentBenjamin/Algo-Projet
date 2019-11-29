@@ -49,6 +49,11 @@ int nombrePoint(Case t[5]);
 void meilleurCarteJoueur(Case t[2], Case t1[5] ,Case retour[5]);
 int joueurGagnant(Parti p , int n);
 
+int testeEgaliteSuite(Case carteGagnant[5], Case test[5]);
+int testeGagnantBrelan(Case carteGagnant[5], Case test[5]);
+int testeGagnantPaire(Case carteGagnant[5], Case test[5]);
+int testdoublePaire(Case carteGagnant[5], Case test[5]);
+
 Parti tourJoueur(Parti p,int numerojoueur, int n);
 int tour(Parti* p, int n, int premier);
 Parti tourPartie (Parti p , int n,  Case t[5+2*n]);
