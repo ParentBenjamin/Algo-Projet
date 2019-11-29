@@ -1,7 +1,7 @@
 
 #include "Poker.h"
 
-int nbAlea(int n){  //genere une valeur aleatoire entre 0 et n;
+int nbAlea2(int n){  //genere une valeur aleatoire entre 0 et n;
     return (rand() % n);
 }
 
@@ -40,8 +40,8 @@ void remplirTirage(int n ,Case t[5+2*n]){    // Fait le tirage de toutes qui von
     int i = 0;
     srand(time(NULL));
     while (i < ((n*2)+5)) {
-        valeur = nbAlea(13) + 2;
-        couleur = nbAlea(4) + 1;
+        valeur = nbAlea2(13) + 2;
+        couleur = nbAlea2(4) + 1;
         if (!appartient(valeur, couleur, i, t)){
             t[i].valeur = valeur;
             t[i].etat = couleur;
@@ -130,7 +130,7 @@ int quitterLaTable(Parti* p, int joueur){ // permet au joueur de quitter la tabl
 
 Parti repartitionArgent (Parti p, int joueurGagnant, int n){    // reparti l'argent entre chaque joueur en vérifiant ayant le joueur gagnant
     if (p.tableDeJeu[joueurGagnant].mise < maxMise(p,n)){   //si le joueur gagnant a fait tapis et qu'il a miser moins que les autres
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < n; ++i) {
             if(i != joueurGagnant || p.tableDeJeu[i].coucher){
                 p.tableDeJeu[i].mise -= p.tableDeJeu[joueurGagnant].mise;
                 p.tableDeJeu[joueurGagnant].argent += p.tableDeJeu[joueurGagnant].mise;
@@ -143,7 +143,7 @@ Parti repartitionArgent (Parti p, int joueurGagnant, int n){    // reparti l'arg
         p.tableDeJeu[joueurGagnant].argent +=p.tableDeJeu[joueurGagnant].mise;
         p.tableDeJeu[joueurGagnant].mise = 0;
     }else {                                       // si le joueur gagnant a la mise la plus haute
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < n; ++i) {
             if(p.tableDeJeu[i].coucher == false){
                 p.tableDeJeu[joueurGagnant].argent += p.tableDeJeu[i].mise;
                 p.tableDeJeu[i].mise = 0;
@@ -177,27 +177,36 @@ Parti miseDepart(Parti p, int n, int tour){ // la mise de chaque joueur au debut
     for (int i = 0; i < n; ++i) {
         if (p.tableDeJeu[i].argent != 0) {
             if (i == tour ) {                    // grosse blinde
-                if (p.tableDeJeu[i].argent >= 100) {    //si il n'a pas assez pour miser
-                    p.tableDeJeu[i].argent -= 100;
-                    p.tableDeJeu[i].mise = 100;
+                if (p.tableDeJeu[i].argent >= 75) {    //si il n'a pas assez pour miser
+                    p.tableDeJeu[i].argent -= 75;
+                    p.tableDeJeu[i].mise = 75;
                 } else {                              //si il a assez pour miser
                     p.tableDeJeu[i].mise = p.tableDeJeu[i].argent;
                     p.tableDeJeu[i].argent = 0;
                 }
             }
             else {
-                if (i == tour + 1) {                  // petite blinde
-                    if (p.tableDeJeu[i].argent >= 75) { //si il n'a pas assez pour miser
-                        p.tableDeJeu[i].argent -= 75;
-                        p.tableDeJeu[i].mise = 75;
+                if(n-1==tour){
+                    if (p.tableDeJeu[0].argent >= 100) { //si il n'a pas assez pour miser
+                        p.tableDeJeu[0].argent -= 100;
+                        p.tableDeJeu[0].mise = 100;
+                    } else {                              //si il a assez pour miser
+                        p.tableDeJeu[0].mise = p.tableDeJeu[i].argent;
+                        p.tableDeJeu[0].argent = 0;
+                    }
+                }
+                else if (i == tour + 1) {                  // petite blinde
+                    if (p.tableDeJeu[i].argent >= 100) { //si il n'a pas assez pour miser
+                        p.tableDeJeu[i].argent -= 100;
+                        p.tableDeJeu[i].mise = 100;
                     } else {                              //si il a assez pour miser
                         p.tableDeJeu[i].mise = p.tableDeJeu[i].argent;
                         p.tableDeJeu[i].argent = 0;
                     }
                 } else {                              //mise normale
-                    if (p.tableDeJeu[i].argent >= 50) {  //si il n'a pas assez pour miser
-                        p.tableDeJeu[i].argent -= 50;
-                        p.tableDeJeu[i].mise = 50;
+                    if (p.tableDeJeu[i].argent >= 0) {  //si il n'a pas assez pour miser
+                        p.tableDeJeu[i].argent -= 0;
+                        p.tableDeJeu[i].mise = 0;
                     } else {                              //si il a assez pour miser
                         p.tableDeJeu[i].mise = p.tableDeJeu[i].argent;
                         p.tableDeJeu[i].argent = 0;
@@ -254,6 +263,62 @@ bool prochaineMiseEgale (int numjoueur, Parti p , int n){
     }
     return  misedifferent;
 }
+
+
+
+
+
+
+Parti tourJoueur(Parti p,int numerojoueur, int n){
+    int choix,somme = 0;
+    printf("carte une :%d , %d  /",p.tableDeJeu[numerojoueur].jeu[0].valeur,p.tableDeJeu[numerojoueur].jeu[0].etat);
+    printf("carte deux %d ,%d",p.tableDeJeu[numerojoueur].jeu[1].valeur,p.tableDeJeu[numerojoueur].jeu[1].etat) ;
+    printf("1 = fold, 2 = call, 3 = raise et 4 = all-in\n");
+    scanf("%d",&choix);
+    switch(choix){
+        case 1: p = seCoucher(p, numerojoueur);
+            break;
+        case 2: p = Suivre(p, numerojoueur,n);
+            break;
+        case 3 :printf("quelle somme en plus de la mise :");
+            scanf("%d",&somme);
+            p = relancer(p,numerojoueur,somme,n);
+            break;
+        case 4 :p = tapis(p,numerojoueur);
+        default :somme = quitterLaTable(&p,numerojoueur);
+            break;
+    }
+    return p;
+
+}
+
+int tour(Parti* p, int n, int premier){
+    int n1 = 0;
+    while(((n1-1 >= n && !prochaineMiseEgale(((n1+premier)%n),*p,n)) || (n1-1 < n)) && (nombreCoucher(*p,n) < n-1)) {
+        *p = tourJoueur(*p,n1%n,n);
+        n1++;
+        for (int i = 0; i < n; ++i) {
+            printf("%d   ", p->tableDeJeu[i].mise);
+        }
+        printf("%d  %d",n1,nombreCoucher(*p,n));
+    }
+}
+
+Parti tourPartie (Parti p , int n, Case t[5+2*n]){
+    int numjoueur = 0;
+    int i = 0;
+    int joueurGagnant = 3;
+    while(i<4 && nombreCoucher(p,n) < n-1) {
+        numjoueur = tour(&p, n , numjoueur);
+        //retourne les cartes
+        i++;
+    }
+        // definie le joueur gagnant
+        p = repartitionArgent(p ,joueurGagnant,n);
+    return p;
+}
+
+
 
 //tri le tableau de cartes
 void tri(Case t[5]) {
@@ -455,54 +520,6 @@ int joueurGagnant(Parti p , int n){
     return joueur;
 }
 
-Parti tourJoueur(Parti p,int numerojoueur, int n){
-    int choix,somme = 0;
-    printf("carte une :%d , %d  /",p.tableDeJeu[numerojoueur].jeu[0].valeur,p.tableDeJeu[numerojoueur].jeu[0].etat);
-    printf("carte deux %d ,%d",p.tableDeJeu[numerojoueur].jeu[1].valeur,p.tableDeJeu[numerojoueur].jeu[1].etat) ;
-    printf("1 = fold, 2 = call, 3 = raise et 4 = all-in\n");
-    scanf("%d",&choix);
-    switch(choix){
-        case 1: p = seCoucher(p, numerojoueur);
-            break;
-        case 2: p = Suivre(p, numerojoueur,n);
-            break;
-        case 3 :printf("quelle somme en plus de la mise :");
-            scanf("%d",&somme);
-            p = relancer(p,numerojoueur,somme,n);
-            break;
-        case 4 :p = tapis(p,numerojoueur);
-        default :somme = quitterLaTable(&p,numerojoueur);
-            break;
-    }
-    return p;
-
-}
-
-int tour(Parti* p, int n, int premier){
-    int n1 = 0;
-    while(((n1-1 >= n && !prochaineMiseEgale(((n1+premier)%n),*p,n)) || (n1-1 < n)) && (nombreCoucher(*p,n) < n-1 )) {
-        *p = tourJoueur(*p,n1%n,n);
-        n1++;
-        for (int i = 0; i < n; ++i) {
-            printf("%d   ", p->tableDeJeu[i].mise);
-        }
-        printf("%d  %d",n1,nombreCoucher(*p,n));
-    }
-}
-
-Parti tourPartie (Parti p , int n, Case t[5+2*n]){
-    int numjoueur = 0;
-    int i = 0;
-    int joueurGagnant = 3;
-    while(i<4 && nombreCoucher(p,n) < n-1) {
-        numjoueur = tour(&p, n , numjoueur);
-        //retourne les cartes
-        i++;
-    }
-        // definie le joueur gagnant
-        p = repartitionArgent(p ,joueurGagnant,n);
-    return p;
-}
 
 
 void partie(){

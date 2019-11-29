@@ -92,7 +92,7 @@ int checkVictoire(TAB t) {
 }
 
 //fonction principale de la Bataille Navale
-void batailleNavale() {
+/*void batailleNavale() {
     srand(time(NULL)); // Necessaire pour la generation aleatoire (ligne a executer 1 seule fois, attention elle est executer dans le loto)
 
     //INITIALISATION
@@ -137,4 +137,4 @@ void batailleNavale() {
 >>>>>>> Stashed changes
     afficheEtat(tabJOUEUR);
 }
-
+*/

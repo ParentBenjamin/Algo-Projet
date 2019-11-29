@@ -22,6 +22,7 @@ typedef struct {
 }Parti;
 
 
+
 joueurPoker initJoueur(joueurPoker j);
 void initTirage(int n, Case t[5+2*n]);
 Parti initParti(int n,Parti p);
@@ -41,15 +42,15 @@ Parti miseDepart(Parti p, int n, int tour);
 int potTotale(Parti p,int n);
 int nombreAbbandon(Parti p, int n);
 int nombreCoucher(Parti p, int n);
+Parti tourJoueur(Parti p,int numerojoueur, int n);
+int tour(Parti* p, int n, int premier);
+Parti tourPartie (Parti p , int n,  Case t[5+2*n]);
 bool prochaineMiseEgale (int numjoueur, Parti p , int n);
-
 void tri(Case t[5]);
 bool memeCouleur(Case t[5]);
 int nombrePoint(Case t[5]);
 void meilleurCarteJoueur(Case t[2], Case t1[5] ,Case retour[5]);
 int joueurGagnant(Parti p , int n);
-
-Parti tourJoueur(Parti p,int numerojoueur, int n);
-int tour(Parti* p, int n, int premier);
-Parti tourPartie (Parti p , int n,  Case t[5+2*n]);
 void partie();
+
+#endif // PROJETALGO_POKER_H

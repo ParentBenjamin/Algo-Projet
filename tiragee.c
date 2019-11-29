@@ -13,9 +13,22 @@ void initialisationTirage(Tirage *t) //initialistaion des tirages, nombre et tab
 
 void majtirage(int numtire, Tirage *t)//maj d'un tirage, on ajoute 1 au nb de tirage et on ajoute la valeur tiree au tableau
 {
+    t->tab[t->nbtirage]=numtire;
     t->nbtirage=t->nbtirage+1;
-    t->tab[t->nbtirage-1]=numtire;
 }
+
+
+void affichagetableau(Tirage t)//affichage du tableau de tirage et du nombre de tirage effectues
+{
+    printf("Nombre de tirage = %d\n",t.nbtirage);
+    printf("le tableau des tirages :");
+    for(int i=0;i<t.nbtirage;i++)
+    {
+        printf(" %d |",t.tab[i]);
+    }
+    printf("\n");
+}
+
 
 //Tirage aleatoire d'un nombre entre min et max compris
 int getRandom(int mini, int maxi) {
@@ -33,5 +46,23 @@ int numtire(Tirage *t) //numero tiree aleatoirement
     }
     return numero;
 }
+
+
+void general()
+{
+    srand(time(NULL));//eviter la redondance des sequences d'aleatoire;
+    Tirage t;//cree un tirage
+    initialisationTirage(&t);//initialisation du tirage
+    int num;
+    for (int i=0;i<90;i++)//boucle pour effectuer les 90 tirages
+    {
+        num=numtire(&t);
+        majtirage(num,&t);
+        printf("Le numero est : %d\n",num);//affichage du numero tire
+        Sleep(5000); //attente entre deux tirages de 5s
+    }
+    //affichagetableau(t);
+}
+
 
 #endif // TIRAGE_C_INCLUDED

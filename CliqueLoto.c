@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
+#include <time.h>
 
 #include "InterfaceLoto.h"
 #include "loto.h"
@@ -62,7 +63,6 @@ SDL_Rect cliqueSourisLoto2(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rec
     SDL_Flip(ecran);
 
 
-    //remplirTEST2(t);
     srand(time(NULL)); // Necessaire pour la generation aleatoire (ligne a executer 1 seule fois)
     init(9,9,t);
     Tirage tab;
@@ -71,66 +71,44 @@ SDL_Rect cliqueSourisLoto2(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rec
     int victoire = -1; //1 si victoire 0 defaite car pas tous les nums -1 defaite car tous les tirages ont ete effectues
 
     genererCartons(t,choix);
+    //remplirTEST2(t);
 
     numTirage=numtire(&tab);
     majtirage(numTirage,&tab);
     ecrireLoto(t,ecran,imageDeFond,positionFond,choix,tab);
 
+
+    clock_t t1,t2;
+    t1 = clock();
+
     SDL_Event event;
     while(positionFond.x>=0 && positionFond.y>=0)
     {
-
-        SDL_WaitEvent(&event);
+        SDL_PollEvent(&event);
+        t2 = clock();
+        if((int)((t2-t1)/CLOCKS_PER_SEC)>3){
+            tab = suivant(ecran,imageDeFond,positionFond,t,choix,tab);
+            t1 = t2;
+        }
         switch(event.type)
         {
             case SDL_MOUSEBUTTONUP:
             {
-                if(event.button.x>620 && event.button.x<942 && event.button.y>673 && event.button.y<706){
-                    if(tab.nbtirage<90){
-                        int monentier = tab.nbtirage+1;
-                        char machaine[4];
-                        sprintf(machaine,"%d",monentier);
-
-                        positionFond.x = 1130;
-                        positionFond.y = 400;
-                        imageDeFond = SDL_LoadBMP("loto/blanc2.bmp");
-                        SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
-                        SDL_Flip(ecran);
-                        imageDeFond = TTF_RenderText_Blended(police, machaine, color);
-                        SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
-                        SDL_Flip(ecran);
-
-
-                        numTirage=numtire(&tab);
-                        majtirage(numTirage,&tab);
-                        ecrireLoto(t,ecran,imageDeFond,positionFond,choix,tab);
-
-                    }
-                    else{
-                        positionFond.x = 100;
-                        positionFond.y = 250;
-                        if(verifierVictoire(t,choix)){
-                            imageDeFond = TTF_RenderText_Blended(police, "Gagné", color);
-                            SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
-                            SDL_Flip(ecran);
-                        }
-                        else{
-                            imageDeFond = TTF_RenderText_Blended(police, "Perdu", color);
-                            SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
-                            SDL_Flip(ecran);
-                        }
-                    }
-
-                }
-                else if(event.button.x>133 && event.button.x<452 && event.button.y>676 && event.button.y<705){
+                if(event.button.x>133 && event.button.x<452 && event.button.y>676 && event.button.y<705){
                     positionFond.x = -2;
                     positionFond.y = -2;
                     return positionFond;
                     break;
                 }
+                else if(event.button.x>1143 && event.button.x<1294 && event.button.y>670 && event.button.y<705){
+                    positionFond.x = -1;
+                    positionFond.y = -1;
+                    return positionFond;
+                    break;
+                }
                 else{
                     positionFond = cliqueSourisLoto3(tab,ecran,imageDeFond,positionFond,event,t,choix);
-                    if(positionFond.x>=0 && tab.nbtirage<90){
+                    if(positionFond.x>=0 && tab.nbtirage<91){
                         ecrireLoto(t,ecran,imageDeFond,positionFond,choix,tab);
                         if(verifierVictoire(t,choix)){
                             positionFond.x = 100;
@@ -148,23 +126,12 @@ SDL_Rect cliqueSourisLoto2(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rec
     }
 }
 
-    /*Victoire ou defaire
-    if (victoire == 1) {
-        printf("VOUS AVEZ GAGNE !\n Nombre de tirages : %d", t.nbtirage);
-    } else if (victoire == 0){
-        printf("VOUS AVEZ PERDU !\n Vos cartons ne sont pas remplis !\n Nombre de tirages : %d", t.nbtirage);
-    } else {
-        printf("VOUS AVEZ PERDU !\n Tous les nombres ont ete tires !\nNombre de tirages : %d", t.nbtirage);
-    }
-
-    printf("\nFIN DU JEU\n\n");
-*/
 
 
 SDL_Rect cliqueSourisLoto3(Tirage tab, SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, SDL_Event event, TAB t, int choix){
     int longueur_case,hauteur_case,hauteur_grille;
     hauteur_grille = 0;
-    if(tab.nbtirage<90){
+    if(tab.nbtirage<91){
     for(int i=0;i<choix;i++)
     {
         hauteur_case = 0;
@@ -186,11 +153,6 @@ SDL_Rect cliqueSourisLoto3(Tirage tab, SDL_Surface *ecran, SDL_Surface *imageDeF
         }
         hauteur_grille += 200;
     }
-    }
-    if(event.button.x>1143 && event.button.x<1294 && event.button.y>670 && event.button.y<705)
-    {
-        positionFond.x = -1;
-        positionFond.y = -1;
     }
     return positionFond;
 }

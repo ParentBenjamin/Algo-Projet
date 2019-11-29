@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
-
+#include <SDL/SDL_mixer.h>
 
 #include "Menu.h"
 
@@ -37,11 +37,13 @@ int main(int argc, char *argv[])
 
 
     SDL_Init(SDL_INIT_VIDEO);
-    TTF_Init();
+
 
     ecran = SDL_SetVideoMode(1366, 768, 32, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN); //définit la taille de la fenêtre ainsi que son mode
 
     menuPrincipal(ecran,imageDeFond,positionFond);
+
+
 
     TTF_Quit();
     SDL_Quit(); //quitte l'interface graphique
