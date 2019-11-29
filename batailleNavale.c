@@ -122,6 +122,15 @@ void batailleNavale() {
         printf("\nDefaite  !\n");
     }
 
+<<<<<<< Updated upstream
+=======
+    int score = calculScoreBN(&p1, fin);
+    printf("Votre score est de : %d points",score);
+    enregistrerScore("THEO",score);
+
+
+
+>>>>>>> Stashed changes
     afficheEtat(tabJOUEUR);
 }
 
