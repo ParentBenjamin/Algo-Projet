@@ -2,7 +2,7 @@
 #include "grille.h"
 #include "iaBN.h"
 
-void sauvegarderjeu(TAB joueur, TAB ia, char *nom, Player p)//permet de sauvegarder la partie en cours dans un fichier
+void sauvegarderjeu(TAB joueur, TAB ia, char *nom, Player p, int etape)//permet de sauvegarder la partie en cours dans un fichier
 {
     FILE *f=NULL;
     f=fopen(nom,"w");//ouverture du fichier en ecriture
@@ -42,13 +42,15 @@ void sauvegarderjeu(TAB joueur, TAB ia, char *nom, Player p)//permet de sauvegar
         }
         //sauvegarde du nombre de tir du joueur
         fprintf(f,"%d",p.nbtir);
+        fprintf(f,"%d",etape);
     }
     else printf("erreur");//sinon affichage dune erreur
     fclose(f);//fermeture du fichier
 }
 
-void genererpartie(TAB chainejoueur, TAB chaineia, Player p)//recupere la partie a partir du fichier texte
+int genererpartie(TAB chainejoueur, TAB chaineia, Player p)//recupere la partie a partir du fichier texte
 {
+    int etape;//variable pour recuperer a quel moment a été arreté la partie
     FILE* fichier =NULL;
     fichier=fopen("SAUVEGARDEPARTIE.txt","r");//ouverture en lecture du fichier
     if(fichier!=NULL)
@@ -70,8 +72,10 @@ void genererpartie(TAB chainejoueur, TAB chaineia, Player p)//recupere la partie
             for(int p=0;p<9;p++)
                 chaineia[o][p].etat=(int)fgetc(fichier)-48;
         p.nbtir=(int)fgetc(fichier)-48;//copie du nombre de tir du joueur
+        etape=(int)fgetc(fichier)-48;//copie du numero detape pour savoir quand est ce que letape a ete arretee
     }
     fclose(fichier);
+    return etape;
 }
 
 //Verifie victoire, renvoie 1 si true 0 false
