@@ -337,7 +337,7 @@ void tri(Case t[5]) {
 bool memeCouleur(Case t[5]) {
     bool couleur = true;
     for (int i = 1; i < 5; ++i) {
-        if (t[0].etat == t[i].etat) {
+        if (t[0].etat != t[i].etat) {
             couleur = false;
         }
     }
@@ -351,7 +351,7 @@ int nombrePoint(Case t[5]) {
          t[3].valeur == t[4].valeur - 1 && memeCouleur(t))) {
         point = 7;
     } else {
-        if (t[0].valeur != t[4].valeur) {
+        if (t[0].valeur == t[3].valeur || t[1].valeur == t[4].valeur) {
             point = 6;
         } else {
             if ((t[0].valeur == t[2].valeur && t[3].valeur == t[4].valeur) ||
