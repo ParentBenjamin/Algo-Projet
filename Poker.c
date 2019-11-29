@@ -209,7 +209,7 @@ Parti miseDepart(Parti p, int n, int tour){ // la mise de chaque joueur au debut
     return p;
 }
 
-int potTotale(Parti p,int n){
+int potTotale(Parti p,int n){  // somme des mises posées + le pot
     int totale = 0;
     for (int i = 0; i < n; ++i) {
         totale += p.tableDeJeu[i].mise;
@@ -218,7 +218,7 @@ int potTotale(Parti p,int n){
     return totale;
 }
 
-int nombreAbbandon(Parti p, int n) {
+int nombreAbbandon(Parti p, int n) { // nombre de personne ne jouant plus sur les n de departs
     int nb = 0;
     for (int i = 0; i < n; ++i) {
         if (p.tableDeJeu[i].argent == 0){
@@ -228,7 +228,7 @@ int nombreAbbandon(Parti p, int n) {
     return nb;
 }
 
-int nombreCoucher(Parti p, int n){
+int nombreCoucher(Parti p, int n){  // nombre de personne qui se sont couchées durant cette manche
     int nb = 0;
     for (int i = 0; i < n; ++i) {
         if (p.tableDeJeu[i].coucher == true){
@@ -238,7 +238,7 @@ int nombreCoucher(Parti p, int n){
     return nb;
 }
 
-bool prochaineMiseEgale (int numjoueur, Parti p , int n){
+bool prochaineMiseEgale (int numjoueur, Parti p , int n){ // regarde si la personne qui suit a la meme mise
     int i = 0;
     int joueurTest = (numjoueur+1)%n;
     bool misedifferent = true;
@@ -269,7 +269,7 @@ void tri(Case t[5]) {
     }
 }
 
-bool memeCouleur(Case t[5]) {
+bool memeCouleur(Case t[5]) {  // retourn vrai si toutes les carte sont de la meme couleur
     bool couleur = true;
     for (int i = 1; i < 5; ++i) {
         if (t[0].etat != t[i].etat) {
@@ -319,7 +319,7 @@ int nombrePoint(Case t[5]) { //retorune le nombre de point selon la combinaison
     }
     return point;
 }
-void meilleurCarteJoueur(Case t[2], Case t1[5], Case retour[5]) {
+void meilleurCarteJoueur(Case t[2], Case t1[5], Case retour[5]) { //retourne les meilleur cartes d'un joueurs 
     int sommemax = -1;
     int testsomme;
     Case test[5];
