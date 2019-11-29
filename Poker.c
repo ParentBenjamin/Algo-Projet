@@ -279,33 +279,35 @@ bool memeCouleur(Case t[5]) {
     return couleur;
 }
 
-int nombrePoint(Case t[5]) {
+int nombrePoint(Case t[5]) { //retorune le nombre de point selon la combinaison
     int point = 0;
     tri(t);
-    if ((t[0].valeur == t[1].valeur - 1 && t[1].valeur == t[2].valeur - 1 && t[2].valeur == t[3].valeur - 1 &&
+    if ((t[0].valeur == t[1].valeur - 1 && t[1].valeur == t[2].valeur - 1 && t[2].valeur == t[3].valeur - 1 &&    // Quinte
          t[3].valeur == t[4].valeur - 1 && memeCouleur(t))) {
-        point = 7;
+        point = 8;
     } else {
-        if (t[0].valeur != t[4].valeur) {
-            point = 6;
+        if (t[0].valeur != t[4].valeur) {  // Carré
+            point = 7;
         } else {
-            if ((t[0].valeur == t[2].valeur && t[3].valeur == t[4].valeur) ||
+            if ((t[0].valeur == t[2].valeur && t[3].valeur == t[4].valeur) ||    // Full
                 (t[2].valeur == t[4].valeur && t[0].valeur == t[1].valeur)) {
-                point = 5;
+                point = 6;
             } else {
-                if (memeCouleur(t)) {
-                    point = 4;
+                if (memeCouleur(t)) {  // Couleur
+                    point = 5;
                 } else {
-                    if (t[0].valeur == t[1].valeur - 1 && t[1].valeur == t[2].valeur - 1 &&
+                    if (t[0].valeur == t[1].valeur - 1 && t[1].valeur == t[2].valeur - 1 &&   // Suite
                         t[2].valeur == t[3].valeur - 1 && t[3].valeur == t[4].valeur - 1) {
+                        point = 4;
+                    } else if (t[0].valeur == t[2].valeur || t[2].valeur == t[4].valeur) {  // Brelan
                         point = 3;
                     } else {
-                        if ((t[0].valeur == t[1].valeur &&
+                        if ((t[0].valeur == t[1].valeur &&              // Double paire
                              (t[2].valeur == t[3].valeur || t[3].valeur == t[4].valeur)) ||
                             (t[1].valeur == t[2].valeur && t[3].valeur == t[4].valeur)) {
                             point = 2;
                         } else {
-                            if (t[0].valeur == t[1].valeur || t[1].valeur == t[2].valeur ||
+                            if (t[0].valeur == t[1].valeur || t[1].valeur == t[2].valeur ||  // paire
                                 t[2].valeur == t[3].valeur || t[3].valeur == t[4].valeur) {
                                 point = 1;
                             }
@@ -317,7 +319,6 @@ int nombrePoint(Case t[5]) {
     }
     return point;
 }
-
 void meilleurCarteJoueur(Case t[2], Case t1[5], Case retour[5]) {
     int sommemax = -1;
     int testsomme;
