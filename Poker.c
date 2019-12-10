@@ -40,8 +40,8 @@ void remplirTirage(int n ,Case t[5+2*n]){    // Fait le tirage de toutes qui von
     int i = 0;
     srand(time(NULL));
     while (i < ((n*2)+5)) {
-        valeur = nbAlea2(13) + 2;
-        couleur = nbAlea2(4) + 1;
+        valeur = nbAlea(13) + 2;
+        couleur = nbAlea(4) + 1;
         if (!appartient(valeur, couleur, i, t)){
             t[i].valeur = valeur;
             t[i].etat = couleur;
@@ -130,7 +130,7 @@ int quitterLaTable(Parti* p, int joueur){ // permet au joueur de quitter la tabl
 
 Parti repartitionArgent (Parti p, int joueurGagnant, int n){    // reparti l'argent entre chaque joueur en vérifiant ayant le joueur gagnant
     if (p.tableDeJeu[joueurGagnant].mise < maxMise(p,n)){   //si le joueur gagnant a fait tapis et qu'il a miser moins que les autres
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < 5; ++i) {
             if(i != joueurGagnant || p.tableDeJeu[i].coucher){
                 p.tableDeJeu[i].mise -= p.tableDeJeu[joueurGagnant].mise;
                 p.tableDeJeu[joueurGagnant].argent += p.tableDeJeu[joueurGagnant].mise;
@@ -143,7 +143,7 @@ Parti repartitionArgent (Parti p, int joueurGagnant, int n){    // reparti l'arg
         p.tableDeJeu[joueurGagnant].argent +=p.tableDeJeu[joueurGagnant].mise;
         p.tableDeJeu[joueurGagnant].mise = 0;
     }else {                                       // si le joueur gagnant a la mise la plus haute
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < 5; ++i) {
             if(p.tableDeJeu[i].coucher == false){
                 p.tableDeJeu[joueurGagnant].argent += p.tableDeJeu[i].mise;
                 p.tableDeJeu[i].mise = 0;
@@ -186,7 +186,7 @@ Parti miseDepart(Parti p, int n, int tour){ // la mise de chaque joueur au debut
                 }
             }
             else {
-                if(n-1==tour){  //grosse blinde
+               if(n-1==tour){
                     if (p.tableDeJeu[0].argent >= 100) { //si il n'a pas assez pour miser
                         p.tableDeJeu[0].argent -= 100;
                         p.tableDeJeu[0].mise = 100;
@@ -195,7 +195,7 @@ Parti miseDepart(Parti p, int n, int tour){ // la mise de chaque joueur au debut
                         p.tableDeJeu[0].argent = 0;
                     }
                 }
-                else if (i == tour + 1) {                  
+                 else if (i == tour + 1) {                  // petite blinde
                     if (p.tableDeJeu[i].argent >= 100) { //si il n'a pas assez pour miser
                         p.tableDeJeu[i].argent -= 100;
                         p.tableDeJeu[i].mise = 100;
@@ -218,7 +218,7 @@ Parti miseDepart(Parti p, int n, int tour){ // la mise de chaque joueur au debut
     return p;
 }
 
-int potTotale(Parti p,int n){ //somme de l'ensemble des mises plus du pot
+int potTotale(Parti p,int n){  // somme des mises posées + le pot
     int totale = 0;
     for (int i = 0; i < n; ++i) {
         totale += p.tableDeJeu[i].mise;
@@ -227,7 +227,7 @@ int potTotale(Parti p,int n){ //somme de l'ensemble des mises plus du pot
     return totale;
 }
 
-int nombreAbbandon(Parti p, int n) { //nombre de joueur ayant arreter de jouer si la valeur egale n-1 alors la partie est fini
+int nombreAbbandon(Parti p, int n) { // nombre de personne ne jouant plus sur les n de departs
     int nb = 0;
     for (int i = 0; i < n; ++i) {
         if (p.tableDeJeu[i].argent == 0){
@@ -237,7 +237,7 @@ int nombreAbbandon(Parti p, int n) { //nombre de joueur ayant arreter de jouer s
     return nb;
 }
 
-int nombreCoucher(Parti p, int n){ // nombre de personne s'etant coucher durant la manche si la valeur egale n-1 la manche est finie
+int nombreCoucher(Parti p, int n){  // nombre de personne qui se sont couchées durant cette manche
     int nb = 0;
     for (int i = 0; i < n; ++i) {
         if (p.tableDeJeu[i].coucher == true){
@@ -247,7 +247,7 @@ int nombreCoucher(Parti p, int n){ // nombre de personne s'etant coucher durant 
     return nb;
 }
 
-bool prochaineMiseEgale (int numjoueur, Parti p , int n){ // regarde si le prochains joueur encore en jeu possede la meme mise permet.
+bool prochaineMiseEgale (int numjoueur, Parti p , int n){ // regarde si la personne qui suit a la meme mise
     int i = 0;
     int joueurTest = (numjoueur+1)%n;
     bool misedifferent = true;
@@ -264,64 +264,8 @@ bool prochaineMiseEgale (int numjoueur, Parti p , int n){ // regarde si le proch
     return  misedifferent;
 }
 
-
-
-
-
-
-Parti tourJoueur(Parti p,int numerojoueur, int n){ // tour d'un joueur ou il peut soit suivre, se coucher,relancer,faire tapis ou quitter la table
-    int choix,somme = 0;
-    printf("carte une :%d , %d  /",p.tableDeJeu[numerojoueur].jeu[0].valeur,p.tableDeJeu[numerojoueur].jeu[0].etat);
-    printf("carte deux %d ,%d",p.tableDeJeu[numerojoueur].jeu[1].valeur,p.tableDeJeu[numerojoueur].jeu[1].etat) ;
-    printf("1 = fold, 2 = call, 3 = raise et 4 = all-in\n");
-    scanf("%d",&choix);
-    switch(choix){
-        case 1: p = seCoucher(p, numerojoueur);
-            break;
-        case 2: p = Suivre(p, numerojoueur,n);
-            break;
-        case 3 :printf("quelle somme en plus de la mise :");
-            scanf("%d",&somme);
-            p = relancer(p,numerojoueur,somme,n);
-            break;
-        case 4 :p = tapis(p,numerojoueur);
-        default :somme = quitterLaTable(&p,numerojoueur);
-            break;
-    }
-    return p;
-
-}
-
-int tour(Parti* p, int n, int premier){ //tour d'une manche, appelle chaque joueur au moins une fois puis s'arrete si il on tous la meme mise ou qu'il n'en reste qu'un seul
-    int n1 = 0;
-    while(((n1-1 >= n && !prochaineMiseEgale(((n1+premier)%n),*p,n)) || (n1-1 < n)) && (nombreCoucher(*p,n) < n-1)) {
-        *p = tourJoueur(*p,n1%n,n);
-        n1++;
-        for (int i = 0; i < n; ++i) {
-            printf("%d   ", p->tableDeJeu[i].mise);
-        }
-        printf("%d  %d",n1,nombreCoucher(*p,n));
-    }
-}
-
-Parti tourPartie (Parti p , int n, Case t[5+2*n]){ //definie un tour et se termine quand toutes les carte de la river sont retourée ou qu'un seul joueur ne c'est pas couche
-    int numjoueur = 0;
-    int i = 0;
-    int joueurGagnant = 3;
-    while(i<4 && nombreCoucher(p,n) < n-1) {
-        numjoueur = tour(&p, n , numjoueur);
-        //retourne les cartes
-        i++;
-    }
-        // definie le joueur gagnant
-        p = repartitionArgent(p ,joueurGagnant,n);
-    return p;
-}
-
-
-
-
-void tri(Case t[5]) { //tri le tableau de cartes
+//tri le tableau de cartes
+void tri(Case t[5]) {
     Case min;
     for (int i = 0; i < 4; ++i) {
         for (int j = i + 1; j < 5; ++j) {
@@ -334,7 +278,7 @@ void tri(Case t[5]) { //tri le tableau de cartes
     }
 }
 
-bool memeCouleur(Case t[5]) { //regarde si les 5 cartes en entré sont de la meme couleur
+bool memeCouleur(Case t[5]) {  // retourn vrai si toutes les carte sont de la meme couleur
     bool couleur = true;
     for (int i = 1; i < 5; ++i) {
         if (t[0].etat != t[i].etat) {
@@ -344,33 +288,35 @@ bool memeCouleur(Case t[5]) { //regarde si les 5 cartes en entré sont de la mem
     return couleur;
 }
 
-int nombrePoint(Case t[5]) { // retourne un nombre de point selon les 5 cates en entreenet la meilleur combinaison que l'on obtient avec celles-ci
+int nombrePoint(Case t[5]) { //retorune le nombre de point selon la combinaison
     int point = 0;
     tri(t);
-    if ((t[0].valeur == t[1].valeur - 1 && t[1].valeur == t[2].valeur - 1 && t[2].valeur == t[3].valeur - 1 &&
+    if ((t[0].valeur == t[1].valeur - 1 && t[1].valeur == t[2].valeur - 1 && t[2].valeur == t[3].valeur - 1 &&    // Quinte
          t[3].valeur == t[4].valeur - 1 && memeCouleur(t))) {
-        point = 7;
+        point = 8;
     } else {
-        if (t[0].valeur == t[3].valeur || t[1].valeur == t[4].valeur) {
-            point = 6;
+        if (t[0].valeur == t[4].valeur || t[1].valeur == t[4].valeur) {  // Carré
+            point = 7;
         } else {
-            if ((t[0].valeur == t[2].valeur && t[3].valeur == t[4].valeur) ||
+            if ((t[0].valeur == t[2].valeur && t[3].valeur == t[4].valeur) ||    // Full
                 (t[2].valeur == t[4].valeur && t[0].valeur == t[1].valeur)) {
-                point = 5;
+                point = 6;
             } else {
-                if (memeCouleur(t)) {
-                    point = 4;
+                if (memeCouleur(t)) {  // Couleur
+                    point = 5;
                 } else {
-                    if (t[0].valeur == t[1].valeur - 1 && t[1].valeur == t[2].valeur - 1 &&
+                    if (t[0].valeur == t[1].valeur - 1 && t[1].valeur == t[2].valeur - 1 &&   // Suite
                         t[2].valeur == t[3].valeur - 1 && t[3].valeur == t[4].valeur - 1) {
+                        point = 4;
+                    } else if (t[0].valeur == t[2].valeur || t[2].valeur == t[4].valeur) {  // Brelan
                         point = 3;
                     } else {
-                        if ((t[0].valeur == t[1].valeur &&
+                        if ((t[0].valeur == t[1].valeur &&              // Double paire
                              (t[2].valeur == t[3].valeur || t[3].valeur == t[4].valeur)) ||
                             (t[1].valeur == t[2].valeur && t[3].valeur == t[4].valeur)) {
                             point = 2;
                         } else {
-                            if (t[0].valeur == t[1].valeur || t[1].valeur == t[2].valeur ||
+                            if (t[0].valeur == t[1].valeur || t[1].valeur == t[2].valeur ||  // paire
                                 t[2].valeur == t[3].valeur || t[3].valeur == t[4].valeur) {
                                 point = 1;
                             }
@@ -382,8 +328,7 @@ int nombrePoint(Case t[5]) { // retourne un nombre de point selon les 5 cates en
     }
     return point;
 }
-
-void meilleurCarteJoueur(Case t[2], Case t1[5] ,Case retour[5]) {  //retourne la meilleur combinaison de carte d'un joueur a partir de ses 2 cartes ainsi que de celles de la river
+void meilleurCarteJoueur(Case t[2], Case t1[5], Case retour[5]) { //retourne les meilleur cartes d'un joueurs 
     int sommemax = -1;
     int testsomme;
     Case test[5];
@@ -436,77 +381,220 @@ void meilleurCarteJoueur(Case t[2], Case t1[5] ,Case retour[5]) {  //retourne la
     }
 }
 
-int joueurGagnant(Parti p , int n){  // retourne le numéro du joueur ayant la meilleur combinaison
-    int joueur  = 0 ;
+int joueurGagnant(Parti p, int n) {
+    int joueur = 0;
     int pointGagnant;
     int pointTest;
     Case carteGagnant[5];
     Case test[5];
-    meilleurCarteJoueur(p.tableDeJeu[0].jeu,  p.river , carteGagnant);
-    for (int i = 1; i < n ; ++i) {
-        meilleurCarteJoueur(p.tableDeJeu[i].jeu, p.river , test);
+    meilleurCarteJoueur(p.tableDeJeu[0].jeu, p.river, carteGagnant);
+    for (int i = 1; i < n; ++i) {
+        meilleurCarteJoueur(p.tableDeJeu[i].jeu, p.river, test);
         pointGagnant = nombrePoint(carteGagnant);
-        pointTest =nombrePoint(test);
-        if(pointGagnant< pointTest){
+        pointTest = nombrePoint(test);
+        if (pointGagnant < pointTest) {
             carteGagnant[0] = test[0];
             carteGagnant[1] = test[1];
             carteGagnant[2] = test[2];
             carteGagnant[3] = test[3];
             carteGagnant[4] = test[4];
             joueur = i;
-        }else{
-            if(pointGagnant == pointTest){
-                if(carteGagnant[0].valeur <= test[0].valeur){
-                    carteGagnant[0] = test[0];
-                    carteGagnant[1] = test[1];
-                    carteGagnant[2] = test[2];
-                    carteGagnant[3] = test[3];
-                    carteGagnant[4] = test[4];
-                    joueur = i;
-                }
-                else {
-                    if (carteGagnant[0].valeur == test[0].valeur) {
-                        if (carteGagnant[1].valeur <= test[1].valeur) {
-                            carteGagnant[0] = test[0];
-                            carteGagnant[1] = test[1];
-                            carteGagnant[2] = test[2];
-                            carteGagnant[3] = test[3];
-                            carteGagnant[4] = test[4];
+        } else {
+            if (pointGagnant == pointTest) {
+                if (pointGagnant == 1) {
+                    if (testeGagnantPaire(carteGagnant, test) == 1) {
+                        joueur = i;
+                    } else {
+                        if (testeGagnantPaire(carteGagnant, test) == -1) {
+                            joueur = -1;
+                        }
+                    }
+
+                } else {
+                    if (pointGagnant == 2) {
+                        if (testdoublePaire(carteGagnant, test) == 1) {
                             joueur = i;
                         } else {
-                            if (carteGagnant[1].valeur == test[1].valeur) {
-                                if (carteGagnant[2].valeur <= test[2].valeur) {
-                                    carteGagnant[0] = test[0];
-                                    carteGagnant[1] = test[1];
-                                    carteGagnant[2] = test[2];
-                                    carteGagnant[3] = test[3];
-                                    carteGagnant[4] = test[4];
-                                    joueur = i;
-                                } else {
-                                    if (carteGagnant[2].valeur == test[2].valeur) {
-                                        if (carteGagnant[3].valeur <= test[3].valeur) {
-                                            carteGagnant[0] = test[0];
-                                            carteGagnant[1] = test[1];
-                                            carteGagnant[2] = test[2];
-                                            carteGagnant[3] = test[3];
-                                            carteGagnant[4] = test[4];
-                                            joueur = i;
-                                        } else {
-                                            if(carteGagnant[3].valeur == test[3].valeur) {
-                                                if (carteGagnant[4].valeur <= test[4].valeur) {
-                                                    carteGagnant[0] = test[0];
-                                                    carteGagnant[1] = test[1];
-                                                    carteGagnant[2] = test[2];
-                                                    carteGagnant[3] = test[3];
-                                                    carteGagnant[4] = test[4];
-                                                    joueur = i;
-                                                }
-                                                else {
-                                                    if(carteGagnant[4].valeur == test[4].valeur){
-                                                        joueur = -1;
-                                                    }
-                                                }
-                                            }
+                            if (testdoublePaire(carteGagnant, test) == -1) {
+                                joueur = -1;
+                            }
+                        }
+                    }
+                    else{
+                        if (pointGagnant == 3 || pointGagnant == 6 || pointGagnant == 7){
+                            if (testeGagnantBrelan(carteGagnant, test) == 1) {
+                                joueur = i;
+                            } else {
+                                if (testeGagnantBrelan(carteGagnant, test) == -1) {
+                                    joueur = -1;
+                                }
+                            }
+                        }
+                        else{
+                            if (testeEgaliteSuite(carteGagnant, test) == 1) {
+                                joueur = i;
+                            } else {
+                                if (testeEgaliteSuite(carteGagnant, test) == -1) {
+                                    joueur = -1;
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+            }
+        }
+    }
+    return joueur;
+}
+
+int testdoublePaire(Case carteGagnant[5], Case test[5]) {
+    if (carteGagnant[1].valeur <= test[1].valeur) {
+        carteGagnant[0] = test[0];
+        carteGagnant[1] = test[1];
+        carteGagnant[2] = test[2];
+        carteGagnant[3] = test[3];
+        carteGagnant[4] = test[4];
+        return 1;
+    } else {
+        if (carteGagnant[1].valeur >= test[1].valeur) {
+            return 0;
+        }
+    }
+    if (carteGagnant[3].valeur <= test[3].valeur) {
+        carteGagnant[0] = test[0];
+        carteGagnant[1] = test[1];
+        carteGagnant[2] = test[2];
+        carteGagnant[3] = test[3];
+        carteGagnant[4] = test[4];
+        return 1;
+    } else {
+        if (carteGagnant[3].valeur >= test[3].valeur) {
+            return 0;
+        }
+    }
+    return testeEgaliteSuite(carteGagnant, test);
+}
+
+int testeGagnantPaire(Case carteGagnant[5], Case test[5]) {
+    if (carteGagnant[0].valeur == carteGagnant[1].valeur || carteGagnant[1].valeur == carteGagnant[2].valeur) {
+        if (test[0].valeur == test[1].valeur || test[1].valeur == test[2].valeur) {
+            if (carteGagnant[1].valeur <= test[1].valeur) {
+                carteGagnant[0] = test[0];
+                carteGagnant[1] = test[1];
+                carteGagnant[2] = test[2];
+                carteGagnant[3] = test[3];
+                carteGagnant[4] = test[4];
+                return 1;
+            } else {
+                if (carteGagnant[1].valeur == test[1].valeur) {
+                    return testeEgaliteSuite(carteGagnant, test);
+                }
+            }
+        } else {
+            if (carteGagnant[1].valeur <= test[3].valeur || carteGagnant[1].valeur == test[3].valeur) {
+                carteGagnant[0] = test[0];
+                carteGagnant[1] = test[1];
+                carteGagnant[2] = test[2];
+                carteGagnant[3] = test[3];
+                carteGagnant[4] = test[4];
+                return 1;
+            }
+        }
+    } else {
+        if (test[0].valeur == test[1].valeur || test[1].valeur == test[2].valeur) {
+            if (carteGagnant[3].valeur <= test[1].valeur) {
+                carteGagnant[0] = test[0];
+                carteGagnant[1] = test[1];
+                carteGagnant[2] = test[2];
+                carteGagnant[3] = test[3];
+                carteGagnant[4] = test[4];
+                return 1;
+            }
+        } else {
+            if (carteGagnant[3].valeur <= test[3].valeur) {
+                carteGagnant[0] = test[0];
+                carteGagnant[1] = test[1];
+                carteGagnant[2] = test[2];
+                carteGagnant[3] = test[3];
+                carteGagnant[4] = test[4];
+                return 1;
+            } else {
+                if (carteGagnant[3].valeur == test[3].valeur) {
+                    return testeEgaliteSuite(carteGagnant, test);
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+int testeGagnantBrelan(Case carteGagnant[5], Case test[5]) {
+    if (carteGagnant[3].valeur <= test[3].valeur) {
+        carteGagnant[0] = test[0];
+        carteGagnant[1] = test[1];
+        carteGagnant[2] = test[2];
+        carteGagnant[3] = test[3];
+        carteGagnant[4] = test[4];
+        return 1;
+    } else {
+        return 0;
+    }
+
+}
+
+
+int testeEgaliteSuite(Case carteGagnant[5], Case test[5]) {
+
+    if (carteGagnant[0].valeur <= test[0].valeur) {
+        carteGagnant[0] = test[0];
+        carteGagnant[1] = test[1];
+        carteGagnant[2] = test[2];
+        carteGagnant[3] = test[3];
+        carteGagnant[4] = test[4];
+        return 1;
+    } else {
+        if (carteGagnant[0].valeur == test[0].valeur) {
+            if (carteGagnant[1].valeur <= test[1].valeur) {
+                carteGagnant[0] = test[0];
+                carteGagnant[1] = test[1];
+                carteGagnant[2] = test[2];
+                carteGagnant[3] = test[3];
+                carteGagnant[4] = test[4];
+                return 1;
+            } else {
+                if (carteGagnant[1].valeur == test[1].valeur) {
+                    if (carteGagnant[2].valeur <= test[2].valeur) {
+                        carteGagnant[0] = test[0];
+                        carteGagnant[1] = test[1];
+                        carteGagnant[2] = test[2];
+                        carteGagnant[3] = test[3];
+                        carteGagnant[4] = test[4];
+                        return 1;
+                    } else {
+                        if (carteGagnant[2].valeur == test[2].valeur) {
+                            if (carteGagnant[3].valeur <= test[3].valeur) {
+                                carteGagnant[0] = test[0];
+                                carteGagnant[1] = test[1];
+                                carteGagnant[2] = test[2];
+                                carteGagnant[3] = test[3];
+                                carteGagnant[4] = test[4];
+                                return 1;
+                            } else {
+                                if (carteGagnant[3].valeur == test[3].valeur) {
+                                    if (carteGagnant[4].valeur <= test[4].valeur) {
+                                        carteGagnant[0] = test[0];
+                                        carteGagnant[1] = test[1];
+                                        carteGagnant[2] = test[2];
+                                        carteGagnant[3] = test[3];
+                                        carteGagnant[4] = test[4];
+                                        return 1;
+                                    } else {
+
+                                        if (carteGagnant[4].valeur == test[4].valeur) {
+                                            return -1;
                                         }
                                     }
                                 }
@@ -516,10 +604,58 @@ int joueurGagnant(Parti p , int n){  // retourne le numéro du joueur ayant la m
                 }
             }
         }
+        return 0;
     }
-    return joueur;
 }
 
+Parti tourJoueur(Parti p,int numerojoueur, int n){
+    int choix,somme = 0;
+    printf("carte une :%d , %d  /",p.tableDeJeu[numerojoueur].jeu[0].valeur,p.tableDeJeu[numerojoueur].jeu[0].etat);
+    printf("carte deux %d ,%d",p.tableDeJeu[numerojoueur].jeu[1].valeur,p.tableDeJeu[numerojoueur].jeu[1].etat) ;
+    printf("1 = fold, 2 = call, 3 = raise et 4 = all-in\n");
+    scanf("%d",&choix);
+    switch(choix){
+        case 1: p = seCoucher(p, numerojoueur);
+            break;
+        case 2: p = Suivre(p, numerojoueur,n);
+            break;
+        case 3 :printf("quelle somme en plus de la mise :");
+            scanf("%d",&somme);
+            p = relancer(p,numerojoueur,somme,n);
+            break;
+        case 4 :p = tapis(p,numerojoueur);
+        default :somme = quitterLaTable(&p,numerojoueur);
+            break;
+    }
+    return p;
+
+}
+
+int tour(Parti* p, int n, int premier){
+    int n1 = 0;
+    while(((n1-1 >= n && !prochaineMiseEgale(((n1+premier)%n),*p,n)) || (n1-1 < n)) && (nombreCoucher(*p,n) < n-1 )) {
+        *p = tourJoueur(*p,n1%n,n);
+        n1++;
+        for (int i = 0; i < n; ++i) {
+            printf("%d   ", p->tableDeJeu[i].mise);
+        }
+        printf("%d  %d",n1,nombreCoucher(*p,n));
+    }
+}
+
+Parti tourPartie (Parti p , int n, Case t[5+2*n]){
+    int numjoueur = 0;
+    int i = 0;
+    int joueurGagnant = 3;
+    while(i<4 && nombreCoucher(p,n) < n-1) {
+        numjoueur = tour(&p, n , numjoueur);
+        //retourne les cartes
+        i++;
+    }
+        // definie le joueur gagnant
+        p = repartitionArgent(p ,joueurGagnant,n);
+    return p;
+}
 
 
 void partie(){
@@ -541,4 +677,3 @@ void partie(){
         nombredeManche++;
     }
 }
-
