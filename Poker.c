@@ -176,7 +176,7 @@ Parti repartitionEgaliter(Parti p, int n){  // en cas d'egaliter tous les joueur
 Parti miseDepart(Parti p, int n, int tour){ // la mise de chaque joueur au debut du tour avec 1 joueur qui a la grosse blinde et un qui a la petite blinde
     for (int i = 0; i < n; ++i) {
         if (p.tableDeJeu[i].argent != 0) {
-            if (i == tour ) {                    // grosse blinde
+            if (i == tour ) {                    // petite blinde
                 if (p.tableDeJeu[i].argent >= 75) {    //si il n'a pas assez pour miser
                     p.tableDeJeu[i].argent -= 75;
                     p.tableDeJeu[i].mise = 75;
@@ -186,7 +186,7 @@ Parti miseDepart(Parti p, int n, int tour){ // la mise de chaque joueur au debut
                 }
             }
             else {
-                if(n-1==tour){
+                if(n-1==tour){  //grosse blinde
                     if (p.tableDeJeu[0].argent >= 100) { //si il n'a pas assez pour miser
                         p.tableDeJeu[0].argent -= 100;
                         p.tableDeJeu[0].mise = 100;
@@ -195,7 +195,7 @@ Parti miseDepart(Parti p, int n, int tour){ // la mise de chaque joueur au debut
                         p.tableDeJeu[0].argent = 0;
                     }
                 }
-                else if (i == tour + 1) {                  // petite blinde
+                else if (i == tour + 1) {                  
                     if (p.tableDeJeu[i].argent >= 100) { //si il n'a pas assez pour miser
                         p.tableDeJeu[i].argent -= 100;
                         p.tableDeJeu[i].mise = 100;
