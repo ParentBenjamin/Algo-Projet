@@ -176,28 +176,37 @@ Parti repartitionEgaliter(Parti p, int n){  // en cas d'egaliter tous les joueur
 Parti miseDepart(Parti p, int n, int tour){ // la mise de chaque joueur au debut du tour avec 1 joueur qui a la grosse blinde et un qui a la petite blinde
     for (int i = 0; i < n; ++i) {
         if (p.tableDeJeu[i].argent != 0) {
-            if (i == tour ) {                    // grosse blinde
-                if (p.tableDeJeu[i].argent >= 100) {    //si il n'a pas assez pour miser
-                    p.tableDeJeu[i].argent -= 100;
-                    p.tableDeJeu[i].mise = 100;
+            if (i == tour ) {                    // petite blinde
+                if (p.tableDeJeu[i].argent >= 75) {    //si il n'a pas assez pour miser
+                    p.tableDeJeu[i].argent -= 75;
+                    p.tableDeJeu[i].mise = 75;
                 } else {                              //si il a assez pour miser
                     p.tableDeJeu[i].mise = p.tableDeJeu[i].argent;
                     p.tableDeJeu[i].argent = 0;
                 }
             }
             else {
-                if (i == tour + 1) {                  // petite blinde
-                    if (p.tableDeJeu[i].argent >= 75) { //si il n'a pas assez pour miser
-                        p.tableDeJeu[i].argent -= 75;
-                        p.tableDeJeu[i].mise = 75;
+               if(n-1==tour){
+                    if (p.tableDeJeu[0].argent >= 100) { //si il n'a pas assez pour miser
+                        p.tableDeJeu[0].argent -= 100;
+                        p.tableDeJeu[0].mise = 100;
+                    } else {                              //si il a assez pour miser
+                        p.tableDeJeu[0].mise = p.tableDeJeu[i].argent;
+                        p.tableDeJeu[0].argent = 0;
+                    }
+                }
+                 else if (i == tour + 1) {                  // petite blinde
+                    if (p.tableDeJeu[i].argent >= 100) { //si il n'a pas assez pour miser
+                        p.tableDeJeu[i].argent -= 100;
+                        p.tableDeJeu[i].mise = 100;
                     } else {                              //si il a assez pour miser
                         p.tableDeJeu[i].mise = p.tableDeJeu[i].argent;
                         p.tableDeJeu[i].argent = 0;
                     }
                 } else {                              //mise normale
-                    if (p.tableDeJeu[i].argent >= 50) {  //si il n'a pas assez pour miser
-                        p.tableDeJeu[i].argent -= 50;
-                        p.tableDeJeu[i].mise = 50;
+                    if (p.tableDeJeu[i].argent >= 0) {  //si il n'a pas assez pour miser
+                        p.tableDeJeu[i].argent -= 0;
+                        p.tableDeJeu[i].mise = 0;
                     } else {                              //si il a assez pour miser
                         p.tableDeJeu[i].mise = p.tableDeJeu[i].argent;
                         p.tableDeJeu[i].argent = 0;
