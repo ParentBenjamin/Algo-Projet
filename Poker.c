@@ -40,8 +40,8 @@ void remplirTirage(int n ,Case t[5+2*n]){    // Fait le tirage de toutes qui von
     int i = 0;
     srand(time(NULL));
     while (i < ((n*2)+5)) {
-        valeur = nbAlea(13) + 2;
-        couleur = nbAlea(4) + 1;
+        valeur = nbAlea2(13) + 2;
+        couleur = nbAlea2(4) + 1;
         if (!appartient(valeur, couleur, i, t)){
             t[i].valeur = valeur;
             t[i].etat = couleur;
