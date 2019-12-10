@@ -218,7 +218,7 @@ Parti miseDepart(Parti p, int n, int tour){ // la mise de chaque joueur au debut
     return p;
 }
 
-int potTotale(Parti p,int n){
+int potTotale(Parti p,int n){ //somme de l'ensemble des mises plus du pot
     int totale = 0;
     for (int i = 0; i < n; ++i) {
         totale += p.tableDeJeu[i].mise;
@@ -227,7 +227,7 @@ int potTotale(Parti p,int n){
     return totale;
 }
 
-int nombreAbbandon(Parti p, int n) {
+int nombreAbbandon(Parti p, int n) { //nombre de joueur ayant arreter de jouer si la valeur egale n-1 alors la partie est fini
     int nb = 0;
     for (int i = 0; i < n; ++i) {
         if (p.tableDeJeu[i].argent == 0){
@@ -237,7 +237,7 @@ int nombreAbbandon(Parti p, int n) {
     return nb;
 }
 
-int nombreCoucher(Parti p, int n){
+int nombreCoucher(Parti p, int n){ // nombre de personne s'etant coucher durant la manche si la valeur egale n-1 la manche est finie
     int nb = 0;
     for (int i = 0; i < n; ++i) {
         if (p.tableDeJeu[i].coucher == true){
@@ -247,7 +247,7 @@ int nombreCoucher(Parti p, int n){
     return nb;
 }
 
-bool prochaineMiseEgale (int numjoueur, Parti p , int n){
+bool prochaineMiseEgale (int numjoueur, Parti p , int n){ // regarde si le prochains joueur encore en jeu possede la meme mise permet.
     int i = 0;
     int joueurTest = (numjoueur+1)%n;
     bool misedifferent = true;
@@ -269,7 +269,7 @@ bool prochaineMiseEgale (int numjoueur, Parti p , int n){
 
 
 
-Parti tourJoueur(Parti p,int numerojoueur, int n){
+Parti tourJoueur(Parti p,int numerojoueur, int n){ // tour d'un joueur ou il peut soit suivre, se coucher,relancer,faire tapis ou quitter la table
     int choix,somme = 0;
     printf("carte une :%d , %d  /",p.tableDeJeu[numerojoueur].jeu[0].valeur,p.tableDeJeu[numerojoueur].jeu[0].etat);
     printf("carte deux %d ,%d",p.tableDeJeu[numerojoueur].jeu[1].valeur,p.tableDeJeu[numerojoueur].jeu[1].etat) ;
@@ -292,7 +292,7 @@ Parti tourJoueur(Parti p,int numerojoueur, int n){
 
 }
 
-int tour(Parti* p, int n, int premier){
+int tour(Parti* p, int n, int premier){ //tour d'une manche, appelle chaque joueur au moins une fois puis s'arrete si il on tous la meme mise ou qu'il n'en reste qu'un seul
     int n1 = 0;
     while(((n1-1 >= n && !prochaineMiseEgale(((n1+premier)%n),*p,n)) || (n1-1 < n)) && (nombreCoucher(*p,n) < n-1)) {
         *p = tourJoueur(*p,n1%n,n);
@@ -304,7 +304,7 @@ int tour(Parti* p, int n, int premier){
     }
 }
 
-Parti tourPartie (Parti p , int n, Case t[5+2*n]){
+Parti tourPartie (Parti p , int n, Case t[5+2*n]){ //definie un tour et se termine quand toutes les carte de la river sont retourée ou qu'un seul joueur ne c'est pas couche
     int numjoueur = 0;
     int i = 0;
     int joueurGagnant = 3;
@@ -320,8 +320,8 @@ Parti tourPartie (Parti p , int n, Case t[5+2*n]){
 
 
 
-//tri le tableau de cartes
-void tri(Case t[5]) {
+
+void tri(Case t[5]) { //tri le tableau de cartes
     Case min;
     for (int i = 0; i < 4; ++i) {
         for (int j = i + 1; j < 5; ++j) {
@@ -334,7 +334,7 @@ void tri(Case t[5]) {
     }
 }
 
-bool memeCouleur(Case t[5]) {
+bool memeCouleur(Case t[5]) { //regarde si les 5 cartes en entré sont de la meme couleur
     bool couleur = true;
     for (int i = 1; i < 5; ++i) {
         if (t[0].etat != t[i].etat) {
@@ -344,7 +344,7 @@ bool memeCouleur(Case t[5]) {
     return couleur;
 }
 
-int nombrePoint(Case t[5]) {
+int nombrePoint(Case t[5]) { // retourne un nombre de point selon les 5 cates en entreenet la meilleur combinaison que l'on obtient avec celles-ci
     int point = 0;
     tri(t);
     if ((t[0].valeur == t[1].valeur - 1 && t[1].valeur == t[2].valeur - 1 && t[2].valeur == t[3].valeur - 1 &&
@@ -383,7 +383,7 @@ int nombrePoint(Case t[5]) {
     return point;
 }
 
-void meilleurCarteJoueur(Case t[2], Case t1[5] ,Case retour[5]) {
+void meilleurCarteJoueur(Case t[2], Case t1[5] ,Case retour[5]) {  //retourne la meilleur combinaison de carte d'un joueur a partir de ses 2 cartes ainsi que de celles de la river
     int sommemax = -1;
     int testsomme;
     Case test[5];
@@ -436,7 +436,7 @@ void meilleurCarteJoueur(Case t[2], Case t1[5] ,Case retour[5]) {
     }
 }
 
-int joueurGagnant(Parti p , int n){
+int joueurGagnant(Parti p , int n){  // retourne le numéro du joueur ayant la meilleur combinaison
     int joueur  = 0 ;
     int pointGagnant;
     int pointTest;
