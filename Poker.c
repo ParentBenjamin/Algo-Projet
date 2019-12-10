@@ -1,7 +1,7 @@
 
 #include "Poker.h"
 
-int nbAlea(int n){  //genere une valeur aleatoire entre 0 et n;
+int nbAlea2(int n){  //genere une valeur aleatoire entre 0 et n;
     return (rand() % n);
 }
 
