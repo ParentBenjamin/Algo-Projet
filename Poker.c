@@ -328,7 +328,7 @@ int nombrePoint(Case t[5]) { //retorune le nombre de point selon la combinaison
     }
     return point;
 }
-void meilleurCarteJoueur(Case t[2], Case t1[5], Case retour[5]) { //retourne les meilleur cartes d'un joueurs 
+void meilleurCarteJoueur(Case t[2], Case t1[5], Case retour[5]) { //retourne les meilleur cartes d'un joueurs en calculant le nombre de point pour chaque combinaison de point possible
     int sommemax = -1;
     int testsomme;
     Case test[5];
@@ -381,7 +381,7 @@ void meilleurCarteJoueur(Case t[2], Case t1[5], Case retour[5]) { //retourne les
     }
 }
 
-int joueurGagnant(Parti p, int n) {
+int joueurGagnant(Parti p, int n) { // comppre les meilleurs cartes de chaque joueur pour savoir qui a gagné ou si il y a égalité
     int joueur = 0;
     int pointGagnant;
     int pointTest;
@@ -449,7 +449,7 @@ int joueurGagnant(Parti p, int n) {
     return joueur;
 }
 
-int testdoublePaire(Case carteGagnant[5], Case test[5]) {
+int testdoublePaire(Case carteGagnant[5], Case test[5]) { //retourne qui des deux joueurs a les meilleurs cartes si ils ont tous les deux une double paires
     if (carteGagnant[1].valeur <= test[1].valeur) {
         carteGagnant[0] = test[0];
         carteGagnant[1] = test[1];
@@ -477,7 +477,7 @@ int testdoublePaire(Case carteGagnant[5], Case test[5]) {
     return testeEgaliteSuite(carteGagnant, test);
 }
 
-int testeGagnantPaire(Case carteGagnant[5], Case test[5]) {
+int testeGagnantPaire(Case carteGagnant[5], Case test[5]) {   //retourne qui des deux joueurs a les meilleurs cartes si ils ont tous les deux une paires
     if (carteGagnant[0].valeur == carteGagnant[1].valeur || carteGagnant[1].valeur == carteGagnant[2].valeur) {
         if (test[0].valeur == test[1].valeur || test[1].valeur == test[2].valeur) {
             if (carteGagnant[1].valeur <= test[1].valeur) {
@@ -531,7 +531,7 @@ int testeGagnantPaire(Case carteGagnant[5], Case test[5]) {
     return 0;
 }
 
-int testeGagnantBrelan(Case carteGagnant[5], Case test[5]) {
+int testeGagnantBrelan(Case carteGagnant[5], Case test[5]) {   //retourne qui des deux joueurs a les meilleurs cartes si ils ont tous les deux un brelan ou un carré ou un Full
     if (carteGagnant[3].valeur <= test[3].valeur) {
         carteGagnant[0] = test[0];
         carteGagnant[1] = test[1];
@@ -546,7 +546,7 @@ int testeGagnantBrelan(Case carteGagnant[5], Case test[5]) {
 }
 
 
-int testeEgaliteSuite(Case carteGagnant[5], Case test[5]) {
+int testeEgaliteSuite(Case carteGagnant[5], Case test[5]) {  //retourne qui des deux joueurs a les meilleurs cartes si ils ont tous les deux une suite ou une couleur ou quinte ou aucune combinaison
 
     if (carteGagnant[0].valeur <= test[0].valeur) {
         carteGagnant[0] = test[0];
@@ -631,7 +631,7 @@ Parti tourJoueur(Parti p,int numerojoueur, int n){
 
 }
 
-int tour(Parti* p, int n, int premier){
+int tour(Parti* p, int n, int premier){  //definie un tour c'est a dire avant que l'on retourne les carte de la river (fonction de démonstration a destination de la personne ce chargent de l'interface graphique)
     int n1 = 0;
     while(((n1-1 >= n && !prochaineMiseEgale(((n1+premier)%n),*p,n)) || (n1-1 < n)) && (nombreCoucher(*p,n) < n-1 )) {
         *p = tourJoueur(*p,n1%n,n);
@@ -643,7 +643,7 @@ int tour(Parti* p, int n, int premier){
     }
 }
 
-Parti tourPartie (Parti p , int n, Case t[5+2*n]){
+Parti tourPartie (Parti p , int n, Case t[5+2*n]){ // définie une manche c'est a dire jusqu'a ca que un joueur remporte le pot (fonction de démonstration a destination de la personne ce chargent de l'interface graphique)
     int numjoueur = 0;
     int i = 0;
     int joueurGagnant = 3;
@@ -658,7 +658,7 @@ Parti tourPartie (Parti p , int n, Case t[5+2*n]){
 }
 
 
-void partie(){
+void partie(){( // Déroulement d'un partie de poker jusqu'a l'abaanddon de tous les joueurs sauf 1(fonction de démonstration a destination de la personne ce chargent de l'interface graphique)
     int n;
     int nombredeManche = 0;
     Parti p;
