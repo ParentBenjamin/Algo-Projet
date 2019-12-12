@@ -9,7 +9,7 @@
 #include "iaBN.h"
 
 
-
+/**Bataille Navale en Grahique*/
 int interBN(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond){
 
 

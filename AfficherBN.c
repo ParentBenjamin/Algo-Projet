@@ -7,7 +7,7 @@
 #include "InterfaceBN.h"
 
 
-
+/**Affiche la grille du bateau et les coups touchésou ratés*/
 void ecrireBN(TAB t, SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, int etape){
     if(etape == 1){
         for(int i=0;i<9;i++){
@@ -54,11 +54,6 @@ void ecrireBN(TAB t, SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect posi
         }
     }
     else{
-        /*positionFond.x = 200;
-        positionFond.y = 100;
-        imageDeFond = IMG_Load("bn/point.png");
-        SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
-        SDL_Flip(ecran);*/
         for(int i=0;i<9;i++){
             positionFond.x = 84;
             for(int j=0;j<9;j++){

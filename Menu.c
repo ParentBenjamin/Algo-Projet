@@ -11,25 +11,8 @@
 #include "InterfaceBN.h"
 #include "InterfacePoker.h"
 
-/*
-int init_mini_sound(MiniSound *minisound)
-{
-    Mix_AllocateChannels(2);
 
-    minisound->music = Mix_LoadWAV("explosion.wav");
-
-    if(minisound->music == NULL)
-    {
-        return 1;
-    }
-
-    return 0;
-}
-*/
-
-
-
-
+/**Menu Principal*/
 void menuPrincipal(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond){ /* Le menu principal */
     SDL_Event event; // La variable contenant l'événement
     int continuer = 1;

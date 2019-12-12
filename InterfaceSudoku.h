@@ -8,7 +8,7 @@
 
 #ifndef INTERFACESUDOKU_H_INCLUDED
 #define INTERFACESUDOKU_H_INCLUDED
-
+/**Hearders Sudoku*/
 typedef struct{
     int x;
     int y;

@@ -7,7 +7,7 @@
 #include "Menu.h"
 #include "Poker.h"
 
-
+/**Fonction graphique du Poker*/
 int interPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond){
 
     imageDeFond = SDL_LoadBMP("poker/pokerchoix.bmp");

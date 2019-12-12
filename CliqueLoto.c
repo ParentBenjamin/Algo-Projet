@@ -8,6 +8,7 @@
 #include "loto.h"
 #include "tiragee.h"
 
+/**Choix du nombre de grille*/
 SDL_Rect cliqueSourisLoto1(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, SDL_Event event, TAB t){
 
     if(event.button.x>1143 && event.button.x<1294 && event.button.y>670 && event.button.y<705)
@@ -28,7 +29,7 @@ SDL_Rect cliqueSourisLoto1(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rec
     return positionFond;
 }
 
-
+/**Fonction qui s'occupe du jeu du loto*/
 SDL_Rect cliqueSourisLoto2(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, TAB t, int choix){
     positionFond.x = 0;
     positionFond.y = 0;
@@ -127,7 +128,7 @@ SDL_Rect cliqueSourisLoto2(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rec
 }
 
 
-
+/**Fonction qui vérifie si une case cliqué correspond avec le numéro tiré et dans ce cas, lui donne l'état 2*/
 SDL_Rect cliqueSourisLoto3(Tirage tab, SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, SDL_Event event, TAB t, int choix){
     int longueur_case,hauteur_case,hauteur_grille;
     hauteur_grille = 0;

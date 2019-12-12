@@ -6,7 +6,7 @@
 #include "InterfacePoker.h"
 #include "Poker.h"
 
-
+/**Fonction qui gère tout le poker*/
 int cliqueSourisPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, int nbJoueurs, int numeroJoueur, int nbManche, Parti p, Case t[2*nbJoueurs+5], int newManche, int n1, int nbTour, int blind){
 
     if(newManche == 1){
@@ -324,7 +324,7 @@ int cliqueSourisPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect pos
 }
 
 
-
+/**S'occupe du Raise*/
 void ecrirePoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, int somme){
     positionFond.x = 399;
     positionFond.y = 528;
@@ -357,6 +357,8 @@ void ecrirePoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect position
     SDL_Flip(ecran);
 }
 
+
+/**Affiche les mises et le pot*/
 void ecrirePoker_2(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, int pot, Parti p, int numeroJoueur){
 
     positionFond.x = 864;

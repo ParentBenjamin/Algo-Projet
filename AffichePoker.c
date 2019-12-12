@@ -6,6 +6,10 @@
 #include "InterfacePoker.h"
 #include "Poker.h"
 
+
+
+
+/**Affiche les cartes des joueurs restants et donne le gagnant et repartit l'argent*/
 void finPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, int nbJoueurs, int numeroJoueur, int nbManche, Parti p, Case t[2*nbJoueurs+5], int newManche, int n1, int nbTour, int blind){
 
     positionFond.x = 0;
@@ -25,7 +29,7 @@ void finPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFon
     SDL_Color color = {255, 255, 255};
     TTF_Font *police = TTF_OpenFont("font/arialunicode.ttf",60);
     imageDeFond = TTF_RenderText_Blended(police, machaine, color);
-    SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
+    SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
     SDL_Flip(ecran);
 
 
@@ -85,7 +89,7 @@ void finPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFon
             }
 
             imageDeFond = TTF_RenderText_Blended(police, machaine, color);
-            SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
+            SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
             SDL_Flip(ecran);
 
             positionFond.x = 30+l+pas;

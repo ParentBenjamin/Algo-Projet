@@ -1,6 +1,7 @@
 #ifndef INTERFACEPOKER_H_INCLUDED
 #define INTERFACEPOKER_H_INCLUDED
 #include "poker.h"
+/**Headers Poker*/
 int interPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond);
 int cliqueSourisPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, int nbJoueurs, int numeroJoueur, int nbManche, Parti p, Case t[2*nbJoueurs+5],int newMANCHE, int n1, int nbTour, int blind);
 void ecrirePoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, int somme);

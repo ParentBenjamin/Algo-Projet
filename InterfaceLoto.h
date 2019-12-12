@@ -4,7 +4,7 @@
 #include "tiragee.h"
 #ifndef INTERFACELOTO_H_INCLUDED
 #define INTERFACELOTO_H_INCLUDED
-
+/**Headers Loto*/
 int interLoto(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond);
 SDL_Rect cliqueSourisLoto1(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, SDL_Event event, TAB t);
 SDL_Rect cliqueSourisLoto2(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, TAB t, int choix);

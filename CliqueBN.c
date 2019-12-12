@@ -8,7 +8,7 @@
 #include "InterfaceBN.h"
 #include "Grille.h"
 
-
+/**Fonction qui s'active au clique de la souris dans al bataillle Navale*/
 SDL_Rect cliqueSourisBN(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, SDL_Event event, TAB t, int etape, int typebateau){
     int longueur_case,hauteur_case = 0;
     SDL_Rect debut_grille;
