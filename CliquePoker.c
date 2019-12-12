@@ -15,23 +15,26 @@ int cliqueSourisPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect pos
                 p.tableDeJeu[k].coucher = false;
             }
         }
+
         initTirage(nbJoueurs,t);
+
         remplirTirage(nbJoueurs,t);
+        positionFond.x = 5;
+        positionFond.y = 5;
+        imageDeFond = SDL_LoadBMP("bn/carre-jaune.bmp");
+        SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
+        SDL_Flip(ecran);
         p = distribution(nbJoueurs,t,p);
         p = miseDepart(p,nbJoueurs,(nbManche%nbJoueurs));
        if(blind>=nbJoueurs){
-            numeroJoueur = 0;
             blind = 0;
-        }
-        else{
-            numeroJoueur = blind;
-
         }
     }
 
+
     while(p.tableDeJeu[numeroJoueur].argent==0 || numeroJoueur+1>nbJoueurs || p.tableDeJeu[numeroJoueur].coucher==true){
         if(numeroJoueur+1>nbJoueurs){
-            numeroJoueur=0;
+            numeroJoueur -=nbJoueurs;
          }
          else{
             numeroJoueur++;
@@ -275,7 +278,7 @@ int cliqueSourisPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect pos
                         }
                         else{
                             p = repartitionArgent(p ,1,nbJoueurs);
-                            finPoker(ecran,imageDeFond,positionFond,nbJoueurs, blind++,++nbManche,p,t,1,0,0,blind++);
+                            finPoker(ecran,imageDeFond,positionFond,nbJoueurs, blind+3,++nbManche,p,t,1,0,0,blind++);
                         }
                     }
                     positionFond.x = -1;
@@ -291,7 +294,7 @@ int cliqueSourisPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect pos
                             cliqueSourisPoker(ecran,imageDeFond,positionFond,nbJoueurs, ++numeroJoueur,nbManche,p,t,0,0,++nbTour,blind);
                         }
                         else{
-                            finPoker(ecran,imageDeFond,positionFond,nbJoueurs, blind+1,++nbManche,p,t,1,0,0,blind+1);
+                            finPoker(ecran,imageDeFond,positionFond,nbJoueurs, blind+3,++nbManche,p,t,1,0,0,blind+1);
                         }
                     }
                     positionFond.x = -1;
@@ -310,7 +313,7 @@ int cliqueSourisPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect pos
                         else{
                             p = repartitionArgent(p ,1,nbJoueurs);
                         }
-                        cliqueSourisPoker(ecran,imageDeFond,positionFond,nbJoueurs, blind+1,++nbManche,p,t,1,0,0,blind+1);
+                        cliqueSourisPoker(ecran,imageDeFond,positionFond,nbJoueurs, blind+3,++nbManche,p,t,1,0,0,blind+1);
                     }
                     positionFond.x = -1;
                     positionFond.y = -1;
