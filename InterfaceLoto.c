@@ -104,7 +104,7 @@ void ecrireLoto(TAB t, SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect po
                 else{
                     color.r = 0;
                     imageDeFond = TTF_RenderText_Blended(police, machaine, color);
-                    SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);an
+                    SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
                     SDL_Flip(ecran);
                 }
             }
