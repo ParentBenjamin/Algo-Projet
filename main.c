@@ -3,27 +3,15 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 #include <SDL/SDL_mixer.h>
+#include <windows.h>
+#include <SDL/SDL_image.h>
 
 #include "Menu.h"
 
-/*void pause() //permet de faire une boucle infini
-{
-    int continuer = 1;
-    SDL_Event event;
-    while(continuer)
-    {
-        SDL_WaitEvent(&event);
-        switch(event.type)
-        {
-            case SDL_QUIT: continuer = 0;
-        }
-    }
-}*/
 
 
 
-
-
+/**Main*/
 int main(int argc, char *argv[])
 {
 
@@ -35,14 +23,18 @@ int main(int argc, char *argv[])
     positionFond.y = 0;
 
 
-
+    TTF_Init();
     SDL_Init(SDL_INIT_VIDEO);
 
 
     ecran = SDL_SetVideoMode(1366, 768, 32, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN); //définit la taille de la fenêtre ainsi que son mode
 
-    menuPrincipal(ecran,imageDeFond,positionFond);
+    Tableau pseudo;
+    Tableau autre;
+    pseudo[0]='\0';
+    int i = 0;
 
+    ecrirePseudo(i,pseudo,autre,ecran,imageDeFond,positionFond);
 
 
     TTF_Quit();

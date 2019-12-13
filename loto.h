@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "grille.h"
+#include "tiragee.h"
 
 int verifierVictoire_aux(TAB t, int yStart, int yEnd);
 
@@ -23,6 +24,7 @@ int genererCartons(TAB t, int nbCartons);
 
 int nombreTrouve(TAB t, int nbCartons, int nombre);
 
+int scorefinal(TAB t,int nbCartons, Tirage tir);
 
 void loto();
 #endif

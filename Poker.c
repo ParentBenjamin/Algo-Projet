@@ -94,7 +94,7 @@ Parti Suivre(Parti p,int joueur,int n){   // suit la plus haute mise
 }
 
 Parti tapis(Parti p , int joueur){               // permet au joueur de faire tapis
-    p.tableDeJeu[joueur].mise = p.tableDeJeu[joueur].argent;
+    p.tableDeJeu[joueur].mise += p.tableDeJeu[joueur].argent;
     p.tableDeJeu[joueur].argent = 0;
     return p;
 }
@@ -130,7 +130,7 @@ int quitterLaTable(Parti* p, int joueur){ // permet au joueur de quitter la tabl
 
 Parti repartitionArgent (Parti p, int joueurGagnant, int n){    // reparti l'argent entre chaque joueur en vérifiant ayant le joueur gagnant
     if (p.tableDeJeu[joueurGagnant].mise < maxMise(p,n)){   //si le joueur gagnant a fait tapis et qu'il a miser moins que les autres
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < n; ++i) {
             if(i != joueurGagnant || p.tableDeJeu[i].coucher){
                 p.tableDeJeu[i].mise -= p.tableDeJeu[joueurGagnant].mise;
                 p.tableDeJeu[joueurGagnant].argent += p.tableDeJeu[joueurGagnant].mise;
@@ -143,7 +143,7 @@ Parti repartitionArgent (Parti p, int joueurGagnant, int n){    // reparti l'arg
         p.tableDeJeu[joueurGagnant].argent +=p.tableDeJeu[joueurGagnant].mise;
         p.tableDeJeu[joueurGagnant].mise = 0;
     }else {                                       // si le joueur gagnant a la mise la plus haute
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < n; ++i) {
             if(p.tableDeJeu[i].coucher == false){
                 p.tableDeJeu[joueurGagnant].argent += p.tableDeJeu[i].mise;
                 p.tableDeJeu[i].mise = 0;
@@ -328,7 +328,7 @@ int nombrePoint(Case t[5]) { //retorune le nombre de point selon la combinaison
     }
     return point;
 }
-void meilleurCarteJoueur(Case t[2], Case t1[5], Case retour[5]) { //retourne les meilleur cartes d'un joueurs en calculant le nombre de point pour chaque combinaison de point possible
+void meilleurCarteJoueur(Case t[2], Case t1[5], Case retour[5]) { //retourne les meilleur cartes d'un joueurs
     int sommemax = -1;
     int testsomme;
     Case test[5];
@@ -381,7 +381,7 @@ void meilleurCarteJoueur(Case t[2], Case t1[5], Case retour[5]) { //retourne les
     }
 }
 
-int joueurGagnant(Parti p, int n) { // comppre les meilleurs cartes de chaque joueur pour savoir qui a gagné ou si il y a égalité
+int joueurGagnant(Parti p, int n) {
     int joueur = 0;
     int pointGagnant;
     int pointTest;
@@ -449,7 +449,7 @@ int joueurGagnant(Parti p, int n) { // comppre les meilleurs cartes de chaque jo
     return joueur;
 }
 
-int testdoublePaire(Case carteGagnant[5], Case test[5]) { //retourne qui des deux joueurs a les meilleurs cartes si ils ont tous les deux une double paires
+int testdoublePaire(Case carteGagnant[5], Case test[5]) {
     if (carteGagnant[1].valeur <= test[1].valeur) {
         carteGagnant[0] = test[0];
         carteGagnant[1] = test[1];
@@ -477,7 +477,7 @@ int testdoublePaire(Case carteGagnant[5], Case test[5]) { //retourne qui des deu
     return testeEgaliteSuite(carteGagnant, test);
 }
 
-int testeGagnantPaire(Case carteGagnant[5], Case test[5]) {   //retourne qui des deux joueurs a les meilleurs cartes si ils ont tous les deux une paires
+int testeGagnantPaire(Case carteGagnant[5], Case test[5]) {
     if (carteGagnant[0].valeur == carteGagnant[1].valeur || carteGagnant[1].valeur == carteGagnant[2].valeur) {
         if (test[0].valeur == test[1].valeur || test[1].valeur == test[2].valeur) {
             if (carteGagnant[1].valeur <= test[1].valeur) {
@@ -531,7 +531,7 @@ int testeGagnantPaire(Case carteGagnant[5], Case test[5]) {   //retourne qui des
     return 0;
 }
 
-int testeGagnantBrelan(Case carteGagnant[5], Case test[5]) {   //retourne qui des deux joueurs a les meilleurs cartes si ils ont tous les deux un brelan ou un carré ou un Full
+int testeGagnantBrelan(Case carteGagnant[5], Case test[5]) {
     if (carteGagnant[3].valeur <= test[3].valeur) {
         carteGagnant[0] = test[0];
         carteGagnant[1] = test[1];
@@ -546,7 +546,7 @@ int testeGagnantBrelan(Case carteGagnant[5], Case test[5]) {   //retourne qui de
 }
 
 
-int testeEgaliteSuite(Case carteGagnant[5], Case test[5]) {  //retourne qui des deux joueurs a les meilleurs cartes si ils ont tous les deux une suite ou une couleur ou quinte ou aucune combinaison
+int testeEgaliteSuite(Case carteGagnant[5], Case test[5]) {
 
     if (carteGagnant[0].valeur <= test[0].valeur) {
         carteGagnant[0] = test[0];
@@ -605,75 +605,5 @@ int testeEgaliteSuite(Case carteGagnant[5], Case test[5]) {  //retourne qui des 
             }
         }
         return 0;
-    }
-}
-
-Parti tourJoueur(Parti p,int numerojoueur, int n){
-    int choix,somme = 0;
-    printf("carte une :%d , %d  /",p.tableDeJeu[numerojoueur].jeu[0].valeur,p.tableDeJeu[numerojoueur].jeu[0].etat);
-    printf("carte deux %d ,%d",p.tableDeJeu[numerojoueur].jeu[1].valeur,p.tableDeJeu[numerojoueur].jeu[1].etat) ;
-    printf("1 = fold, 2 = call, 3 = raise et 4 = all-in\n");
-    scanf("%d",&choix);
-    switch(choix){
-        case 1: p = seCoucher(p, numerojoueur);
-            break;
-        case 2: p = Suivre(p, numerojoueur,n);
-            break;
-        case 3 :printf("quelle somme en plus de la mise :");
-            scanf("%d",&somme);
-            p = relancer(p,numerojoueur,somme,n);
-            break;
-        case 4 :p = tapis(p,numerojoueur);
-        default :somme = quitterLaTable(&p,numerojoueur);
-            break;
-    }
-    return p;
-
-}
-
-int tour(Parti* p, int n, int premier){  //definie un tour c'est a dire avant que l'on retourne les carte de la river (fonction de démonstration a destination de la personne ce chargent de l'interface graphique)
-    int n1 = 0;
-    while(((n1-1 >= n && !prochaineMiseEgale(((n1+premier)%n),*p,n)) || (n1-1 < n)) && (nombreCoucher(*p,n) < n-1 )) {
-        *p = tourJoueur(*p,n1%n,n);
-        n1++;
-        for (int i = 0; i < n; ++i) {
-            printf("%d   ", p->tableDeJeu[i].mise);
-        }
-        printf("%d  %d",n1,nombreCoucher(*p,n));
-    }
-}
-
-Parti tourPartie (Parti p , int n, Case t[5+2*n]){ // définie une manche c'est a dire jusqu'a ca que un joueur remporte le pot (fonction de démonstration a destination de la personne ce chargent de l'interface graphique)
-    int numjoueur = 0;
-    int i = 0;
-    int joueurGagnant = 3;
-    while(i<4 && nombreCoucher(p,n) < n-1) {
-        numjoueur = tour(&p, n , numjoueur);
-        //retourne les cartes
-        i++;
-    }
-        // definie le joueur gagnant
-        p = repartitionArgent(p ,joueurGagnant,n);
-    return p;
-}
-
-
-void partie(){( // Déroulement d'un partie de poker jusqu'a l'abaanddon de tous les joueurs sauf 1(fonction de démonstration a destination de la personne ce chargent de l'interface graphique)
-    int n;
-    int nombredeManche = 0;
-    Parti p;
-    printf("nombre de joueur : \n");
-    scanf("%d", &n);
-    Case t[2*n+5];
-    p = initParti(n,p);
-    while(nombreAbbandon(p,n) < n-1){
-        initTirage(n,t);
-        remplirTirage(n,t);
-        p = distribution(n,t,p);
-        printf("\n%d\n",maxMise(p,n));
-        p = miseDepart(p,n,(nombredeManche%n));
-        printf("\n%d\n",maxMise(p,n));
-        p = tourPartie(p,n,t);
-        nombredeManche++;
     }
 }

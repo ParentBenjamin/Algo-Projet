@@ -40,7 +40,7 @@ int score(TAB t, int dep, Tirage tir)//la variable dep sert de numero de depart 
         somme=0;
         for(int j=0;j<9;j++)//j=numero de colonne
         {
-            if(t[i][j].etat==3)somme=somme+1;//compte le nombre de numero sur la ligne
+            if(t[i][j].etat==2)somme=somme+1;//compte le nombre de numero sur la ligne
         }
         nbnum=nbnum+somme;//nbnum est le nombre de num touchés au total sur la grille
         if(somme==5)nbligne=nbligne +1;//la ligne est remplie
@@ -206,7 +206,7 @@ int nombreTrouve(TAB t, int nbCartons, int nombre) {
     return found;
 }
 
-void loto() {
+/*void loto() {
     srand(time(NULL)); // Necessaire pour la generation aleatoire (ligne a executer 1 seule fois)
 
     TAB tab;
@@ -259,5 +259,5 @@ void loto() {
     }
 
     printf("\nFIN DU JEU\n\n");
-}
+}*/
 

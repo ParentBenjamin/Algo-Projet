@@ -19,4 +19,6 @@ int compterNombreLigneSudoku();
 int compterNombreLigneFichier(char nom[]);
 void sudoku();
 int chargerSudokuSpe2(TAB t, int n);
+int calculScoreSudoku(double temps);
+double round(double value);
 #endif //PROJETALGO_SUDOKU_H

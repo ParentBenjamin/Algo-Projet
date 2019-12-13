@@ -1,5 +1,27 @@
 
 #include "Sudoku.h"
+#include <math.h>
+
+//calcule le score du sudoku en fonction du temps de jeu
+// + 10 min  =  0 points
+int calculScoreSudoku(double temps) {
+    if (temps >= 600) {
+        return 0;
+    } else {
+        int score = (600 - (int) temps) / 3;
+        return score;
+    }
+}
+
+//retourne l'arrondi du parametre (double)
+double round(double value) {
+     return floor(value + 0.5);
+}
+
+
+
+
+
 int tableauRempli(TAB t){ //verifie si le tableau est rempli, le tableau est rempli quand toutes les case sont différentes de 0
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
