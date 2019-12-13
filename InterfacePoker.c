@@ -8,7 +8,7 @@
 #include "Poker.h"
 
 /**Fonction graphique du Poker*/
-int interPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond){
+int interPoker(Tableau pseudo, SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond){
 
     imageDeFond = SDL_LoadBMP("poker/pokerchoix.bmp");
     SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
@@ -30,7 +30,7 @@ int interPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFo
                     Parti p;
                     Case t[2*2+5];
                     p = initParti(2,p);
-                    cliqueSourisPoker(ecran,imageDeFond,positionFond,2, 0,0,p,t,1,0,0,0);
+                    cliqueSourisPoker(pseudo,ecran,imageDeFond,positionFond,2, 0,0,p,t,1,0,0,0);
                     return 0;
                 }
                 else if(event.button.x>569 && event.button.x<588 && event.button.y>144 && event.button.y<173){
@@ -38,7 +38,7 @@ int interPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFo
                     Parti p;
                     Case t[2*3+5];
                     p = initParti(3,p);
-                    cliqueSourisPoker(ecran,imageDeFond,positionFond,3, 2,0,p,t,1,0,0,0);
+                    cliqueSourisPoker(pseudo,ecran,imageDeFond,positionFond,3, 2,0,p,t,1,0,0,0);
                     return 0;
                 }
                 else if(event.button.x>785 && event.button.x<805 && event.button.y>144 && event.button.y<173){
@@ -46,7 +46,7 @@ int interPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFo
                     Parti p;
                     Case t[2*4+5];
                     p = initParti(4,p);
-                    cliqueSourisPoker(ecran,imageDeFond,positionFond,4, 2,0,p,t,1,0,0,0);
+                    cliqueSourisPoker(pseudo,ecran,imageDeFond,positionFond,4, 2,0,p,t,1,0,0,0);
                     return 0;
                 }
                 else if(event.button.x>1007 && event.button.x<1027 && event.button.y>144 && event.button.y<173){
@@ -54,7 +54,7 @@ int interPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFo
                     Parti p;
                     Case t[2*5+5];
                     p = initParti(5,p);
-                    cliqueSourisPoker(ecran,imageDeFond,positionFond,5, 2,0,p,t,1,0,0,0);
+                    cliqueSourisPoker(pseudo,ecran,imageDeFond,positionFond,5, 2,0,p,t,1,0,0,0);
                     return 0;
                 }
             }

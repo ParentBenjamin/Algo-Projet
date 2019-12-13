@@ -9,6 +9,7 @@
 #include "menu.h"
 #include "loto.h"
 
+
 /**Tirage suivant Loto*/
 Tirage suivant(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, TAB t, int choix, Tirage tab){
     SDL_Color color = {255, 0, 0};
@@ -36,7 +37,7 @@ Tirage suivant(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFo
     }
     else
     {
-        positionFond.x = 100;
+        positionFond.x = 110;
         positionFond.y = 250;
         if(verifierVictoire(t,choix))
         {
@@ -140,8 +141,8 @@ void ecrireLoto(TAB t, SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect po
    }
 }
 
-/**onction graphique Loto*/
-int interLoto(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond){
+/**Fonction graphique Loto*/
+int interLoto(Tableau pseudo, SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond){
     positionFond.x = 0;
     positionFond.y = 0;
     imageDeFond = SDL_LoadBMP("loto/bingo.bmp");
@@ -158,11 +159,11 @@ int interLoto(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFon
         {
             case SDL_MOUSEBUTTONUP:
             {
-                positionFond = cliqueSourisLoto1(ecran,imageDeFond,positionFond,event,t);
+                positionFond = cliqueSourisLoto1(pseudo,ecran,imageDeFond,positionFond,event,t);
                 if(positionFond.x ==-2 && positionFond.y ==-2){
                     positionFond.x = 0;
                     positionFond.y = 0;
-                    interLoto(ecran,imageDeFond,positionFond);
+                    interLoto(pseudo, ecran,imageDeFond,positionFond);
                     return 0;
                 }
                 break;

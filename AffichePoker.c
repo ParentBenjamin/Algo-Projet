@@ -10,7 +10,7 @@
 
 
 /**Affiche les cartes des joueurs restants et donne le gagnant et repartit l'argent*/
-void finPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, int nbJoueurs, int numeroJoueur, int nbManche, Parti p, Case t[2*nbJoueurs+5], int newManche, int n1, int nbTour, int blind){
+void finPoker(Tableau pseudo, SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, int nbJoueurs, int numeroJoueur, int nbManche, Parti p, Case t[2*nbJoueurs+5], int newManche, int n1, int nbTour, int blind){
 
     positionFond.x = 0;
     positionFond.y = 0;
@@ -137,9 +137,22 @@ void finPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFon
                             p=repartitionEgaliter(p,nbJoueurs);
                         }
                         else{
-                            p = repartitionArgent(p ,1,nbJoueurs);
+                            p = repartitionArgent(p ,vainqueur,nbJoueurs);
                         }
-                    cliqueSourisPoker(ecran,imageDeFond,positionFond,nbJoueurs, numeroJoueur,nbManche,p,t,1,0,0,blind);
+                    int fin=0;
+                    for(int k=0;k<nbJoueurs;k++){
+                        if(p.tableDeJeu[k].argent<=0 && p.tableDeJeu[k].mise<=0){
+                        }
+                        else{
+                            fin++;
+                        }
+                    }
+                    if(fin==1){
+                        resultat(pseudo,ecran,imageDeFond,positionFond,vainqueur,nbJoueurs);
+                    }
+                    else{
+                        cliqueSourisPoker(pseudo,ecran,imageDeFond,positionFond,nbJoueurs, numeroJoueur,nbManche,p,t,1,0,0,blind);
+                    }
                     positionFond.x = -1;
                     positionFond.y =-1;
                 }
@@ -149,3 +162,53 @@ void finPoker(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFon
     }
 
 }
+
+
+
+
+
+void resultat(Tableau pseudo, SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, int vainqueur,int nbJoueurs){
+    positionFond.x = 0;
+    positionFond.y = 0;
+    imageDeFond = SDL_LoadBMP("poker/resultat.bmp");
+    SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
+    SDL_Flip(ecran);
+
+    SDL_Event event;
+    positionFond.x = 620;
+    positionFond.y = 500;
+    char machaine[4];
+    int monentier = vainqueur+1;
+    sprintf(machaine,"%d",monentier);
+    positionFond.x = 600;
+    positionFond.y = 400;
+    SDL_Color color = {255, 0, 0};
+    TTF_Font *police = TTF_OpenFont("font/arialunicode.ttf",100);
+    imageDeFond = TTF_RenderText_Blended(police, machaine, color);
+    SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond); // On blitte par-dessus l'écran
+    SDL_Flip(ecran);
+
+    if(vainqueur==0){
+        enregistrerScore(pseudo, 1500*nbJoueurs);
+    }
+
+    while(positionFond.x>=0 && positionFond.y>=0)
+    {
+        SDL_WaitEvent(&event);
+        switch(event.type)
+        {
+            case SDL_MOUSEBUTTONUP:
+            {
+                if(event.button.x>1173 && event.button.x<1345 && event.button.y>684 && event.button.y<743){
+
+                    positionFond.x=-1;
+                    positionFond.y=-1;
+                }
+                break;
+            }
+            default : break;
+        }
+    }
+
+}
+

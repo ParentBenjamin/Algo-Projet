@@ -56,7 +56,7 @@ int genererpartie(TAB chainejoueur, TAB chaineia, Player p)//recupere la partie 
 {
     int compt;//compteur pour le nbre de bateau
     int taille;//permet de recuperer la taille en nbre d'unite du nombre de tir du joueur
-    int lire1; 
+    int lire1;
     int lire2;
     int etape;//variable pour recuperer a quel moment a été arreté la partie
     FILE* fichier =NULL;
@@ -81,17 +81,17 @@ int genererpartie(TAB chainejoueur, TAB chaineia, Player p)//recupere la partie 
                 chaineia[o][p].etat=(int)fgetc(fichier)-48;
         taille=(int)fgetc(fichier)-48;//copie de la taille du nb tir
         if(taille==1)p.nbtir=(int)fgetc(fichier)-48;//copie du nombre de tir du joueur
-        else 
+        else
         {
             lire1=(int)fgetc(fichier)-48;
             lire2=(int)fgetc(fichier)-48;
             p.nbtir=lire1*10 + lire2;
-        }        
+        }
         etape=(int)fgetc(fichier)-48;//copie du numero detape pour savoir quand est ce que letape a ete arretee
         compt=(int)fgetc(fichier)-48;//copie du compteur : compteur qui sert a savoir combien de bateau a deja été placé
     }
     fclose(fichier);
-    if(etape==1)return -compt;
+    if(etape==2)return -compt;
     else return etape;
 }
 
@@ -107,51 +107,3 @@ int checkVictoire(TAB t) {
     }
     return victoire;
 }
-
-//fonction principale de la Bataille Navale
-/*void batailleNavale() {
-    srand(time(NULL)); // Necessaire pour la generation aleatoire (ligne a executer 1 seule fois, attention elle est executer dans le loto)
-
-    //INITIALISATION
-    IA irobot;
-    TAB tabJOUEUR, tabIA;
-    init(9,9,tabJOUEUR);
-    init(9,9,tabIA);
-    initIA(&irobot);
-
-    //PLACEMENT DES BATEAUX
-    placementsDesBateauxJOUEUR(tabJOUEUR);
-    placementsDesBateauxIA(tabIA);
-
-    system("cls"); // clear console
-
-    int fin = 0;
-    while (fin==0) {
-        //TOUR JOUEUR 1
-        fin = tirJOUEUR(tabIA, tabJOUEUR);
-        if (fin==0) {
-            fin = tirIA(tabJOUEUR, &irobot);
-            if (fin==1) {
-                fin = 2;
-            }
-        }
-    }
-
-    if (fin==1) {
-        printf("\nVictoire !\n");
-    } else {
-        printf("\nDefaite  !\n");
-    }
-
-<<<<<<< Updated upstream
-=======
-    int score = calculScoreBN(&p1, fin);
-    printf("Votre score est de : %d points",score);
-    enregistrerScore("THEO",score);
-
-
-
->>>>>>> Stashed changes
-    afficheEtat(tabJOUEUR);
-}
-*/

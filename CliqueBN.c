@@ -8,8 +8,9 @@
 #include "InterfaceBN.h"
 #include "Grille.h"
 
+
 /**Fonction qui s'active au clique de la souris dans al bataillle Navale*/
-SDL_Rect cliqueSourisBN(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, SDL_Event event, TAB t, int etape, int typebateau){
+SDL_Rect cliqueSourisBN(Compteur cpt,SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, SDL_Event event, TAB t, int etape, int typebateau){
     int longueur_case,hauteur_case = 0;
     SDL_Rect debut_grille;
     if(etape==1){
@@ -76,7 +77,8 @@ SDL_Rect cliqueSourisBN(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect p
                         imageDeFond = IMG_Load("bn/croix-rouge.png");
                         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
                         SDL_Flip(ecran);
-                        t[l][j].etat=1;
+                        t[l][j].etat=3;
+                        cpt[0]++;
                     }
                     else{
                         imageDeFond = IMG_Load("bn/point.png");
@@ -84,7 +86,6 @@ SDL_Rect cliqueSourisBN(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect p
                         SDL_Flip(ecran);
                     }
                 }
-                //t[l][j].valeur = 1;
                 return positionFond;
             }
             longueur_case += 50;

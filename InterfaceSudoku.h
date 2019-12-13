@@ -4,7 +4,8 @@
 
 */
 #include "Grille.h"
-
+#include "Menu.h"
+#include "scores.h"
 
 #ifndef INTERFACESUDOKU_H_INCLUDED
 #define INTERFACESUDOKU_H_INCLUDED
@@ -15,7 +16,7 @@ typedef struct{
 }Coordonees;
 
 
-void interSudoku(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond);
+void interSudoku(Tableau pseudo, SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond);
 SDL_Rect cliqueSourisSudoku(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond, SDL_Event event,TAB t);
 void ecrire(TAB t, SDL_Surface *ecran, SDL_Surface *imageDeFond);
 void remplirTEST(TAB t);

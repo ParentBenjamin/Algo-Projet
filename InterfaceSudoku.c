@@ -1,13 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
-//#include <windows.h>
+
 #include <SDL/SDL.h>
 #include <time.h>
+#include <math.h>
 
 #include "InterfaceSudoku.h"
 #include "Menu.h"
 #include "Grille.h"
 #include "Sudoku.h"
+
 
 
 
@@ -153,8 +155,11 @@ void pause(int temps){
 
 
 /**Fonction qui gère toute l'interface du sudoku*/
-void interSudoku(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond){
+void interSudoku(Tableau pseudo,SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond){
 
+    float temps;
+    clock_t t1, t2;
+    t1 = clock();
 
     imageDeFond = SDL_LoadBMP("sudoku/tableau.bmp");
     SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
@@ -184,6 +189,10 @@ void interSudoku(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect position
             imageDeFond = SDL_LoadBMP("sudoku/Victoire.bmp");
             SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
             SDL_Flip(ecran);
+            t2 = clock();
+            temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+            int score = calculScoreSudoku(round(temps));
+            enregistrerScore(pseudo, score);
             positionFond.x = 0;
             positionFond.y = 0;
         }
@@ -286,11 +295,11 @@ void interSudoku(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect position
     if(positionFond.x == -2 && positionFond.y == -2){
         positionFond.x = 0;
         positionFond.y = 0;
-        interSudoku(ecran,imageDeFond,positionFond);
+        interSudoku(pseudo,ecran,imageDeFond,positionFond);
     }
     if(positionFond.x == -1 && positionFond.y == -1){
         positionFond.x = 0;
         positionFond.y = 0;
-        menuPrincipal(ecran,imageDeFond,positionFond);
+        menuPrincipal(pseudo,ecran,imageDeFond,positionFond);
     }
 }

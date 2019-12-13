@@ -7,10 +7,11 @@
 #include "InterfaceBN.h"
 #include "batailleNavale.h"
 #include "iaBN.h"
+#include "scores.h"
 
 
 /**Bataille Navale en Grahique*/
-int interBN(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond){
+int interBN(Tableau pseudo, SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond){
 
 
      srand(time(NULL)); // Necessaire pour la generation aleatoire (ligne a executer 1 seule fois, attention elle est executer dans le loto)
@@ -31,7 +32,8 @@ int interBN(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond)
     init(9,9,tabIA);
     initIA(&irobot);
 
-    int cpt = 0;
+    Compteur cpt;
+    cpt[0]=0;
     int etape = 1;
     int orientation = 0;
     int typebateau = 5;
@@ -43,20 +45,51 @@ int interBN(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond)
 
     while(positionFond.x>=0 && positionFond.y>=0)
     {
-        //ecrireBN(tabIA,ecran,imageDeFond,arriere,etape);
         SDL_WaitEvent(&event);
         switch(event.type)
         {
             case SDL_MOUSEBUTTONUP:
             {
                 if(event.button.x>220 && event.button.x<516 && event.button.y>261 && event.button.y<300){
-                    //PLACEMENT DES BATEAUx
+                    positionFond.x = 0;
+                    positionFond.y = 0;
+                    imageDeFond = SDL_LoadBMP("bn/bn.bmp");
+                    SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
+                    SDL_Flip(ecran);
                     placementsDesBateauxIA(tabIA);
                     positionFond.x = -1;
                 }
                 else if(event.button.x>780 && event.button.x<1161 && event.button.y>262 && event.button.y<313){
-                    etape = genererpartie(tabJOUEUR,tabIA,p);
+                    positionFond.x = 0;
+                    positionFond.y = 0;
+                    imageDeFond = SDL_LoadBMP("bn/bn.bmp");
+                    SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
+                    SDL_Flip(ecran);
+                    cpt[0] = genererpartie(tabJOUEUR,tabIA,p);
                     positionFond.x = -1;
+
+                    if(cpt[0]==1){
+                        etape=1;
+                        ecrireBN(tabJOUEUR,ecran,imageDeFond,arriere,1);
+                        int changement=1;
+                        while(changement==1){
+                            changement =0;
+                            for(int i=0;i<9;i++){
+                                for(int j=0;j<9;j++){
+                                    if(tabJOUEUR[i][j].valeur==typebateau){
+                                        typebateau--;
+                                        changement=1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        ecrireBN(tabJOUEUR,ecran,imageDeFond,arriere,1);
+                        ecrireBN(tabJOUEUR,ecran,imageDeFond,arriere,2);
+                        typebateau==0;
+                        etape=2;
+                    }
                 }
                 else if(event.button.x>1190 && event.button.x<1319 && event.button.y>678 && event.button.y<723){
                     return 0;
@@ -65,22 +98,12 @@ int interBN(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond)
         }
     }
 
-
-
     positionFond.x = 0;
     positionFond.y = 0;
-    imageDeFond = SDL_LoadBMP("bn/bn.bmp");
-    SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
-    SDL_Flip(ecran);
-
-    //ecrireBN(tabJOUEUR,ecran,imageDeFond,arriere,1);
-    ecrireBN(tabJOUEUR,ecran,imageDeFond,arriere,etape);
-    //ecrireBN(tabIA,ecran,imageDeFond,arriere,2);
 
 
     while(positionFond.x>=0 && positionFond.y>=0)
     {
-        //ecrireBN(tabIA,ecran,imageDeFond,arriere,etape);
         SDL_WaitEvent(&event);
         switch(event.type)
         {
@@ -90,24 +113,24 @@ int interBN(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond)
                     return 0;
                 }
                 else if(event.button.x>21 && event.button.x<337 && event.button.y>688 && event.button.y<717){
-                    interBN(ecran,imageDeFond,positionFond);
+                    interBN(pseudo,ecran,imageDeFond,positionFond);
                     return 0;
                 }
                 else if(event.button.x>563 && event.button.x<801 && event.button.y>676 && event.button.y<720){
-                    sauvegarderjeu(tabJOUEUR,tabIA,"SAUVEGARDEPARTIE.txt",p,etape);
+                    sauvegarderjeu(tabJOUEUR,tabIA,"SAUVEGARDEPARTIE.txt",p,etape,15);
                 }
                 else{
                     if(etape==1){
                         imageDeFond = SDL_LoadBMP("bn/carre-bleu.bmp");
                         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
                         SDL_Flip(ecran);
-                        positionFond = cliqueSourisBN(ecran,imageDeFond,positionFond,event,tabJOUEUR,etape,typebateau);
+                        positionFond = cliqueSourisBN(cpt,ecran,imageDeFond,positionFond,event,tabJOUEUR,etape,typebateau);
                         orientation = 0;
                     }
                     else if(etape==2){
                         positionFond.x = 0;
                         positionFond.y = 0;
-                        positionFond = cliqueSourisBN(ecran,imageDeFond,positionFond,event,tabIA,etape,typebateau);
+                        positionFond = cliqueSourisBN(cpt,ecran,imageDeFond,positionFond,event,tabIA,etape,typebateau);
                         if(positionFond.x>=841 && positionFond.x<=1241 && positionFond.y>=160 && positionFond.y<=560){
                         if(checkVictoire(tabIA)){
                             positionFond.x = 236;
@@ -115,6 +138,7 @@ int interBN(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond)
                             imageDeFond = IMG_Load("bn/victoire.png");
                             SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
                             SDL_Flip(ecran);
+                            enregistrerScore(pseudo, cpt[0]);
                             etape++;
                         }
                         else if(tabIA[(positionFond.y - 160)/50][(positionFond.x - 841)/50].valeur==0){
@@ -127,6 +151,7 @@ int interBN(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond)
                             SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
                             SDL_Flip(ecran);
                             etape++;
+                            enregistrerScore(pseudo, cpt[0]);
                             }
                             else{
                                 ecrireBN(tabJOUEUR,ecran,imageDeFond,arriere,etape);
@@ -260,19 +285,19 @@ int interBN(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond)
                     positionFond.x = (positionFond.x - 84)/50;
                     positionFond.y = (positionFond.y - 163)/50;
                     if(verifEmplacement(tabJOUEUR,typebateau,orientation,positionFond.y,positionFond.x) == 0){
-                        positionFond.x = 0;
+                        /*positionFond.x = 0;
                         positionFond.y = 0;
                         imageDeFond = SDL_LoadBMP("bn/carre-rouge.bmp");
                         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
-                        SDL_Flip(ecran);
+                        SDL_Flip(ecran);*/
                     }
                     else{
                         placerBateau(tabJOUEUR, typebateau, orientation, positionFond.y, positionFond.x);
-                        positionFond.x = 0;
+                        /*positionFond.x = 0;
                         positionFond.y = 0;
                         imageDeFond = SDL_LoadBMP("bn/carre-bleu.bmp");
                         SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
-                        SDL_Flip(ecran);
+                        SDL_Flip(ecran);*/
                         ecrireBN(tabJOUEUR,ecran,imageDeFond,arriere,etape);
                         if(typebateau == 2){
                             etape = 2;
@@ -294,8 +319,5 @@ int interBN(SDL_Surface *ecran, SDL_Surface *imageDeFond, SDL_Rect positionFond)
         }
 
     }
-    //positionFond.x = 0;
-    //positionFond.y = 0;
-   // menuPrincipal(ecran,imageDeFond,positionFond);
     return 0;
 }
